@@ -74,12 +74,18 @@
 <div class="container">
 
 <br>
-
     <div class="form-group">
         <span  class="display-3" itemprop="headline">Opinie</span></div>
+
         <label for="exampleFormControlTextarea1">Napisz opinię</label>
         <textarea name="opinia" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea></br>
+    <div class="form-outline mb-4">
+        <label class="form-la">Nick</label>
+        <input style="width: 200px;" type="text" name="nick" class="form-control form-control-lg" />
+
+    </div>
         <button class="btn btn-primary" name="submit" type="submit">Wyślij ocene</button>
+
 
     </div>
 
@@ -92,19 +98,20 @@
         die("Connection failed: " . $conn->connect_error);
     }
 
-    $sql = "SELECT opina, data FROM opinie ORDER BY DATE(data) DESC, data DESC;";
+    $sql = "SELECT opina, data, nick FROM opinie ORDER BY DATE(data) DESC, data DESC;";
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
-            echo $row["data"] . "<br>" . $row["opina"] . "<br>" . "<br>";
+            echo $row["data"] . "<br>" . $row["opina"] . "<br>" .$row["nick"]."<br>"."<br>";
         }
     } else {
-        echo "0 results";
+        echo "Brak komntarzy";
     }
     $conn->close();
     ?>
 </div>
+
 
 
 </body>
