@@ -1,0 +1,98 @@
+body{
+
+    color: #000000;
+}
+
+.wrapper{
+
+    height: 50vh;
+}
+
+.card{
+
+    position: relative;
+    background-color: #7B1FA2;
+    width: 250px;
+    height: 260px;
+    border:none;
+
+
+}
+
+.content{
+
+    z-index: 10;
+}
+
+.logo{
+
+    margin-bottom: 10px;
+}
+
+
+.off{
+
+    line-height: 0px;
+}
+
+.off h1{
+
+    font-size: 80px;
+}
+
+.off span{
+
+    margin-right: 111px;
+}
+
+
+.plus{
+    font-size: 23px;
+}
+
+.code{
+
+    text-transform: uppercase;
+    padding: 10px;
+    background-color: #fff;
+    color: red;
+    font-size: 20px;
+}
+
+.cross-bg{
+
+    height: 100%;
+    width: 100%;
+    position: absolute;
+
+    background-color: #9C27B0;
+
+    left: 0px;
+    top: 0px;
+    opacity: 0.4;
+    clip-path: polygon(50% 0%, 90% 20%, 100% 60%, 75% 100%, 25% 100%, 0% 60%, 10% 20%);
+    z-index:1;
+}
+
+.banner{position:relative}
+.banner img{width:100%}
+.banner .container{position: absolute; left:0; right:0; top:50%; text-align:left; transform:translateY(-50%)}
+
+#top, #bottom, #left, #right {
+    background: #e4c9c4;
+    position: absolute;
+
+}
+#left, #right {
+    top: 0; bottom: 0;
+    width: 8px;
+}
+#left { left: 0; }
+#right { right: 0; }
+
+#top, #bottom {
+    left: 0; right: 0;
+    height: 8px;
+}
+#top { top: 0; }
+#bottom { bottom: 0; }
