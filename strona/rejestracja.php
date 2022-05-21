@@ -123,26 +123,7 @@
                             <input type="password" name="password" class="form-control form-control-lg" />
                             <label class="form-label">Hasło</label>
                         </div>
-                        <!--
-                                                <div class="d-md-flex justify-content-start align-items-center mb-4 py-2">
 
-                                                    <h6 class="mb-0 me-4">Płeć:&nbsp;&nbsp;</h6>
-
-                                                    <div class="form-check form-check-inline mb-0 me-4">
-                                                        <label><input class="form-check-input" type="radio" name="women" > Kobieta </label> <br>
-
-                                                    </div>
-
-                                                    <div class="form-check form-check-inline mb-0 me-4">
-                                                        <label><input class="form-check-input" type="radio" name="men" > Kobieta </label> <br>
-                                                    </div>
-
-                                                    <div class="form-check form-check-inline mb-0">
-                                                        <label><input class="form-check-input" type="radio" name="other" > Kobieta </label> <br>
-                                                    </div>
-
-                                                </div>
--->
                                                 <div class="pt-1 mb-4">
                                                     <button class="btn btn-info btn-lg btn-block" type="submit">Zarejestruj się</button>
                                                 </div>
