@@ -115,7 +115,7 @@
                         </div>
 
                         <div class="form-outline mb-4">
-                            <input type="text" name="mail" class="form-control form-control-lg" />
+                            <input type="text" name="email" class="form-control form-control-lg" />
                             <label class="form-label" >E-mail</label>
                         </div>
 
