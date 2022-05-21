@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="PHP/styles.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
 </head>
 
@@ -86,6 +87,7 @@
     </div>
         <button class="btn btn-primary" name="submit" type="submit">Wyślij ocene</button>
 
+    <br><br>
 
     </div>
 
@@ -103,7 +105,24 @@
 
     if ($result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
-            echo $row["data"] . "<br>" . $row["opina"] . "<br>" .$row["nick"]."<br>"."<br>";
+
+            echo "<div class='container'>
+    <div class='row'>
+        <div class='col-md-8'>
+            <div class='media g-mb-30 media-comment'>
+                <img style='width: 50px;height: 50px;' class='d-flex g-width-50 g-height-50 rounded-circle g-mt-3 g-mr-15' src='https://bootdey.com/img/Content/avatar/avatar7.png' alt='Image Description'>
+                <div class='media-body u-shadow-v18 g-bg-secondary g-pa-30'>
+                    <div class='g-mb-15'>
+                        <h5 class='h5 g-color-gray-dark-v1 mb-0'>".$row["nick"]."</h5>
+                        <span class='g-color-gray-dark-v4 g-font-size-12'>". $row["data"] ."</span>
+                    </div>
+
+                    <p>". $row["opina"] ."</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>";
         }
     } else {
         echo "Brak komntarzy";
