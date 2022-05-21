@@ -97,17 +97,8 @@ if ($result->num_rows > 0) {
                                 </table>
                             </div>
                         </section>";}}
-else {
-    echo "0 results";}
-$conn->close();
-?>
 
-<h3 style="text-indent: 5%;" class="name-of-treatment" ><a style=" text-decoration: none; color:#e4c9c4; " href="#">Zabiegi na ciało z użyciem aparatury</a></h3>
-
-<?php
-$conn = new mysqli("localhost", "szymon", "haslo", "loki");;
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);}
+echo '<h3 style="text-indent: 5%;" class="name-of-treatment" ><a style=" text-decoration: none; color:#e4c9c4; " href="#">Zabiegi na ciało z użyciem aparatury</a></h3>';
 
 $sql = "SELECT nazwa, cena, czas FROM zabieg WHERE Rodzaj_id = '2';";
 $result = $conn->query($sql);
@@ -126,19 +117,8 @@ if ($result->num_rows > 0) {
                                 </table>
                             </div>
                         </section>";}}
-else {
-    echo "0 results";}
-$conn->close();
-?>
 
-
-<h3 style="text-indent: 5%;" class="name-of-treatment" ><a style=" text-decoration: none; color:#e4c9c4; " href="#">Oprawa oka</a></h3>
-
-
-<?php
-$conn = new mysqli("localhost", "szymon", "haslo", "loki");;
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);}
+echo '<h3 style="text-indent: 5%;" class="name-of-treatment" ><a style=" text-decoration: none; color:#e4c9c4; " href="#">Oprawa oka</a></h3>';
 
 $sql = "SELECT nazwa, cena, czas FROM zabieg WHERE Rodzaj_id = '3';";
 $result = $conn->query($sql);
@@ -157,17 +137,9 @@ if ($result->num_rows > 0) {
                                 </table>
                             </div>
                         </section>";}}
-else {
-    echo "0 results";}
-$conn->close();
-?>
 
-<h3 style="text-indent: 5%;" class="name-of-treatment" ><a style=" text-decoration: none; color:#e4c9c4; " href="#">Masaż twarzy</a></h3>
+echo '<h3 style="text-indent: 5%;" class="name-of-treatment" ><a style=" text-decoration: none; color:#e4c9c4; " href="#">Masaż twarzy</a></h3>';
 
-<?php
-$conn = new mysqli("localhost", "szymon", "haslo", "loki");;
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);}
 
 $sql = "SELECT nazwa, cena, czas FROM zabieg WHERE Rodzaj_id = '4';";
 $result = $conn->query($sql);
@@ -186,17 +158,8 @@ if ($result->num_rows > 0) {
                                 </table>
                             </div>
                         </section>";}}
-else {
-    echo "0 results";}
-$conn->close();
-?>
 
-<h3 style="text-indent: 5%;" class="name-of-treatment" ><a style=" text-decoration: none; color:#e4c9c4; " href="#">Makijaż permanentny</a></h3>
-
-<?php
-$conn = new mysqli("localhost", "szymon", "haslo", "loki");;
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);}
+echo '<h3 style="text-indent: 5%;" class="name-of-treatment" ><a style=" text-decoration: none; color:#e4c9c4; " href="#">Makijaż permanentny</a></h3>';
 
 $sql = "SELECT nazwa, cena, czas FROM zabieg WHERE Rodzaj_id = '5';";
 $result = $conn->query($sql);
@@ -215,97 +178,77 @@ if ($result->num_rows > 0) {
                                 </table>
                             </div>
                         </section>";}}
-else {
-    echo "0 results";}
-$conn->close();
-?>
 
-<h3 style="text-indent: 5%;" class="name-of-treatment" ><a style=" text-decoration: none; color:#e4c9c4; " href="#">Pielęgnacja dłoni i stóp</a></h3>
-
-<?php
-$conn = new mysqli("localhost", "szymon", "haslo", "loki");;
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);}
+echo '<h3 style="text-indent: 5%;" class="name-of-treatment" ><a style=" text-decoration: none; color:#e4c9c4; " href="#">Pielęgnacja dłoni i stóp</a></h3>';
 
 $sql = "SELECT nazwa, cena, czas FROM zabieg WHERE Rodzaj_id = '6';";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
-    while($row = $result->fetch_assoc()) {
+    while ($row = $result->fetch_assoc()) {
         echo "<section class='type-of-treatment'> <span class='slidetoggle-trigger''></span>
                              <div class='table-and-explication'>
                                 <table class='list-of-tasks''>
                                     <tbody><tr>
-                                        <td class='task-name'>".$row["nazwa"]."</td>
-                                        <td class='duration'>".$row["czas"]."</td>
-                                        <td class='price'>".$row["cena"]."</td>
-                                        <td class='price-sale'>"."</td>
+                                        <td class='task-name'>" . $row["nazwa"] . "</td>
+                                        <td class='duration'>" . $row["czas"] . "</td>
+                                        <td class='price'>" . $row["cena"] . "</td>
+                                        <td class='price-sale'>" . "</td>
                                     </tr></tbody>
                                 </table>
                             </div>
-                        </section>";}}
-else {
-    echo "0 results";}
-$conn->close();
-?>
+                        </section>";
+    }
 
-<h3 style="text-indent: 5%;" class="name-of-treatment" ><a style=" text-decoration: none; color:#e4c9c4; " href="#">Zabiegi na twarz z użyciem aparatury</a></h3>
+    echo '<h3 style="text-indent: 5%;" class="name-of-treatment" ><a style=" text-decoration: none; color:#e4c9c4; " href="#">Zabiegi na twarz z użyciem aparatury</a></h3>';
 
-<?php
-$conn = new mysqli("localhost", "szymon", "haslo", "loki");;
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);}
+    $sql = "SELECT nazwa, cena, czas FROM zabieg WHERE Rodzaj_id = '7';";
+    $result = $conn->query($sql);
 
-$sql = "SELECT nazwa, cena, czas FROM zabieg WHERE Rodzaj_id = '7';";
-$result = $conn->query($sql);
-
-if ($result->num_rows > 0) {
-    while($row = $result->fetch_assoc()) {
-        echo "<section class='type-of-treatment'> <span class='slidetoggle-trigger''></span>
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            echo "<section class='type-of-treatment'> <span class='slidetoggle-trigger''></span>
                              <div class='table-and-explication'>
                                 <table class='list-of-tasks''>
                                     <tbody><tr>
-                                        <td class='task-name'>".$row["nazwa"]."</td>
-                                        <td class='duration'>".$row["czas"]."</td>
-                                        <td class='price'>".$row["cena"]."</td>
-                                        <td class='price-sale'>"."</td>
+                                        <td class='task-name'>" . $row["nazwa"] . "</td>
+                                        <td class='duration'>" . $row["czas"] . "</td>
+                                        <td class='price'>" . $row["cena"] . "</td>
+                                        <td class='price-sale'>" . "</td>
                                     </tr></tbody>
                                 </table>
                             </div>
-                        </section>";}}
-else {
-    echo "0 results";}
-$conn->close();
-?>
+                        </section>";
+        }
+    }
 
-<h3 style="text-indent: 5%;" class="name-of-treatment" ><a style=" text-decoration: none; color:#e4c9c4; " href="#">Mezoterapia</a></h3>
+    echo '<h3 style="text-indent: 5%;" class="name-of-treatment" ><a style=" text-decoration: none; color:#e4c9c4; " href="#">Mezoterapia</a></h3>';
 
-<?php
-$conn = new mysqli("localhost", "szymon", "haslo", "loki");;
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);}
+    $sql = "SELECT nazwa, cena, czas FROM zabieg WHERE Rodzaj_id = '8';";
+    $result = $conn->query($sql);
 
-$sql = "SELECT nazwa, cena, czas FROM zabieg WHERE Rodzaj_id = '8';";
-$result = $conn->query($sql);
-
-if ($result->num_rows > 0) {
-    while($row = $result->fetch_assoc()) {
-        echo "<section class='type-of-treatment'> <span class='slidetoggle-trigger''></span>
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            echo "<section class='type-of-treatment'> <span class='slidetoggle-trigger''></span>
                              <div class='table-and-explication'>
                                 <table class='list-of-tasks''>
                                     <tbody><tr>
-                                        <td class='task-name'>".$row["nazwa"]."</td>
-                                        <td class='duration'>".$row["czas"]."</td>
-                                        <td class='price'>".$row["cena"]."</td>
-                                        <td class='price-sale'>"."</td>
+                                        <td class='task-name'>" . $row["nazwa"] . "</td>
+                                        <td class='duration'>" . $row["czas"] . "</td>
+                                        <td class='price'>" . $row["cena"] . "</td>
+                                        <td class='price-sale'>" . "</td>
                                     </tr></tbody>
                                 </table>
                             </div>
-                        </section>";}}
-else {
-    echo "0 results";}
-$conn->close();
+                        </section>";
+        }
+    } else {
+        echo "0 results";
+    }
+    $conn->close();
+}
 ?>
+
 </body>
 
 <footer class="text-center text-lg-start bg-light text-muted">
