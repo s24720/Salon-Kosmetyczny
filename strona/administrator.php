@@ -87,12 +87,25 @@
         </div>
 
         <div class="form-outline mb-4">
-            <input type="text" name="czas" class="form-control form-control-lg" />
+            <input class="form-control form-control-lg" id="appt-time" type="time" name="appt-time" step="2">
             <label class="form-label" >czas trwania zabiegu</label>
+
+
         </div>
 
         <div class="form-outline mb-4">
-            <input type="text" name="rodzaj" class="form-control form-control-lg" />
+            <select  class="form-control form-control-lg" name="rodzaj" id="cars">
+                <optgroup label="Wybierz rodzaj zabiegu">
+                    <option value="1">1 - Zabiegi pielęgnacyjno-złuszczające</option>
+                    <option value="2">2 - Zabiegi na ciało z użyciem apatatury</option>
+                    <option value="3">3 - Oprawa oka</option>
+                    <option value="4">4 - Masaż twarzy</option>
+                    <option value="5">5 - Makijaż permanentny</option>
+                    <option value="6">6 - Pielęgnacja dłoni i stóp</option>
+                    <option value="7">7 - Zabiegi na twarz z użyciem aparatury</option>
+                    <option value="8">8 - Mezoterapia</option>
+                </optgroup>
+            </select>
             <label class="form-label" >Rodzaj zabiegu</label>
         </div>
         <div class="pt-1 mb-4">
@@ -102,37 +115,6 @@
     </form>
 
 </div>
-
-<div class="container">
-
-    <form style="width: 23rem;"
-          method="POST"
-          action="">
-
-        <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Dodaj usługę</h3>
-
-        <div class="form-outline mb-4">
-            <input type="text" name="nazwa" class="form-control form-control-lg" />
-            <label class="form-label">nazwa zabiegu</label>
-        </div>
-
-        <div class="form-outline mb-4">
-            <input type="text" name="cena" class="form-control form-control-lg" />
-            <label class="form-label" >cena zabiegu</label>
-        </div>
-
-        <div class="form-outline mb-4">
-            <input type="text" name="czas" class="form-control form-control-lg" />
-            <label class="form-label" >czas trwania zabiegu</label>
-        </div>
-
-        <div class="form-outline mb-4">
-            <input type="text" name="rodzaj" class="form-control form-control-lg" />
-            <label class="form-label" >Rodzaj zabiegu</label>
-        </div>
-        <div class="pt-1 mb-4">
-            <button class="btn btn-info btn-lg btn-block" type="submit">dodaj</button>
-        </div>
 
     </form>
 
