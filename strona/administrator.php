@@ -77,9 +77,21 @@
 
             <form style="width: 23rem;"
                   method="POST"
-                  action="">
+                  action="dodawanie_uslugi.php">
 
                 <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Dodaj usługę</h3>
+
+
+                <?php if (isset($_GET['error'])) { ?>
+
+                    <div class="alert alert-danger" role="alert">
+                        <?=$_GET['error']?>
+                    </div>
+
+                    <?php
+                }
+                ?>
+
 
                 <div class="form-outline mb-4">
                     <input type="text" name="nazwa" class="form-control form-control-lg" />
@@ -92,14 +104,14 @@
                 </div>
 
                 <div class="form-outline mb-4">
-                    <input class="form-control form-control-lg" id="appt-time" type="time" name="appt-time" step="2">
+                    <input class="form-control form-control-lg" type="time" name="czas" step="2">
                     <label class="form-label" >Czas trwania zabiegu</label>
 
 
                 </div>
 
                 <div class="form-outline mb-4">
-                    <select  class="form-control form-control-lg" name="rodzaj" id="cars">
+                    <select  class="form-control form-control-lg" name="rodzaj">
                         <optgroup label="Wybierz rodzaj zabiegu">
                             <option value="1">1 - Zabiegi pielęgnacyjno-złuszczające</option>
                             <option value="2">2 - Zabiegi na ciało z użyciem apatatury</option>
@@ -123,27 +135,35 @@
         <div class="col-sm">
             <form style="width: 23rem;"
                   method="POST"
-                  action="">
+                  action="usuwanie_uslugi.php">
 
                 <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Usuń usługę</h3>
 
                 <div class="form-outline mb-4">
-                    <select  class="form-control form-control-lg" name="rodzaj" id="cars">
-                        <optgroup label="Wybierz rodzaj zabiegu">
-                            <option value="1">1 - Zabiegi pielęgnacyjno-złuszczające</option>
-                            <option value="2">2 - Zabiegi na ciało z użyciem apatatury</option>
-                            <option value="3">3 - Oprawa oka</option>
-                            <option value="4">4 - Masaż twarzy</option>
-                            <option value="5">5 - Makijaż permanentny</option>
-                            <option value="6">6 - Pielęgnacja dłoni i stóp</option>
-                            <option value="7">7 - Zabiegi na twarz z użyciem aparatury</option>
-                            <option value="8">8 - Mezoterapia</option>
+                    <select  class="form-control form-control-lg" name="usuwanie" id="cars">
+                        <optgroup label="Wybierz zabieg">
+                <?php
+                $conn = new mysqli("localhost", "szymon", "haslo", "loki");;
+                if ($conn->connect_error) {
+                    die("Connection failed: " . $conn->connect_error);
+                }
+                $sql = "SELECT nazwa FROM zabieg;";
+                $result = $conn->query($sql);
+
+                if ($result->num_rows > 0) {
+                    while($row = $result->fetch_assoc()) {
+
+                        echo "<option name=''>".$row["nazwa"]."</option>";
+                    }
+                }
+                $conn->close();
+                ?>
                         </optgroup>
                     </select>
-                    <label class="form-label" >Zabieg</label>
+                    <label class="form-label" >Nazwa zabiegu</label>
                 </div>
                 <div class="pt-1 mb-4">
-                    <button class="btn btn-info btn-lg btn-block" type="submit">dodaj</button>
+                    <button class="btn btn-info btn-lg btn-block" type="submit">Usuń</button>
                 </div>
 
             </form>
