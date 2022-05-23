@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html" lang="pl-en">
+<html xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html"
+      lang="pl-en">
 <head>
     <title>LooKreacja</title>
     <meta charset="UTF-8">
@@ -67,58 +68,91 @@
     </div>
 
 </nav>
+</br>
+
 
 <div class="container">
+    <div class="row">
+        <div class="col-sm">
 
-    <form style="width: 23rem;"
-          method="POST"
-          action="">
+            <form style="width: 23rem;"
+                  method="POST"
+                  action="">
 
-        <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Dodaj usługę</h3>
+                <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Dodaj usługę</h3>
 
-        <div class="form-outline mb-4">
-            <input type="text" name="nazwa" class="form-control form-control-lg" />
-            <label class="form-label">nazwa zabiegu</label>
+                <div class="form-outline mb-4">
+                    <input type="text" name="nazwa" class="form-control form-control-lg" />
+                    <label class="form-label">Nazwa zabiegu</label>
+                </div>
+
+                <div class="form-outline mb-4">
+                    <input type="text" name="cena" class="form-control form-control-lg" />
+                    <label class="form-label" >Cena zabiegu</label>
+                </div>
+
+                <div class="form-outline mb-4">
+                    <input class="form-control form-control-lg" id="appt-time" type="time" name="appt-time" step="2">
+                    <label class="form-label" >Czas trwania zabiegu</label>
+
+
+                </div>
+
+                <div class="form-outline mb-4">
+                    <select  class="form-control form-control-lg" name="rodzaj" id="cars">
+                        <optgroup label="Wybierz rodzaj zabiegu">
+                            <option value="1">1 - Zabiegi pielęgnacyjno-złuszczające</option>
+                            <option value="2">2 - Zabiegi na ciało z użyciem apatatury</option>
+                            <option value="3">3 - Oprawa oka</option>
+                            <option value="4">4 - Masaż twarzy</option>
+                            <option value="5">5 - Makijaż permanentny</option>
+                            <option value="6">6 - Pielęgnacja dłoni i stóp</option>
+                            <option value="7">7 - Zabiegi na twarz z użyciem aparatury</option>
+                            <option value="8">8 - Mezoterapia</option>
+                        </optgroup>
+                    </select>
+                    <label class="form-label" >Wybierz zabieg do usunięcia</label>
+                </div>
+                <div class="pt-1 mb-4">
+                    <button class="btn btn-info btn-lg btn-block" type="submit">dodaj</button>
+                </div>
+
+            </form>
+
         </div>
+        <div class="col-sm">
+            <form style="width: 23rem;"
+                  method="POST"
+                  action="">
 
-        <div class="form-outline mb-4">
-            <input type="text" name="cena" class="form-control form-control-lg" />
-            <label class="form-label" >cena zabiegu</label>
+                <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Usuń usługę</h3>
+
+                <div class="form-outline mb-4">
+                    <select  class="form-control form-control-lg" name="rodzaj" id="cars">
+                        <optgroup label="Wybierz rodzaj zabiegu">
+                            <option value="1">1 - Zabiegi pielęgnacyjno-złuszczające</option>
+                            <option value="2">2 - Zabiegi na ciało z użyciem apatatury</option>
+                            <option value="3">3 - Oprawa oka</option>
+                            <option value="4">4 - Masaż twarzy</option>
+                            <option value="5">5 - Makijaż permanentny</option>
+                            <option value="6">6 - Pielęgnacja dłoni i stóp</option>
+                            <option value="7">7 - Zabiegi na twarz z użyciem aparatury</option>
+                            <option value="8">8 - Mezoterapia</option>
+                        </optgroup>
+                    </select>
+                    <label class="form-label" >Zabieg</label>
+                </div>
+                <div class="pt-1 mb-4">
+                    <button class="btn btn-info btn-lg btn-block" type="submit">dodaj</button>
+                </div>
+
+            </form>
         </div>
-
-        <div class="form-outline mb-4">
-            <input class="form-control form-control-lg" id="appt-time" type="time" name="appt-time" step="2">
-            <label class="form-label" >czas trwania zabiegu</label>
-
-
-        </div>
-
-        <div class="form-outline mb-4">
-            <select  class="form-control form-control-lg" name="rodzaj" id="cars">
-                <optgroup label="Wybierz rodzaj zabiegu">
-                    <option value="1">1 - Zabiegi pielęgnacyjno-złuszczające</option>
-                    <option value="2">2 - Zabiegi na ciało z użyciem apatatury</option>
-                    <option value="3">3 - Oprawa oka</option>
-                    <option value="4">4 - Masaż twarzy</option>
-                    <option value="5">5 - Makijaż permanentny</option>
-                    <option value="6">6 - Pielęgnacja dłoni i stóp</option>
-                    <option value="7">7 - Zabiegi na twarz z użyciem aparatury</option>
-                    <option value="8">8 - Mezoterapia</option>
-                </optgroup>
-            </select>
-            <label class="form-label" >Rodzaj zabiegu</label>
-        </div>
-        <div class="pt-1 mb-4">
-            <button class="btn btn-info btn-lg btn-block" type="submit">dodaj</button>
-        </div>
-
-    </form>
-
+    </div>
 </div>
 
-    </form>
 
-</div>
+
 
 </body>
 
