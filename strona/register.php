@@ -14,23 +14,28 @@ if (isset($_POST['name']) && isset($_POST['surname']) && isset($_POST['telephone
     $mail = test_input($_POST['email']);
     $password = test_input($_POST['password']);
 
+    $uppercase = preg_match('@[A-Z]@', $password);
+    $lowercase = preg_match('@[a-z]@', $password);
+    $number    = preg_match('@[0-9]@', $password);
+    $specialChars = preg_match('@[^\w]@', $password);
 
     if (empty($name)){
-        header("Location: rejestracja.php?error=Zle podano imie");
+        header("Location: rejestracja.php?error=Imie jest niepoprawne");
     }else if (empty($surname)){
-        header("Location: rejestracja.php?error=Zle podano nazwisko");
+        header("Location: rejestracja.php?error=Nazwisko jest niepoprawne");
     }else if (empty($telephone)){
-        header("Location: rejestracja.php?error=Zle podano numer telefonu");
-    }else if (empty($mail)){
-        header("Location: rejestracja.php?error=Zle podano e-mail");
-    }else if (empty($password)){
-        header("Location: rejestracja.php?error=Zle podano haslo");
+        header("Location: rejestracja.php?error=Numer telefonu jest niepoprawny");
+    }else if (empty($mail) || !filter_var($mail, FILTER_VALIDATE_EMAIL) ){
+        header("Location: rejestracja.php?error=E-mail jest niepoprawne)");
+    }else if (empty($password) || !$uppercase || !$lowercase || !$number || !$specialChars || strlen($password) < 8){
+        header("Location: rejestracja.php?error=Haslo jest niepoprawne");
     }else{
         $conn = new mysqli("localhost", "szymon", "haslo", "loki");
 
         if ($conn->connect_error) {
             die("Connection failed: " . $conn->connect_error);
         }
+
 
         $sql = "INSERT INTO dane_logowanie(email, haslo, Rola_id) VALUE ( '".$mail."','".$password."',1);";
         $result = $conn->query($sql);

@@ -1,7 +1,7 @@
 <?php
 if(isset($_POST['submit']))
 {
-    $usun = $_POST['usuwanie'];
+    $usun = $_POST['usun'];
 
     $sql = "DELETE FROM `zabieg` WHERE `zabieg`.`nazwa` = $usun;";
 

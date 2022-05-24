@@ -4,8 +4,9 @@ include_once 'dp.php';
 if(isset($_POST['submit']))
 {
     $opinia = $_POST['opinia'];
-    $sql = "INSERT INTO opinie (Salon_id, opina, data)VALUES 
-             ('1','$opinia',CURRENT_TIMESTAMP)";
+    $nick = $_POST['nick'];
+    $sql = "INSERT INTO opinie (Salon_id, opina, data, nick)VALUES 
+             ('1','$opinia',CURRENT_TIMESTAMP,'$nick')";
 
     $conn = new mysqli("localhost", "szymon", "haslo", "loki");;
     if (mysqli_query($conn, $sql)) {
@@ -17,5 +18,4 @@ if(isset($_POST['submit']))
 }
 ?>
 
-<?php
 

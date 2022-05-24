@@ -54,11 +54,14 @@
             Konto użytkownika
         </button>
         <div class="dropdown-menu dropdown-menu-right">
-            <button class="dropdown-item"  type="button"><a class="nav-link" href="login.php">Logowanie</a></button>
-            <button class="dropdown-item"  type="button"><a class="nav-link" href="rejestracja.php">Rejestracja</a></button>
             <?php
             session_start();
 
+            if (empty($_SESSION["username"])){
+                echo "<button class='dropdown-item'  type='button'><a class='nav-link' href='login.php'>Logowanie</a></button>";
+                echo "<button class='dropdown-item'  type='button'><a class='nav-link' href='rejestracja.php'>Rejestracja</a></button>";
+
+            }
             if (!empty($_SESSION["username"])){
                 echo " <button class='dropdown-item'  type='button'><a class='nav-link' href='wziyty.php'>Wizyty</a></button>";
                 echo "<button class='dropdown-item'  type='button'><a class='nav-link' href='logut.php'>Wyloguj się</a></button>";
@@ -75,19 +78,23 @@
 <h3 style="text-indent: 5%;" class="name-of-treatment" ><a style=" text-decoration: none; color:#e4c9c4; " href="#">Zabiegi pielęgnacyjno-złuszczające</a></h3>
 
 <?php
+
+
 $conn = new mysqli("localhost", "szymon", "haslo", "loki");;
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);}
 
+
 $sql = "SELECT nazwa, cena, czas FROM zabieg WHERE Rodzaj_id = '1';";
 $result = $conn->query($sql);
 
+
 if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
-        echo "<section class='type-of-treatment'> <span class='slidetoggle-trigger''></span>
+        $cennik = "<section style='height: 20px' class='type-of-treatment'>
                              <div class='table-and-explication'>
-                                <table class='list-of-tasks''>
-                                    <tbody><tr>
+                                <table class='list-of-tasks'>
+                                    <tbody><tr  >
                                         <td class='task-name'>".$row["nazwa"]."</td>
                                         <td class='duration'>".$row["czas"]."</td>
                                         <td class='price'>".$row["cena"]."</td>
@@ -95,7 +102,10 @@ if ($result->num_rows > 0) {
                                     </tr></tbody>
                                 </table>
                             </div>
-                        </section>";}}
+                        </section>'";
+        echo $cennik;
+
+    }}
 
 echo '<h3 style="text-indent: 5%;" class="name-of-treatment" ><a style=" text-decoration: none; color:#e4c9c4; " href="#">Zabiegi na ciało z użyciem aparatury</a></h3>';
 

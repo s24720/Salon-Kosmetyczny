@@ -66,11 +66,14 @@
             Konto użytkownika
         </button>
         <div class="dropdown-menu dropdown-menu-right">
-            <button class="dropdown-item"  type="button"><a class="nav-link" href="login.php">Logowanie</a></button>
-            <button class="dropdown-item"  type="button"><a class="nav-link" href="rejestracja.php">Rejestracja</a></button>
             <?php
             session_start();
 
+            if (empty($_SESSION["username"])){
+                echo "<button class='dropdown-item'  type='button'><a class='nav-link' href='login.php'>Logowanie</a></button>";
+                echo "<button class='dropdown-item'  type='button'><a class='nav-link' href='rejestracja.php'>Rejestracja</a></button>";
+
+            }
             if (!empty($_SESSION["username"])){
                 echo " <button class='dropdown-item'  type='button'><a class='nav-link' href='wziyty.php'>Wizyty</a></button>";
                 echo "<button class='dropdown-item'  type='button'><a class='nav-link' href='logut.php'>Wyloguj się</a></button>";
