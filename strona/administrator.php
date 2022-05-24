@@ -153,7 +153,7 @@
                 if ($result->num_rows > 0) {
                     while($row = $result->fetch_assoc()) {
 
-                        echo "<option name=''>".$row["nazwa"]."</option>";
+                        echo "<option name='usun'>".$row["nazwa"]."</option>";
                     }
                 }
                 $conn->close();
@@ -169,6 +169,53 @@
             </form>
         </div>
     </div>
+    <div class="row">
+        <div class="col">
+            <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Potwierdzenie rezerwacji</h3>
+
+        </div>
+        <div class="col">
+            <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Edycja rezerwacji</h3>
+
+        </div>
+        <div class="row">
+            <div class="col">
+                <form style="width: 23rem;"
+                      method="POST"
+                      action="statystyki.php">
+
+                <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Statystyki</h3>
+
+
+                <div class="form-outline mb-4">
+                    <select  class="form-control form-control-lg" name="usuwanie" id="cars">
+                        <optgroup label="Wybierz zabieg">
+                            <?php
+                            $conn = new mysqli("localhost", "szymon", "haslo", "loki");;
+                            if ($conn->connect_error) {
+                                die("Connection failed: " . $conn->connect_error);
+                            }
+                            $sql = "SELECT imie, nazwisko FROM klient;";
+                            $result = $conn->query($sql);
+
+                            if ($result->num_rows > 0) {
+                                while($row = $result->fetch_assoc()) {
+
+                                    echo "<option value='statystki'>".$row["imie"]." ".$row["nazwisko"]."</option>";
+                                }
+                            }
+                            $conn->close();
+                            ?>
+                        </optgroup>
+                    </select>
+                    <label class="form-label" >Nazwa zabiegu</label>
+                </div>
+                <div class="pt-1 mb-4">
+                    <button class="btn btn-info btn-lg btn-block" type="submit">Sprawdź</button>
+                </div>
+                </form>
+            </div>
+
 </div>
 
 
