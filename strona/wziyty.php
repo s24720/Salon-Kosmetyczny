@@ -94,6 +94,64 @@
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb30 text-center">
                 <h2>Rezerwacja wizyty</h2>
             </div>
+
+
+            <?php
+            $sql = 'SELECT day(czas) as d ,hour(czas) as h FROM wizyta WHERE month(czas) = month(current_date());';
+
+            $conn = new mysqli("localhost", "szymon", "haslo", "loki");
+
+            $result = $conn->query($sql);
+
+            $dates = array();
+
+            if ($result->num_rows > 0) {
+                while($row = $result->fetch_assoc()) {
+
+                    $dates[] = $row;
+                }
+            }
+
+            $maxDays=date('t');
+
+            foreach(range(1,$maxDays) as $i){
+
+                echo " <table class='table'>
+
+                <tbody>
+                <tr>
+                <th>".$i."</th>
+                ";
+
+
+                foreach(range(8,18) as $j){
+
+                    $rezerwacja = false;
+                    foreach ($dates as $d){
+                        if ($d["d"] == $i && $d["h"] == $j){
+                            $rezerwacja = true;
+                            break;
+                        }
+                    }
+
+
+                    if ($rezerwacja) {
+
+
+                        echo "<td>".$j.":00".$rezerwacja."<br><span style='color: red'>rezerwacja</span>"."<br>"."</td>";
+
+                    }
+                    else{
+
+                        echo "<td>".$j.":00".$rezerwacja."<br><span style='color: green'>wolny</span>"."<br>"."</td>";
+
+                    }
+                }
+            }
+            $conn->close();
+
+            ?>
+
         </div>
         <div class="row">
 
@@ -135,13 +193,31 @@
                                 </div>
                             </div>
                             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                                <button type="submit" name="singlebutton" class="btn btn-primary">send Enquiry</button>
+                                <button type="submit" name="singlebutton" class="btn btn-primary">Zarezerwuj wizytę</button>
                             </div>
                         </div>
                     </form>
                 </div>
 
             </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Potwierdzenie rezerwacji
+        </div>
+        <div class="col">
+            <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Edycja rezerwacji</h3>
+        </div>
+        <div class="w-100"></div>
+        <div class="col">
+            <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Usunięcie rezerwacji</h3>
+        </div>
+        <div class="col">
+            <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Historia rezerwacji</h3>
         </div>
     </div>
 </div>
