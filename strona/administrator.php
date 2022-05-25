@@ -150,13 +150,14 @@
                 if ($conn->connect_error) {
                     die("Connection failed: " . $conn->connect_error);
                 }
-                $sql = "SELECT nazwa FROM zabieg;";
+                $sql = "SELECT nazwa, id FROM zabieg;";
                 $result = $conn->query($sql);
+
 
                 if ($result->num_rows > 0) {
                     while($row = $result->fetch_assoc()) {
 
-                        echo "<option name='usun'>".$row["nazwa"]."</option>";
+                        echo "<option value = '".$row["id"]."' >".$row["nazwa"]."</option>";
                     }
                 }
                 $conn->close();

@@ -1,9 +1,9 @@
 <?php
-if(isset($_POST['submit']))
-{
-    $usun = $_POST['usun'];
 
-    $sql = "DELETE FROM `zabieg` WHERE `zabieg`.`nazwa` = $usun;";
+    $usun = $_POST['usuwanie'];
+
+
+    $sql = "DELETE FROM zabieg WHERE id = $usun;";
 
     $conn = new mysqli("localhost", "szymon", "haslo", "loki");;
     if (mysqli_query($conn, $sql)) {
@@ -12,7 +12,7 @@ if(isset($_POST['submit']))
         echo "Error: " . $sql . ":-" . mysqli_error($conn);
     }
     mysqli_close($conn);
-}
+
 ?>
 
 

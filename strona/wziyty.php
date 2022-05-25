@@ -164,7 +164,7 @@
 
         </div>
 
-        <form method="POST" action="rezerwacja">
+        <form method="POST" action="rezerwacja.php">
         <div class="row">
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb30">
                 <div class="tour-booking-form">
@@ -177,7 +177,7 @@
                                 <div class="form-group">
                                     <label class="control-label required" for="select">Zabieg</label>
                                     <div class="select">
-                                        <select id="select" name="select" class="form-control">
+                                        <select id="select" name="zabieg" class="form-control">
                                                 <?php
                                                 $conn = new mysqli("localhost", "szymon", "haslo", "loki");;
                                                 if ($conn->connect_error) {
@@ -206,7 +206,7 @@
                                 <div class="form-group">
                                     <label class="control-label" for="datepicker">Data wizyty (yyyy-mm-dd hh:mm:ss)</label>
                                     <div class='input-group date' id='datetimepicker1'>
-                                        <input id="datepicker" name="datepicker" type="text" placeholder="Data" class="form-control" required>
+                                        <input id="datepicker" name="data" type="text" placeholder="Data" class="form-control" required>
                                         <span class="input-group-addon"><i class="fa fa-calendar"></i></span> </div>
                                 </div>
                             </div>
@@ -215,7 +215,7 @@
                             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                                 <div class="form-group">
                                     <label class="control-label" for="textarea">Podaj dodatkowe informacje</label>
-                                    <textarea class="form-control" id="textarea" name="textarea" rows="4" placeholder="(opcjonalne)"></textarea>
+                                    <textarea class="form-control" id="textarea" name="informacja" rows="4" placeholder="(opcjonalne)"></textarea>
                                 </div>
                             </div>
                             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
@@ -242,9 +242,78 @@
         <div class="w-100"></div>
         <div class="col">
             <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Usunięcie rezerwacji</h3>
+
+            <form method="POST" action="usuwanie_rezerwacji.php">
+            <div class="form-outline mb-4">
+                <select  class="form-control form-control-lg" name="usuwanie" id="cars">
+                    <optgroup label="Wybierz zabieg">
+                        <?php
+                        $conn = new mysqli("localhost", "szymon", "haslo", "loki");;
+                        if ($conn->connect_error) {
+                            die("Connection failed: " . $conn->connect_error);
+                        }
+                        $sql = "SELECT czas, Zabieg_id,id FROM wizyta WHERE Klient_id = 1;";
+                        $result = $conn->query($sql);
+
+                        if ($result->num_rows > 0) {
+                            while($row = $result->fetch_assoc()) {
+
+                                echo "<option value = '".$row["id"]."' >".$row["czas"]." ".$row["Zabieg_id"]."</option>";
+                            }
+                        }
+                        $conn->close();
+                        ?>
+                    </optgroup>
+                </select>
+            </div>
+                <div class="pt-1 mb-4">
+                    <button class="btn btn-info btn-lg btn-block" type="submit">Usuń</button>
+                </div>
+            </form>
         </div>
         <div class="col">
             <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Historia rezerwacji</h3>
+
+            <?php if (isset($_GET['error'])) { ?>
+
+                <div class="alert alert-success" role="alert">
+                    <?=$_GET['error']?>
+                </div>
+
+                <?php
+            }
+            ?>
+
+            <form method="POST" action="historia_rezerwacji.php"></form>
+            <div class="form-outline mb-4">
+                <select  class="form-control form-control-lg" name="historia" id="cars">
+                    <optgroup label="Wybierz zabieg">
+                        <?php
+                        $conn = new mysqli("localhost", "szymon", "haslo", "loki");;
+                        if ($conn->connect_error) {
+                            die("Connection failed: " . $conn->connect_error);
+                        }
+                        $sql = "SELECT czas, Zabieg_id,id FROM wizyta WHERE Klient_id = 1;";
+                        $result = $conn->query($sql);
+
+                        if ($result->num_rows > 0) {
+                            while($row = $result->fetch_assoc()) {
+
+                                echo "<option value = '".$row["id"]."' >".$row["czas"]."</option>";
+                            }
+                        }
+                        $conn->close();
+                        ?>
+                    </optgroup>
+                </select>
+            </div>
+
+            <div class="pt-1 mb-4">
+                <button class="btn btn-info btn-lg btn-block" type="submit">Pokaż szczegóły</button>
+            </div>
+            </form>
+         </div>
+        </div>
         </div>
     </div>
 </div>

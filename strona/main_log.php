@@ -113,7 +113,7 @@
                 <span class="display-4" itemprop="headline">LooKreacja</span>
                 </br>
                 </br>
-                <span class="text-muted">Secret Avenue The Beauty Institute w Gdańsku to salon kosmetyczny w którym możesz skorzystać z kompleksowych usług kosmetycznych oraz zasięgnąć fachowych porad z zakresu pielęgnacji.
+                <span class="text-muted">LooKreacja w Wawie to salon kosmetyczny w którym możesz skorzystać z kompleksowych usług kosmetycznych oraz zasięgnąć fachowych porad z zakresu pielęgnacji.
 Oferujemy szeroki wachlarz zabiegów medycyny estetycznej, kosmetyki ciała oraz pielęgnacji twarzy, ciała i paznokci.</span>
             </div>
             <div class="col-sm">

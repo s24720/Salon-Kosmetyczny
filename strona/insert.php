@@ -1,5 +1,4 @@
 <?php
-include_once 'dp.php';
 
 if(isset($_POST['submit']))
 {
