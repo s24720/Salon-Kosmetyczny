@@ -87,84 +87,11 @@
 
 </br>
 </br>
-<div class="content">
-    <div class="container">
-        <div class="row">
-
-            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb30 text-center">
-                <h2>Rezerwacja wizyty</h2>
-            </div>
-    <br><br><br><br><br>
-            <table class="table">
-                <thead>
-                <tr>
-                    <th scope="col">Dzień miesiąca</th>
-                    <th scope="col">Terminarz</th>
-                    <th scope="col"></th>
-                    <th scope="col"></th>
-                </tr>
-                </thead>
-            </table>
-
-            <?php
-            $sql = 'SELECT day(czas) as d ,hour(czas) as h FROM wizyta WHERE month(czas) = month(current_date());';
-
-            $conn = new mysqli("localhost", "szymon", "haslo", "loki");
-
-            $result = $conn->query($sql);
-
-            $dates = array();
-
-            if ($result->num_rows > 0) {
-                while($row = $result->fetch_assoc()) {
-
-                    $dates[] = $row;
-                }
-            }
-
-            $maxDays = date('t');
-
-            foreach(range(1,$maxDays) as $i){
-
-                echo " <table class='table'>
-
-                <tbody>
-                <tr>
-                <th>".$i."</th>
-                ";
-
-
-                foreach(range(8,18) as $j){
-
-                    $rezerwacja = false;
-                    foreach ($dates as $d){
-                        if ($d["d"] == $i && $d["h"] == $j){
-                            $rezerwacja = true;
-                            break;
-                        }
-                    }
-
-
-                    if ($rezerwacja) {
-
-
-                        echo "<td>".$j.":00".$rezerwacja."<br><span style='color: red'>rezerwacja</span>"."<br>"."</td>";
-
-                    }
-                    else{
-
-                        echo "<td>".$j.":00".$rezerwacja."<br><span style='color: green'>wolny</span>"."<br>"."</td>";
-
-                    }
-                }
-            }
-            $conn->close();
-
-            ?>
-
-        </div>
-
-        <form method="POST" action="rezerwacja.php">
+<div class="container">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb30 text-center">
+        <h2>Rezerwacja wizyty</h2>
+    </div>
+    <form method="POST" action="rezerwacja.php">
         <div class="row">
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb30">
                 <div class="tour-booking-form">
@@ -178,23 +105,23 @@
                                     <label class="control-label required" for="select">Zabieg</label>
                                     <div class="select">
                                         <select id="select" name="zabieg" class="form-control">
-                                                <?php
-                                                $conn = new mysqli("localhost", "szymon", "haslo", "loki");;
-                                                if ($conn->connect_error) {
-                                                    die("Connection failed: " . $conn->connect_error);
+                                            <?php
+                                            $conn = new mysqli("localhost", "szymon", "haslo", "loki");;
+                                            if ($conn->connect_error) {
+                                                die("Connection failed: " . $conn->connect_error);
+                                            }
+                                            $sql = "SELECT nazwa, id FROM zabieg;";
+                                            $result = $conn->query($sql);
+
+
+                                            if ($result->num_rows > 0) {
+                                                while($row = $result->fetch_assoc()) {
+
+                                                    echo "<option value = '".$row["id"]."' >".$row["nazwa"]."</option>";
                                                 }
-                                                $sql = "SELECT nazwa, id FROM zabieg;";
-                                                $result = $conn->query($sql);
-
-
-                                                if ($result->num_rows > 0) {
-                                                    while($row = $result->fetch_assoc()) {
-
-                                                        echo "<option value = '".$row["id"]."' >".$row["nazwa"]."</option>";
-                                                    }
-                                                }
-                                                $conn->close();
-                                                ?>
+                                            }
+                                            $conn->close();
+                                            ?>
                                             </option>
 
                                         </select>
@@ -227,10 +154,11 @@
 
             </div>
         </div>
-    </div>
+</div>
 </div>
 
 </form>
+
 <div class="container">
     <div class="row">
         <div class="col">
@@ -244,28 +172,28 @@
             <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Usunięcie rezerwacji</h3>
 
             <form method="POST" action="usuwanie_rezerwacji.php">
-            <div class="form-outline mb-4">
-                <select  class="form-control form-control-lg" name="usuwanie" id="cars">
-                    <optgroup label="Wybierz zabieg">
-                        <?php
-                        $conn = new mysqli("localhost", "szymon", "haslo", "loki");;
-                        if ($conn->connect_error) {
-                            die("Connection failed: " . $conn->connect_error);
-                        }
-                        $sql = "SELECT czas, Zabieg_id,id FROM wizyta WHERE Klient_id = 1;";
-                        $result = $conn->query($sql);
-
-                        if ($result->num_rows > 0) {
-                            while($row = $result->fetch_assoc()) {
-
-                                echo "<option value = '".$row["id"]."' >".$row["czas"]." ".$row["Zabieg_id"]."</option>";
+                <div class="form-outline mb-4">
+                    <select  class="form-control form-control-lg" name="usuwanie" id="cars">
+                        <optgroup label="Wybierz zabieg">
+                            <?php
+                            $conn = new mysqli("localhost", "szymon", "haslo", "loki");;
+                            if ($conn->connect_error) {
+                                die("Connection failed: " . $conn->connect_error);
                             }
-                        }
-                        $conn->close();
-                        ?>
-                    </optgroup>
-                </select>
-            </div>
+                            $sql = "SELECT czas, Zabieg_id,id FROM wizyta WHERE Klient_id = 1;";
+                            $result = $conn->query($sql);
+
+                            if ($result->num_rows > 0) {
+                                while($row = $result->fetch_assoc()) {
+
+                                    echo "<option value = '".$row["id"]."' >".$row["czas"]." ".$row["Zabieg_id"]."</option>";
+                                }
+                            }
+                            $conn->close();
+                            ?>
+                        </optgroup>
+                    </select>
+                </div>
                 <div class="pt-1 mb-4">
                     <button class="btn btn-info btn-lg btn-block" type="submit">Usuń</button>
                 </div>
@@ -312,11 +240,90 @@
                 <button class="btn btn-info btn-lg btn-block" type="submit">Pokaż szczegóły</button>
             </div>
             </form>
-         </div>
-        </div>
         </div>
     </div>
 </div>
+
+
+    <div class="container">
+        <div class="row">
+
+
+    <br><br><br><br><br>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">Dzień miesiąca</th>
+                    <th scope="col">Terminarz</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                </tr>
+                </thead>
+            </table>
+
+            <?php
+            $sql = 'SELECT day(czas) as d ,hour(czas) as h FROM wizyta WHERE month(czas) = month(current_date());';
+
+            $conn = new mysqli("localhost", "szymon", "haslo", "loki");
+
+            $result = $conn->query($sql);
+
+            $dates = array();
+
+            if ($result->num_rows > 0) {
+                while($row = $result->fetch_assoc()) {
+
+                    $dates[] = $row;
+                }
+            }
+
+            $maxDays = date('t');
+
+            foreach(range(1,$maxDays) as $i){
+
+                echo " <table class='table'>
+
+                <tbody>
+                <tr>
+                <th>".$i."</th>";
+
+
+                foreach(range(8,18) as $j){
+
+                    $rezerwacja = false;
+                    foreach ($dates as $d){
+                        if ($d["d"] == $i && $d["h"] == $j){
+                            $rezerwacja = true;
+                            break;
+                        }
+                    }
+
+
+                    if ($rezerwacja) {
+
+
+                        echo "<td>".$j.":00".$rezerwacja."<br><span style='color: red'>rezerwacja</span>"."<br>"."</td>";
+
+                    }
+                    else{
+
+                        echo "<td>".$j.":00".$rezerwacja."<br><span style='color: green'>wolny</span>"."<br>"."</td>";
+
+                    }
+                }
+            }
+            echo "</tr></tbody></table>";
+
+            $conn->close();
+
+            ?>
+
+        </div>
+    </div>
+
+
+
+
 </body>
 </br>
 </br>
