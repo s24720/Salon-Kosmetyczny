@@ -94,7 +94,17 @@
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb30 text-center">
                 <h2>Rezerwacja wizyty</h2>
             </div>
-
+    <br><br><br><br><br>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">Dzień miesiąca</th>
+                    <th scope="col">Terminarz</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                </tr>
+                </thead>
+            </table>
 
             <?php
             $sql = 'SELECT day(czas) as d ,hour(czas) as h FROM wizyta WHERE month(czas) = month(current_date());';
@@ -112,7 +122,7 @@
                 }
             }
 
-            $maxDays=date('t');
+            $maxDays = date('t');
 
             foreach(range(1,$maxDays) as $i){
 
@@ -153,8 +163,9 @@
             ?>
 
         </div>
-        <div class="row">
 
+        <form method="POST" action="rezerwacja">
+        <div class="row">
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb30">
                 <div class="tour-booking-form">
                     <form>
@@ -167,10 +178,25 @@
                                     <label class="control-label required" for="select">Zabieg</label>
                                     <div class="select">
                                         <select id="select" name="select" class="form-control">
-                                            <option value="">Jaki zabieg Cie interesuje?</option>
-                                            <option value="">Singapore</option>
-                                            <option value="">Thailand</option>
-                                            <option value="">Vietnam</option>
+                                                <?php
+                                                $conn = new mysqli("localhost", "szymon", "haslo", "loki");;
+                                                if ($conn->connect_error) {
+                                                    die("Connection failed: " . $conn->connect_error);
+                                                }
+                                                $sql = "SELECT nazwa, id FROM zabieg;";
+                                                $result = $conn->query($sql);
+
+
+                                                if ($result->num_rows > 0) {
+                                                    while($row = $result->fetch_assoc()) {
+
+                                                        echo "<option value = '".$row["id"]."' >".$row["nazwa"]."</option>";
+                                                    }
+                                                }
+                                                $conn->close();
+                                                ?>
+                                            </option>
+
                                         </select>
                                     </div>
                                 </div>
@@ -178,7 +204,7 @@
 
                             <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
                                 <div class="form-group">
-                                    <label class="control-label" for="datepicker">Data wizyty</label>
+                                    <label class="control-label" for="datepicker">Data wizyty (yyyy-mm-dd hh:mm:ss)</label>
                                     <div class='input-group date' id='datetimepicker1'>
                                         <input id="datepicker" name="datepicker" type="text" placeholder="Data" class="form-control" required>
                                         <span class="input-group-addon"><i class="fa fa-calendar"></i></span> </div>
@@ -204,6 +230,7 @@
     </div>
 </div>
 
+</form>
 <div class="container">
     <div class="row">
         <div class="col">
