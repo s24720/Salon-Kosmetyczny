@@ -14,22 +14,16 @@
     <link rel="stylesheet" href="PHP/styles.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <link rel="stylesheet" href="/PHP/styl2.css" type="text/css" media="screen">
-
 </head>
-
 <body class="border border border-10 border-secondary rounded  ">
 <div id="left"></div>
 <div id="right"></div>
 <div id="top"></div>
 <div id="bottom"></div>
-
 <nav class="navbar navbar-expand-lg navbar-light bg-light ">
-
-
     <div class="collapse navbar-collapse " id="navbarNavDropdown">
         <ul class="navbar-nav">
             <li class="nav-item">
-
                 <a class="nav-link" href="./main_log.php">Aktlualności</a>
             </li>
             <li class="nav-item">
@@ -46,9 +40,6 @@
             </li>
         </ul>
     </div>
-
-
-
     <div class="btn-group">
         <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Konto użytkownika
@@ -69,17 +60,10 @@
             ?>
         </div>
     </div>
-
 </nav>
-
 <br>
-
-
 <h3 style="text-indent: 5%;" class="name-of-treatment" ><a style=" text-decoration: none; color:#e4c9c4; " href="#">Zabiegi pielęgnacyjno-złuszczające</a></h3>
-
 <?php
-
-
 $conn = new mysqli("localhost", "szymon", "haslo", "loki");;
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);}
@@ -91,21 +75,18 @@ $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
-        $cennik = "<section style='height: 20px' class='type-of-treatment'>
-                             <div class='table-and-explication'>
-                                <table class='list-of-tasks'>
-                                    <tbody><tr  >
-                                        <td class='task-name'>".$row["nazwa"]."</td>
-                                        <td class='duration'>".$row["czas"]."</td>
-                                        <td class='price'>".$row["cena"]."</td>
-                                        <td class='price-sale'>"."</td>
-                                    </tr></tbody>
-                                </table>
-                            </div>
-                        </section>'";
-        echo $cennik;
-
-    }}
+        echo "<section class='type-of-treatment'> <span class='slidetoggle-trigger''></span>
+                                      <div class='table-and-explication'>
+                                         <table class='list-of-tasks''>
+                                             <tbody><tr>
+                                                 <td class='task-name'>".$row["nazwa"]."</td>
+                                                 <td class='duration'>".$row["czas"]."</td>
+                                                 <td class='price'>".$row["cena"]."</td>
+                                                 <td class='price-sale'>"."</td>
+                                             </tr></tbody>
+                                         </table>
+                                     </div>
+                                 </section>";}}
 
 echo '<h3 style="text-indent: 5%;" class="name-of-treatment" ><a style=" text-decoration: none; color:#e4c9c4; " href="#">Zabiegi na ciało z użyciem aparatury</a></h3>';
 
@@ -115,17 +96,17 @@ $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
         echo "<section class='type-of-treatment'> <span class='slidetoggle-trigger''></span>
-                             <div class='table-and-explication'>
-                                <table class='list-of-tasks''>
-                                    <tbody><tr>
-                                        <td class='task-name'>".$row["nazwa"]."</td>
-                                        <td class='duration'>".$row["czas"]."</td>
-                                        <td class='price'>".$row["cena"]."</td>
-                                        <td class='price-sale'>"."</td>
-                                    </tr></tbody>
-                                </table>
-                            </div>
-                        </section>";}}
+                                      <div class='table-and-explication'>
+                                         <table class='list-of-tasks''>
+                                             <tbody><tr>
+                                                 <td class='task-name'>".$row["nazwa"]."</td>
+                                                 <td class='duration'>".$row["czas"]."</td>
+                                                 <td class='price'>".$row["cena"]."</td>
+                                                 <td class='price-sale'>"."</td>
+                                             </tr></tbody>
+                                         </table>
+                                     </div>
+                                 </section>";}}
 
 echo '<h3 style="text-indent: 5%;" class="name-of-treatment" ><a style=" text-decoration: none; color:#e4c9c4; " href="#">Oprawa oka</a></h3>';
 
@@ -135,17 +116,17 @@ $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
         echo "<section class='type-of-treatment'> <span class='slidetoggle-trigger''></span>
-                             <div class='table-and-explication'>
-                                <table class='list-of-tasks''>
-                                    <tbody><tr>
-                                        <td class='task-name'>".$row["nazwa"]."</td>
-                                        <td class='duration'>".$row["czas"]."</td>
-                                        <td class='price'>".$row["cena"]."</td>
-                                        <td class='price-sale'>"."</td>
-                                    </tr></tbody>
-                                </table>
-                            </div>
-                        </section>";}}
+                                      <div class='table-and-explication'>
+                                         <table class='list-of-tasks''>
+                                             <tbody><tr>
+                                                 <td class='task-name'>".$row["nazwa"]."</td>
+                                                 <td class='duration'>".$row["czas"]."</td>
+                                                 <td class='price'>".$row["cena"]."</td>
+                                                 <td class='price-sale'>"."</td>
+                                             </tr></tbody>
+                                         </table>
+                                     </div>
+                                 </section>";}}
 
 echo '<h3 style="text-indent: 5%;" class="name-of-treatment" ><a style=" text-decoration: none; color:#e4c9c4; " href="#">Masaż twarzy</a></h3>';
 
@@ -156,17 +137,17 @@ $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
         echo "<section class='type-of-treatment'> <span class='slidetoggle-trigger''></span>
-                             <div class='table-and-explication'>
-                                <table class='list-of-tasks''>
-                                    <tbody><tr>
-                                        <td class='task-name'>".$row["nazwa"]."</td>
-                                        <td class='duration'>".$row["czas"]."</td>
-                                        <td class='price'>".$row["cena"]."</td>
-                                        <td class='price-sale'>"."</td>
-                                    </tr></tbody>
-                                </table>
-                            </div>
-                        </section>";}}
+                                      <div class='table-and-explication'>
+                                         <table class='list-of-tasks''>
+                                             <tbody><tr>
+                                                 <td class='task-name'>".$row["nazwa"]."</td>
+                                                 <td class='duration'>".$row["czas"]."</td>
+                                                 <td class='price'>".$row["cena"]."</td>
+                                                 <td class='price-sale'>"."</td>
+                                             </tr></tbody>
+                                         </table>
+                                     </div>
+                                 </section>";}}
 
 echo '<h3 style="text-indent: 5%;" class="name-of-treatment" ><a style=" text-decoration: none; color:#e4c9c4; " href="#">Makijaż permanentny</a></h3>';
 
@@ -176,17 +157,17 @@ $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
         echo "<section class='type-of-treatment'> <span class='slidetoggle-trigger''></span>
-                             <div class='table-and-explication'>
-                                <table class='list-of-tasks''>
-                                    <tbody><tr>
-                                        <td class='task-name'>".$row["nazwa"]."</td>
-                                        <td class='duration'>".$row["czas"]."</td>
-                                        <td class='price'>".$row["cena"]."</td>
-                                        <td class='price-sale'>"."</td>
-                                    </tr></tbody>
-                                </table>
-                            </div>
-                        </section>";}}
+                                      <div class='table-and-explication'>
+                                         <table class='list-of-tasks''>
+                                             <tbody><tr>
+                                                 <td class='task-name'>".$row["nazwa"]."</td>
+                                                 <td class='duration'>".$row["czas"]."</td>
+                                                 <td class='price'>".$row["cena"]."</td>
+                                                 <td class='price-sale'>"."</td>
+                                             </tr></tbody>
+                                         </table>
+                                     </div>
+                                 </section>";}}
 
 echo '<h3 style="text-indent: 5%;" class="name-of-treatment" ><a style=" text-decoration: none; color:#e4c9c4; " href="#">Pielęgnacja dłoni i stóp</a></h3>';
 
@@ -196,17 +177,17 @@ $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
         echo "<section class='type-of-treatment'> <span class='slidetoggle-trigger''></span>
-                             <div class='table-and-explication'>
-                                <table class='list-of-tasks''>
-                                    <tbody><tr>
-                                        <td class='task-name'>" . $row["nazwa"] . "</td>
-                                        <td class='duration'>" . $row["czas"] . "</td>
-                                        <td class='price'>" . $row["cena"] . "</td>
-                                        <td class='price-sale'>" . "</td>
-                                    </tr></tbody>
-                                </table>
-                            </div>
-                        </section>";
+                                      <div class='table-and-explication'>
+                                         <table class='list-of-tasks''>
+                                             <tbody><tr>
+                                                 <td class='task-name'>" . $row["nazwa"] . "</td>
+                                                 <td class='duration'>" . $row["czas"] . "</td>
+                                                 <td class='price'>" . $row["cena"] . "</td>
+                                                 <td class='price-sale'>" . "</td>
+                                             </tr></tbody>
+                                         </table>
+                                     </div>
+                                 </section>";
     }
 
     echo '<h3 style="text-indent: 5%;" class="name-of-treatment" ><a style=" text-decoration: none; color:#e4c9c4; " href="#">Zabiegi na twarz z użyciem aparatury</a></h3>';
@@ -217,17 +198,17 @@ if ($result->num_rows > 0) {
     if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
             echo "<section class='type-of-treatment'> <span class='slidetoggle-trigger''></span>
-                             <div class='table-and-explication'>
-                                <table class='list-of-tasks''>
-                                    <tbody><tr>
-                                        <td class='task-name'>" . $row["nazwa"] . "</td>
-                                        <td class='duration'>" . $row["czas"] . "</td>
-                                        <td class='price'>" . $row["cena"] . "</td>
-                                        <td class='price-sale'>" . "</td>
-                                    </tr></tbody>
-                                </table>
-                            </div>
-                        </section>";
+                                      <div class='table-and-explication'>
+                                         <table class='list-of-tasks''>
+                                             <tbody><tr>
+                                                 <td class='task-name'>" . $row["nazwa"] . "</td>
+                                                 <td class='duration'>" . $row["czas"] . "</td>
+                                                 <td class='price'>" . $row["cena"] . "</td>
+                                                 <td class='price-sale'>" . "</td>
+                                             </tr></tbody>
+                                         </table>
+                                     </div>
+                                 </section>";
         }
     }
 
@@ -239,17 +220,17 @@ if ($result->num_rows > 0) {
     if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
             echo "<section class='type-of-treatment'> <span class='slidetoggle-trigger''></span>
-                             <div class='table-and-explication'>
-                                <table class='list-of-tasks''>
-                                    <tbody><tr>
-                                        <td class='task-name'>" . $row["nazwa"] . "</td>
-                                        <td class='duration'>" . $row["czas"] . "</td>
-                                        <td class='price'>" . $row["cena"] . "</td>
-                                        <td class='price-sale'>" . "</td>
-                                    </tr></tbody>
-                                </table>
-                            </div>
-                        </section>";
+                                      <div class='table-and-explication'>
+                                         <table class='list-of-tasks''>
+                                             <tbody><tr>
+                                                 <td class='task-name'>" . $row["nazwa"] . "</td>
+                                                 <td class='duration'>" . $row["czas"] . "</td>
+                                                 <td class='price'>" . $row["cena"] . "</td>
+                                                 <td class='price-sale'>" . "</td>
+                                             </tr></tbody>
+                                         </table>
+                                     </div>
+                                 </section>";
         }
     } else {
         echo "0 results";
@@ -257,17 +238,12 @@ if ($result->num_rows > 0) {
     $conn->close();
 }
 ?>
-
 </body>
-
 <footer class="text-center text-lg-start bg-light text-muted">
-
     <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
-
         <div class="me-5 d-none d-lg-block">
             <span>Zajrzyj na nasze social media:</span>
         </div>
-
         <div>
             <a href="" class="me-4 text-reset">
                 <i class="fab fa-facebook-f"></i>
@@ -288,13 +264,9 @@ if ($result->num_rows > 0) {
                 <i class="fab fa-github"></i>
             </a>
         </div>
-
     </section>
-
-
     <section>
         <div class="container text-center text-md-start mt-5">
-
             <div class="row mt-3">
                 <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
                     <h6 class="text-uppercase fw-bold mb-4">
@@ -304,8 +276,6 @@ if ($result->num_rows > 0) {
                         Najlepszy gabniet kosmetyczny
                     </p>
                 </div>
-
-
                 <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
                     <h6 class="text-uppercase fw-bold mb-4">
                         Linki
@@ -320,7 +290,6 @@ if ($result->num_rows > 0) {
                         <a href="#!" class="text-reset">Pomoc</a>
                     </p>
                 </div>
-
                 <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
                     <h6 class="text-uppercase fw-bold mb-4">
                         Kontakt
@@ -336,7 +305,6 @@ if ($result->num_rows > 0) {
             </div>
         </div>
     </section>
-
     <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
         © 2021 Copyright:
         <a class="text-reset fw-bold" href="#">Szymon Szczurowski</a>

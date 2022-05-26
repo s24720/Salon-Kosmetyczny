@@ -12,20 +12,13 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="PHP/styles.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-
 </head>
-
 <body class="border border border-10 border-secondary rounded  ">
 <div id="left"></div>
 <div id="right"></div>
 <div id="top"></div>
 <div id="bottom"></div>
-
-
-
 <nav class="navbar navbar-expand-lg navbar-light bg-light ">
-
-
     <div class="collapse navbar-collapse " id="navbarNavDropdown">
         <ul class="navbar-nav">
             <li class="nav-item">
@@ -45,8 +38,6 @@
             </li>
         </ul>
     </div>
-
-
     <div class="btn-group">
         <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Konto użytkownika
@@ -67,15 +58,9 @@
             ?>
         </div>
     </div>
-
-
 </nav>
-
-
-
 <div style="text-align: center;">
-    </br>
-    </br>
+    <br><br>
     <div class="container">
         <div class="row">
             <div class="col">
@@ -101,15 +86,13 @@
                     }
                     $conn->close();
                     ?>
-
                 </div>
-                </br>
+                <br>
             </div>
             <div class="col">
                 <div class="list-group">
                     <a href="#" style="background-color:  #e4c9c4;  border-color:  #e4c9c4";  class="list-group-item list-group-item-action active">
                         Zabiegi na ciało z użyciem aparatury
-
                     </a>
                     <?php
                     $conn = new mysqli("localhost", "szymon", "haslo", "loki");;
@@ -130,7 +113,7 @@
                     $conn->close();
                     ?>
                 </div>
-                </br>
+                <br>
             </div>
             <div class="w-100"></div>
             <div class="col">
@@ -157,7 +140,7 @@
                     $conn->close();
                     ?>
                 </div>
-                </br>
+                <br>
             </div>
             <div class="col">
                 <div class="list-group">
@@ -183,13 +166,12 @@
                     $conn->close();
                     ?>
                 </div>
-                </br>
+                <br>
             </div>
             <div class="w-100"></div>
             <div class="col">
                 <div class="list-group">
                     <a href="#" style="background-color:  #e4c9c4;  border-color:  #e4c9c4";  class="list-group-item list-group-item-action active">
-
                         Makijaż permanentny
                     </a>
                     <?php
@@ -211,7 +193,7 @@
                     $conn->close();
                     ?>
                 </div>
-                </br>
+                <br>
             </div>
             <div class="col">
                 <div class="list-group">
@@ -237,7 +219,7 @@
                     $conn->close();
                     ?>
                 </div>
-                </br>
+                <br>
             </div>
             <div class="w-100"></div>
             <div class="col">
@@ -264,7 +246,7 @@
                     $conn->close();
                     ?>
                 </div>
-                </br>
+                <br>
             </div>
             <div class="col">
                 <div class="list-group">
@@ -290,19 +272,14 @@
                     $conn->close();
                     ?>
                 </div>
-                </br>
-                </br>
+                <br><br>
             </div>
         </div>
     </div>
-
 </div>
-
 </body>
-
 <section>
     <div class="container text-center text-md-start mt-5">
-
         <div class="row mt-3">
             <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
                 <h6 class="text-uppercase fw-bold mb-4">
@@ -312,8 +289,6 @@
                     Najlepszy gabniet kosmetyczny
                 </p>
             </div>
-
-
             <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
                 <h6 class="text-uppercase fw-bold mb-4">
                     Linki
@@ -328,7 +303,6 @@
                     <a href="#!" class="text-reset">Pomoc</a>
                 </p>
             </div>
-
             <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
                 <h6 class="text-uppercase fw-bold mb-4">
                     Kontakt
@@ -344,7 +318,6 @@
         </div>
     </div>
 </section>
-
 <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
     © 2021 Copyright:
     <a class="text-reset fw-bold" href="#">Szymon Szczurowski</a>

@@ -12,20 +12,13 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="PHP/styles.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-
 </head>
-
 <body class="border border border-10 border-secondary rounded  ">
 <div id="left"></div>
 <div id="right"></div>
 <div id="top"></div>
 <div id="bottom"></div>
-
-
-
 <nav class="navbar navbar-expand-lg navbar-light bg-light ">
-
-
     <div class="collapse navbar-collapse " id="navbarNavDropdown">
         <ul class="navbar-nav">
             <li class="nav-item">
@@ -45,9 +38,6 @@
             </li>
         </ul>
     </div>
-
-
-
     <div class="btn-group">
         <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Konto użytkownika
@@ -68,65 +58,54 @@
             ?>
         </div>
     </div>
-
 </nav>
-
-</br>
+<br>
 <div class="container">
-<div class="row">
-    <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
-        <img
-                src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(73).webp"
-                class="w-100 shadow-1-strong rounded mb-4"
-                alt="Boat on Calm Water"
-        />
-
-        <img
-                src="https://mdbcdn.b-cdn.net/img/Photos/Vertical/mountain1.webp"
-                class="w-100 shadow-1-strong rounded mb-4"
-                alt="Wintry Mountain Landscape"
-        />
+    <div class="row">
+        <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
+            <img
+                    src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(73).webp"
+                    class="w-100 shadow-1-strong rounded mb-4"
+                    alt="Boat on Calm Water"
+            />
+            <img
+                    src="https://mdbcdn.b-cdn.net/img/Photos/Vertical/mountain1.webp"
+                    class="w-100 shadow-1-strong rounded mb-4"
+                    alt="Wintry Mountain Landscape"
+            />
+        </div>
+        <div class="col-lg-4 mb-4 mb-lg-0">
+            <img
+                    src="https://mdbcdn.b-cdn.net/img/Photos/Vertical/mountain2.webp"
+                    class="w-100 shadow-1-strong rounded mb-4"
+                    alt="Mountains in the Clouds"
+            />
+            <img
+                    src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(73).webp"
+                    class="w-100 shadow-1-strong rounded mb-4"
+                    alt="Boat on Calm Water"
+            />
+        </div>
+        <div class="col-lg-4 mb-4 mb-lg-0">
+            <img
+                    src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(18).webp"
+                    class="w-100 shadow-1-strong rounded mb-4"
+                    alt="Waves at Sea"
+            />
+            <img
+                    src="https://mdbcdn.b-cdn.net/img/Photos/Vertical/mountain3.webp"
+                    class="w-100 shadow-1-strong rounded mb-4"
+                    alt="Yosemite National Park"
+            />
+        </div>
     </div>
-
-    <div class="col-lg-4 mb-4 mb-lg-0">
-        <img
-                src="https://mdbcdn.b-cdn.net/img/Photos/Vertical/mountain2.webp"
-                class="w-100 shadow-1-strong rounded mb-4"
-                alt="Mountains in the Clouds"
-        />
-
-        <img
-                src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(73).webp"
-                class="w-100 shadow-1-strong rounded mb-4"
-                alt="Boat on Calm Water"
-        />
-    </div>
-
-    <div class="col-lg-4 mb-4 mb-lg-0">
-        <img
-                src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(18).webp"
-                class="w-100 shadow-1-strong rounded mb-4"
-                alt="Waves at Sea"
-        />
-
-        <img
-                src="https://mdbcdn.b-cdn.net/img/Photos/Vertical/mountain3.webp"
-                class="w-100 shadow-1-strong rounded mb-4"
-                alt="Yosemite National Park"
-        />
-    </div>
-</div>
 </div>
 </body>
-
 <footer class="text-center text-lg-start bg-light text-muted">
-
     <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
-
         <div class="me-5 d-none d-lg-block">
             <span>Zajrzyj na nasze social media:</span>
         </div>
-
         <div>
             <a href="" class="me-4 text-reset">
                 <i class="fab fa-facebook-f"></i>
@@ -147,13 +126,9 @@
                 <i class="fab fa-github"></i>
             </a>
         </div>
-
     </section>
-
-
     <section>
         <div class="container text-center text-md-start mt-5">
-
             <div class="row mt-3">
                 <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
                     <h6 class="text-uppercase fw-bold mb-4">
@@ -163,8 +138,6 @@
                         Najlepszy gabniet kosmetyczny
                     </p>
                 </div>
-
-
                 <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
                     <h6 class="text-uppercase fw-bold mb-4">
                         Linki
@@ -179,7 +152,6 @@
                         <a href="#!" class="text-reset">Pomoc</a>
                     </p>
                 </div>
-
                 <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
                     <h6 class="text-uppercase fw-bold mb-4">
                         Kontakt
@@ -195,7 +167,6 @@
             </div>
         </div>
     </section>
-
     <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
         © 2021 Copyright:
         <a class="text-reset fw-bold" href="#">Szymon Szczurowski</a>

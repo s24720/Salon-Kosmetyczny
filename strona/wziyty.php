@@ -6,9 +6,6 @@ if($_SESSION['rola'] != ("klient" || "administrator")){
     exit;
 }
 ?>
-
-
-
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html" lang="pl-en">
 <head>
@@ -31,26 +28,18 @@ if($_SESSION['rola'] != ("klient" || "administrator")){
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-
     <script>
         $(function () {
             $('#datetimepicker1').datetimepicker();
         });
     </script>
-
 </head>
-
 <body class="border border border-10 border-secondary rounded  ">
 <div id="left"></div>
 <div id="right"></div>
 <div id="top"></div>
 <div id="bottom"></div>
-
-
-
 <nav class="navbar navbar-expand-lg navbar-light bg-light ">
-
-
     <div class="collapse navbar-collapse " id="navbarNavDropdown">
         <ul class="navbar-nav">
             <li class="nav-item">
@@ -70,15 +59,12 @@ if($_SESSION['rola'] != ("klient" || "administrator")){
             </li>
         </ul>
     </div>
-
-
     <div class="btn-group">
         <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Konto użytkownika
         </button>
         <div class="dropdown-menu dropdown-menu-right">
             <?php
-
             if (empty($_SESSION["username"])){
                 echo "<button class='dropdown-item'  type='button'><a class='nav-link' href='login.php'>Logowanie</a></button>";
                 echo "<button class='dropdown-item'  type='button'><a class='nav-link' href='rejestracja.php'>Rejestracja</a></button>";
@@ -91,12 +77,8 @@ if($_SESSION['rola'] != ("klient" || "administrator")){
             ?>
         </div>
     </div>
-
 </nav>
-
-
-</br>
-</br>
+<br><br>
 <div class="container">
     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb30 text-center">
         <h2>Rezerwacja wizyty</h2>
@@ -132,23 +114,18 @@ if($_SESSION['rola'] != ("klient" || "administrator")){
                                             }
                                             $conn->close();
                                             ?>
-                                            </option>
-
                                         </select>
                                     </div>
                                 </div>
                             </div>
-
                             <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
                                 <div class="form-group">
                                     <label class="control-label" for="datepicker">Data wizyty (yyyy-mm-dd hh:mm:ss)</label>
                                     <div class='input-group date' id='datetimepicker1'>
                                         <input id="datepicker" name="data" type="text" placeholder="Data" class="form-control" required>
-                                        </div>
+                                    </div>
                                 </div>
                             </div>
-
-
                             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                                 <div class="form-group">
                                     <label class="control-label" for="textarea">Podaj dodatkowe informacje</label>
@@ -161,30 +138,21 @@ if($_SESSION['rola'] != ("klient" || "administrator")){
                         </div>
                     </form>
                 </div>
-
             </div>
         </div>
 </div>
-</div>
-
-</form>
-
 <div class="container">
     <form method="POST" action="potwierdzenieK.php">
         <div class="row">
             <div class="col">
                 <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Potwierdzenie rezerwacji</h3>
-
                 <?php if (isset($_GET['error'])) { ?>
-
                     <div class="alert alert-success" role="alert">
                         <?=$_GET['error']?>
                     </div>
-
                     <?php
                 }
                 ?>
-
                 <div class="form-outline mb-4">
                     <select  class="form-control form-control-lg" name="potwierdzenieK" id="cars">
                         <optgroup label="Wybierz datę rezerwacji">
@@ -219,239 +187,214 @@ if($_SESSION['rola'] != ("klient" || "administrator")){
                 </div>
     </form>
 </div>
-        <div class="col">
-            <form method="POST" action="edycja_rezerwacja.php">
-            <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Edycja rezerwacji</h3>
-            <div class="form-outline mb-4">
-                <select  class="form-control form-control-lg" name="dataE" id="cars">
-                    <optgroup label="Wybierz rezerwację">
-                        <?php
-                        $conn = new mysqli("localhost", "szymon", "haslo", "loki");;
-                        if ($conn->connect_error) {
-                            die("Connection failed: " . $conn->connect_error);
-                        }
-                        $klient = $_SESSION['klient_id'];
+<div class="col">
+    <form method="POST" action="edycja_rezerwacja.php">
+        <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Edycja rezerwacji</h3>
+        <div class="form-outline mb-4">
+            <select  class="form-control form-control-lg" name="dataE" id="cars">
+                <optgroup label="Wybierz rezerwację">
+                    <?php
+                    $conn = new mysqli("localhost", "szymon", "haslo", "loki");;
+                    if ($conn->connect_error) {
+                        die("Connection failed: " . $conn->connect_error);
+                    }
+                    $klient = $_SESSION['klient_id'];
 
-                        $date = date('Y-m-d H:i:s');
+                    $date = date('Y-m-d H:i:s');
 
-                        $sql = "SELECT czas, Zabieg_id,id FROM wizyta WHERE Klient_id = '$klient' AND czas >= '$date' AND potwierdzoneA = false;";
-                        $result = $conn->query($sql);
+                    $sql = "SELECT czas, Zabieg_id,id FROM wizyta WHERE Klient_id = '$klient' AND czas >= '$date' AND potwierdzoneA = false;";
+                    $result = $conn->query($sql);
 
-                        if ($result->num_rows > 0) {
-                            while($row = $result->fetch_assoc()) {
+                    if ($result->num_rows > 0) {
+                        while($row = $result->fetch_assoc()) {
 
-                                if ($row["potwierdzoneK"] == false) {
+                            if ($row["potwierdzoneK"] == false) {
 
-                                    echo "<option value = '" . $row["id"] . "' >" . $row["czas"] . "</option>";
-                                }
+                                echo "<option value = '" . $row["id"] . "' >" . $row["czas"] . "</option>";
                             }
                         }
-                        $conn->close();
-                        ?>
-                    </optgroup>
-                </select>
-            </div>
-
-                <div class="form-outline mb-4">
-                    <select  class="form-control form-control-lg" name="zabiegE" id="cars">
-                        <optgroup label="Wybierz nowy zabieg">
-                            <?php
-                            $conn = new mysqli("localhost", "szymon", "haslo", "loki");;
-                            if ($conn->connect_error) {
-                                die("Connection failed: " . $conn->connect_error);
-                            }
-                            $klient = $_SESSION['klient_id'];
-
-
-                            $sql = "SELECT nazwa, id FROM zabieg;";
-                            $result = $conn->query($sql);
-
-                            if ($result->num_rows > 0) {
-                                while($row = $result->fetch_assoc()) {
-
-                                    if ($row["potwierdzoneK"] == false) {
-
-                                        echo "<option value = '" . $row["id"] . "' >" . $row["nazwa"] . "</option>";
-                                    }
-                                }
-                            }
-                            $conn->close();
-                            ?>
-                        </optgroup>
-                    </select>
-                </div>
-
-                <div class="form-outline mb-4">
-                    <input id="nowadataE" name="nowadataE" type="text" placeholder="Data" class="form-control">
-                    <label class="form-label">Data nowej wizyty (yyyy-mm-dd hh:mm:ss)</label>
-                </div>
-
-
-                <div class="pt-1 mb-4">
-                    <button class="btn btn-info btn-lg btn-block" type="submit">Edytuj</button>
-                </div>
-            </form>
+                    }
+                    $conn->close();
+                    ?>
+                </optgroup>
+            </select>
         </div>
+        <div class="form-outline mb-4">
+            <select  class="form-control form-control-lg" name="zabiegE" id="cars">
+                <optgroup label="Wybierz nowy zabieg">
+                    <?php
+                    $conn = new mysqli("localhost", "szymon", "haslo", "loki");;
+                    if ($conn->connect_error) {
+                        die("Connection failed: " . $conn->connect_error);
+                    }
+                    $klient = $_SESSION['klient_id'];
 
-        <div class="w-100"></div>
-        <div class="col">
-            <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Usunięcie rezerwacji</h3>
 
-            <form method="POST" action="usuwanie_rezerwacji.php">
-                <div class="form-outline mb-4">
-                    <select  class="form-control form-control-lg" name="usuwanie" id="cars">
-                        <optgroup label="Wybierz zabieg">
-                            <?php
-                            $conn = new mysqli("localhost", "szymon", "haslo", "loki");;
-                            if ($conn->connect_error) {
-                                die("Connection failed: " . $conn->connect_error);
-                            }
-                            $klient = $_SESSION['klient_id'];
+                    $sql = "SELECT nazwa, id FROM zabieg;";
+                    $result = $conn->query($sql);
 
-                            $sql = "SELECT czas, Zabieg_id,id FROM wizyta WHERE Klient_id = '$klient';";
-                            $result = $conn->query($sql);
+                    if ($result->num_rows > 0) {
+                        while($row = $result->fetch_assoc()) {
 
-                            if ($result->num_rows > 0) {
-                                while($row = $result->fetch_assoc()) {
 
-                                    echo "<option value = '".$row["id"]."' >".$row["czas"]." ".$row["Zabieg_id"]."</option>";
-                                }
-                            }
-                            $conn->close();
-                            ?>
-                        </optgroup>
-                    </select>
-                </div>
-                <div class="pt-1 mb-4">
-                    <button class="btn btn-info btn-lg btn-block" type="submit">Usuń</button>
-                </div>
-            </form>
+                            echo "<option value = '" . $row["id"] . "' >" . $row["nazwa"] . "</option>";
+                        }
+                    }
+                    $conn->close();
+                    ?>
+                </optgroup>
+            </select>
         </div>
-        <div class="col">
-            <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Historia rezerwacji</h3>
-            <table class="table">
-                <thead>
-                <tr>
-                    <th scope="col">Pracownik</th>
-                    <th scope="col">Data zabiegu</th>
-                    <th scope="col">Nazwa zabiegu</th>
-                </tr>
-                </thead>
-            </table>
+        <div class="form-outline mb-4">
+            <input id="nowadataE" name="nowadataE" type="text" placeholder="Data" class="form-control">
+            <label class="form-label">Data nowej wizyty (yyyy-mm-dd hh:mm:ss)</label>
+        </div>
+        <div class="pt-1 mb-4">
+            <button class="btn btn-info btn-lg btn-block" type="submit">Edytuj</button>
+        </div>
+    </form>
+</div>
+<div class="w-100"></div>
+<div class="col">
+    <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Usunięcie rezerwacji</h3>
+    <form method="POST" action="usuwanie_rezerwacji.php">
+        <div class="form-outline mb-4">
+            <select  class="form-control form-control-lg" name="usuwanie" id="cars">
+                <optgroup label="Wybierz zabieg">
+                    <?php
+                    $conn = new mysqli("localhost", "szymon", "haslo", "loki");;
+                    if ($conn->connect_error) {
+                        die("Connection failed: " . $conn->connect_error);
+                    }
+                    $klient = $_SESSION['klient_id'];
 
-            <?php
-            $conn = new mysqli("localhost", "szymon", "haslo", "loki");;
-            if ($conn->connect_error) {
-                die("Connection failed: " . $conn->connect_error);
+                    $sql = "SELECT czas, Zabieg_id,id FROM wizyta WHERE Klient_id = '$klient';";
+                    $result = $conn->query($sql);
+
+                    if ($result->num_rows > 0) {
+                        while($row = $result->fetch_assoc()) {
+
+                            echo "<option value = ".$row["id"]."' >".$row["czas"]." ".$row["Zabieg_id"]."</option>";
+                        }
+                    }
+                    $conn->close();
+                    ?>
+                </optgroup>
+            </select>
+        </div>
+        <div class="pt-1 mb-4">
+            <button class="btn btn-info btn-lg btn-block" type="submit">Usuń</button>
+        </div>
+    </form>
+</div>
+<div class="col">
+    <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Historia rezerwacji</h3>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">Pracownik</th>
+            <th scope="col">Data zabiegu</th>
+            <th scope="col">Nazwa zabiegu</th>
+        </tr>
+        </thead>
+    </table>
+    <?php
+    $conn = new mysqli("localhost", "szymon", "haslo", "loki");;
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+    $klient = $_SESSION['klient_id'];
+
+    $sql = "SELECT Salon_id, Pracownik_id, czas, Zabieg_id FROM wizyta WHERE Klient_id = '$klient';";
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+
+            echo '<table class="table"><tbody><tr><th>'.$row["Pracownik_id"].'</th><th>'.$row["czas"].'</th><th>'.$row["Zabieg_id"].'</th></tr></tbody></table>';
+
+        }
+    }
+    $conn->close();
+    ?>
+</div>
+</div>
+</div>
+<div class="container">
+    <div class="row">
+        <br><br><br><br><br>
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Dzień miesiąca</th>
+                <th scope="col">Terminarz</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+            </tr>
+            </thead>
+        </table>
+        <?php
+        $sql = 'SELECT day(czas) as d ,hour(czas) as h FROM wizyta WHERE month(czas) = month(current_date());';
+
+        $conn = new mysqli("localhost", "szymon", "haslo", "loki");
+
+        $result = $conn->query($sql);
+
+        $dates = array();
+
+        if ($result->num_rows > 0) {
+            while($row = $result->fetch_assoc()) {
+
+                $dates[] = $row;
             }
-            $klient = $_SESSION['klient_id'];
+        }
 
-            $sql = "SELECT Salon_id, Pracownik_id, czas, Zabieg_id FROM wizyta WHERE Klient_id = '$klient';";
-            $result = $conn->query($sql);
+        $maxDays = date('t');
 
-            if ($result->num_rows > 0) {
-                while($row = $result->fetch_assoc()) {
+        foreach(range(1,$maxDays) as $i){
 
-                    echo '<table class="table"><tbody><tr><th>'.$row["Pracownik_id"].'</th><th>'.$row["czas"].'</th><th>'.$row["Zabieg_id"].'</th></tr></tbody></table>';
+            echo " <table class='table'>
+               
+                   <tbody>
+                   <tr>
+                   <th>".$i."</th>";
+
+
+            foreach(range(8,18) as $j){
+
+                $rezerwacja = false;
+                foreach ($dates as $d){
+                    if ($d["d"] == $i && $d["h"] == $j){
+                        $rezerwacja = true;
+                        break;
+                    }
+                }
+
+
+                if ($rezerwacja) {
+
+
+                    echo "<td>".$j.":00<br><span style='color: red'>rezerwacja</span>"."<br>"."</td>";
+
+                }
+                else{
+
+                    echo "<td>".$j.":00<br><span style='color: green'>wolny</span>"."<br>"."</td>";
 
                 }
             }
-            $conn->close();
-            ?>
+        }
+        echo "</tr></tbody></table>";
 
-        </div>
+        $conn->close();
 
+        ?>
     </div>
 </div>
-
-
-    <div class="container">
-        <div class="row">
-
-
-    <br><br><br><br><br>
-            <table class="table">
-                <thead>
-                <tr>
-                    <th scope="col">Dzień miesiąca</th>
-                    <th scope="col">Terminarz</th>
-                    <th scope="col"></th>
-                    <th scope="col"></th>
-                </tr>
-                </thead>
-            </table>
-
-            <?php
-            $sql = 'SELECT day(czas) as d ,hour(czas) as h FROM wizyta WHERE month(czas) = month(current_date());';
-
-            $conn = new mysqli("localhost", "szymon", "haslo", "loki");
-
-            $result = $conn->query($sql);
-
-            $dates = array();
-
-            if ($result->num_rows > 0) {
-                while($row = $result->fetch_assoc()) {
-
-                    $dates[] = $row;
-                }
-            }
-
-            $maxDays = date('t');
-
-            foreach(range(1,$maxDays) as $i){
-
-                echo " <table class='table'>
-
-                <tbody>
-                <tr>
-                <th>".$i."</th>";
-
-
-                foreach(range(8,18) as $j){
-
-                    $rezerwacja = false;
-                    foreach ($dates as $d){
-                        if ($d["d"] == $i && $d["h"] == $j){
-                            $rezerwacja = true;
-                            break;
-                        }
-                    }
-
-
-                    if ($rezerwacja) {
-
-
-                        echo "<td>".$j.":00<br><span style='color: red'>rezerwacja</span>"."<br>"."</td>";
-
-                    }
-                    else{
-
-                        echo "<td>".$j.":00<br><span style='color: green'>wolny</span>"."<br>"."</td>";
-
-                    }
-                }
-            }
-            echo "</tr></tbody></table>";
-
-            $conn->close();
-
-            ?>
-
-        </div>
-    </div>
-
-
-
-
 </body>
-</br>
-</br>
-</br>
-</br>
+<br><br><br><br>
 <section>
     <div class="container text-center text-md-start mt-5">
-
         <div class="row mt-3">
             <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
                 <h6 class="text-uppercase fw-bold mb-4">
@@ -461,8 +404,6 @@ if($_SESSION['rola'] != ("klient" || "administrator")){
                     Najlepszy gabniet kosmetyczny
                 </p>
             </div>
-
-
             <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
                 <h6 class="text-uppercase fw-bold mb-4">
                     Linki
@@ -477,7 +418,6 @@ if($_SESSION['rola'] != ("klient" || "administrator")){
                     <a href="#!" class="text-reset">Pomoc</a>
                 </p>
             </div>
-
             <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
                 <h6 class="text-uppercase fw-bold mb-4">
                     Kontakt
@@ -493,7 +433,6 @@ if($_SESSION['rola'] != ("klient" || "administrator")){
         </div>
     </div>
 </section>
-
 <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
     © 2021 Copyright:
     <a class="text-reset fw-bold" href="#">Szymon Szczurowski</a>
