@@ -306,7 +306,9 @@ if($_SESSION['rola'] != ("klient" || "administrator")){
                             if ($conn->connect_error) {
                                 die("Connection failed: " . $conn->connect_error);
                             }
-                            $sql = "SELECT czas, Zabieg_id,id FROM wizyta WHERE Klient_id = 1;";
+                            $klient = $_SESSION['klient_id'];
+
+                            $sql = "SELECT czas, Zabieg_id,id FROM wizyta WHERE Klient_id = '$klient';";
                             $result = $conn->query($sql);
 
                             if ($result->num_rows > 0) {
@@ -326,38 +328,30 @@ if($_SESSION['rola'] != ("klient" || "administrator")){
             </form>
         </div>
         <div class="col">
-            <form method="POST" action="historia_rezerwacji.php"></form>
             <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Historia rezerwacji</h3>
 
+            <?php
+            $conn = new mysqli("localhost", "szymon", "haslo", "loki");;
+            if ($conn->connect_error) {
+                die("Connection failed: " . $conn->connect_error);
+            }
+            $klient = $_SESSION['klient_id'];
 
-            <div class="form-outline mb-4">
-                <select  class="form-control form-control-lg" name="historia" id="cars">
-                    <optgroup label="Wybierz zabieg">
-                        <?php
-                        $conn = new mysqli("localhost", "szymon", "haslo", "loki");;
-                        if ($conn->connect_error) {
-                            die("Connection failed: " . $conn->connect_error);
-                        }
-                        $sql = "SELECT czas, Zabieg_id,id FROM wizyta WHERE Klient_id = 1;";
-                        $result = $conn->query($sql);
+            $sql = "SELECT Salon_id, Pracownik_id, czas, Zabieg_id FROM wizyta WHERE Klient_id = '$klient';";
+            $result = $conn->query($sql);
 
-                        if ($result->num_rows > 0) {
-                            while($row = $result->fetch_assoc()) {
+            if ($result->num_rows > 0) {
+                while($row = $result->fetch_assoc()) {
 
-                                echo "<option value = '".$row["id"]."' >".$row["czas"]."</option>";
-                            }
-                        }
-                        $conn->close();
-                        ?>
-                    </optgroup>
-                </select>
-            </div>
+                    echo '<table class="table"><tbody><tr><th>'.$row["Salon_id"].'</th><th>'.$row["Pracownik_id"].'</th><th>'.$row["czas"].'</th><th>'.$row["Zabieg_id"].'</th></tr></tbody></table>';
 
-            <div class="pt-1 mb-4">
-                <button class="btn btn-info btn-lg btn-block" type="submit">Pokaż szczegóły</button>
-            </div>
-            </form>
+                }
+            }
+            $conn->close();
+            ?>
+
         </div>
+
     </div>
 </div>
 
