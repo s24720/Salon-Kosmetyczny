@@ -146,23 +146,23 @@
                 <div class="form-outline mb-4">
                     <select  class="form-control form-control-lg" name="usuwanie" id="cars">
                         <optgroup label="Wybierz zabieg">
-                <?php
-                $conn = new mysqli("localhost", "szymon", "haslo", "loki");;
-                if ($conn->connect_error) {
-                    die("Connection failed: " . $conn->connect_error);
-                }
-                $sql = "SELECT nazwa, id FROM zabieg;";
-                $result = $conn->query($sql);
+                            <?php
+                            $conn = new mysqli("localhost", "szymon", "haslo", "loki");;
+                            if ($conn->connect_error) {
+                                die("Connection failed: " . $conn->connect_error);
+                            }
+                            $sql = "SELECT nazwa, id FROM zabieg;";
+                            $result = $conn->query($sql);
 
 
-                if ($result->num_rows > 0) {
-                    while($row = $result->fetch_assoc()) {
+                            if ($result->num_rows > 0) {
+                                while($row = $result->fetch_assoc()) {
 
-                        echo "<option value = '".$row["id"]."' >".$row["nazwa"]."</option>";
-                    }
-                }
-                $conn->close();
-                ?>
+                                    echo "<option value = '".$row["id"]."' >".$row["nazwa"]."</option>";
+                                }
+                            }
+                            $conn->close();
+                            ?>
                         </optgroup>
                     </select>
                     <label class="form-label" >Nazwa zabiegu</label>
@@ -208,7 +208,7 @@
                                         if ($result->num_rows > 0) {
                                             while($row = $result->fetch_assoc()) {
 
-                                                    echo "<option value = '" . $row["id"] . "' >" . $row["czas"] . "</option>";
+                                                echo "<option value = '" . $row["id"] . "' >" . $row["czas"] . "</option>";
 
                                             }
                                         }
@@ -222,122 +222,115 @@
                             </div>
                 </form>
             </div>
-        <div class="col">
             <div class="col">
-                <form method="POST" action="edycja_rezerwacja.php">
-                    <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Edycja rezerwacji</h3>
-                    <div class="form-outline mb-4">
-                        <select  class="form-control form-control-lg" name="dataE" id="cars">
-                            <optgroup label="Wybierz rezerwację">
-                                <?php
-                                $conn = new mysqli("localhost", "szymon", "haslo", "loki");;
-                                if ($conn->connect_error) {
-                                    die("Connection failed: " . $conn->connect_error);
-                                }
-                                $klient = $_SESSION['klient_id'];
+                <div class="col">
+                    <form method="POST" action="edycja_rezerwacjaA.php">
+                        <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Edycja rezerwacji</h3>
+                        <div class="form-outline mb-4">
+                            <select  class="form-control form-control-lg" name="dataE" id="cars">
+                                <optgroup label="Wybierz rezerwację">
+                                    <?php
+                                    $conn = new mysqli("localhost", "szymon", "haslo", "loki");;
+                                    if ($conn->connect_error) {
+                                        die("Connection failed: " . $conn->connect_error);
+                                    }
 
-                                $date = date('Y-m-d H:i:s');
+                                    $date = date('Y-m-d H:i:s');
 
-                                $sql = "SELECT czas, Zabieg_id,id FROM wizyta WHERE Klient_id = '$klient' AND czas >= '$date';";
-                                $result = $conn->query($sql);
+                                    $sql = "SELECT czas, Zabieg_id,id FROM wizyta WHERE  czas >= '$date';";
+                                    $result = $conn->query($sql);
 
-                                if ($result->num_rows > 0) {
-                                    while($row = $result->fetch_assoc()) {
+                                    if ($result->num_rows > 0) {
+                                        while($row = $result->fetch_assoc()) {
 
-                                        if ($row["potwierdzoneK"] == false) {
 
                                             echo "<option value = '" . $row["id"] . "' >" . $row["czas"] . "</option>";
                                         }
                                     }
-                                }
-                                $conn->close();
-                                ?>
-                            </optgroup>
-                        </select>
-                    </div>
+                                    $conn->close();
+                                    ?>
+                                </optgroup>
+                            </select>
+                        </div>
 
-                    <div class="form-outline mb-4">
-                        <select  class="form-control form-control-lg" name="zabiegE" id="cars">
-                            <optgroup label="Wybierz nowy zabieg">
-                                <?php
-                                $conn = new mysqli("localhost", "szymon", "haslo", "loki");;
-                                if ($conn->connect_error) {
-                                    die("Connection failed: " . $conn->connect_error);
-                                }
-                                $klient = $_SESSION['klient_id'];
+                        <div class="form-outline mb-4">
+                            <select  class="form-control form-control-lg" name="zabiegE" id="cars">
+                                <optgroup label="Wybierz nowy zabieg">
+                                    <?php
+                                    $conn = new mysqli("localhost", "szymon", "haslo", "loki");;
+                                    if ($conn->connect_error) {
+                                        die("Connection failed: " . $conn->connect_error);
+                                    }
+                                    $klient = $_SESSION['klient_id'];
 
 
-                                $sql = "SELECT nazwa, id FROM zabieg;";
-                                $result = $conn->query($sql);
+                                    $sql = "SELECT nazwa, id FROM zabieg;";
+                                    $result = $conn->query($sql);
 
-                                if ($result->num_rows > 0) {
-                                    while($row = $result->fetch_assoc()) {
+                                    if ($result->num_rows > 0) {
+                                        while($row = $result->fetch_assoc()) {
 
-                                        if ($row["potwierdzoneK"] == false) {
 
                                             echo "<option value = '" . $row["id"] . "' >" . $row["nazwa"] . "</option>";
                                         }
                                     }
-                                }
-                                $conn->close();
-                                ?>
-                            </optgroup>
-                        </select>
-                    </div>
+                                    $conn->close();
+                                    ?>
+                                </optgroup>
+                            </select>
+                        </div>
 
-                    <div class="form-outline mb-4">
-                        <input id="nowadataE" name="nowadataE" type="text" placeholder="Data" class="form-control">
-                        <label class="form-label">Data nowej wizyty (yyyy-mm-dd hh:mm:ss)</label>
-                    </div>
-
-
-                    <div class="pt-1 mb-4">
-                        <button class="btn btn-info btn-lg btn-block" type="submit">Edytuj</button>
-                    </div>
-                </form>
-            </div>
+                        <div class="form-outline mb-4">
+                            <input id="nowadataE" name="nowadataE" type="text" placeholder="Data" class="form-control">
+                            <label class="form-label">Data nowej wizyty (yyyy-mm-dd hh:mm:ss)</label>
+                        </div>
 
 
-        </div>
-        <div class="row">
-            <div class="col">
-                <form style="width: 23rem;"
-                      method="POST"
-                      action="statystyki.php">
-
-                <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Statystyki</h3>
-
-
-                <div class="form-outline mb-4">
-                    <select  class="form-control form-control-lg" name="usuwanie" id="cars">
-                        <optgroup label="Wybierz zabieg">
-                            <?php
-                            $conn = new mysqli("localhost", "szymon", "haslo", "loki");;
-                            if ($conn->connect_error) {
-                                die("Connection failed: " . $conn->connect_error);
-                            }
-                            $sql = "SELECT imie, nazwisko FROM klient;";
-                            $result = $conn->query($sql);
-
-                            if ($result->num_rows > 0) {
-                                while($row = $result->fetch_assoc()) {
-
-                                    echo "<option value='statystki'>".$row["imie"]." ".$row["nazwisko"]."</option>";
-                                }
-                            }
-                            $conn->close();
-                            ?>
-                        </optgroup>
-                    </select>
-                    <label class="form-label" >Nazwa zabiegu</label>
+                        <div class="pt-1 mb-4">
+                            <button class="btn btn-info btn-lg btn-block" type="submit">Edytuj</button>
+                        </div>
+                    </form>
                 </div>
-                <div class="pt-1 mb-4">
-                    <button class="btn btn-info btn-lg btn-block" type="submit">Sprawdź</button>
-                </div>
-                </form>
-            </div>
 
-</div>
+
+            </div>
+            <div class="row">
+                <div class="col">
+
+
+                    <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Statystyki</h3>
+
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col">Klient</th>
+                            <th scope="col">Data zabiegu</th>
+                            <th scope="col">Nazwa zabiegu</th>
+                        </tr>
+                        </thead>
+                    </table>
+
+                    <?php
+                    $conn = new mysqli("localhost", "szymon", "haslo", "loki");;
+                    if ($conn->connect_error) {
+                        die("Connection failed: " . $conn->connect_error);
+                    }
+
+                    $sql = "SELECT Salon_id, Klient_id, czas, Zabieg_id FROM wizyta;";
+                    $result = $conn->query($sql);
+
+                    if ($result->num_rows > 0) {
+                        while($row = $result->fetch_assoc()) {
+
+                            echo '<table class="table"><tbody><tr><th>'.$row["Klient_id"].'</th><th>'.$row["czas"].'</th><th>'.$row["Zabieg_id"].'</th></tr></tbody></table>';
+
+                        }
+                    }
+                    $conn->close();
+                    ?>
+                </div>
+
+            </div>
 
 
 
