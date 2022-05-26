@@ -144,7 +144,7 @@ if($_SESSION['rola'] != ("klient" || "administrator")){
                                     <label class="control-label" for="datepicker">Data wizyty (yyyy-mm-dd hh:mm:ss)</label>
                                     <div class='input-group date' id='datetimepicker1'>
                                         <input id="datepicker" name="data" type="text" placeholder="Data" class="form-control" required>
-                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span> </div>
+                                        </div>
                                 </div>
                             </div>
 
@@ -170,9 +170,21 @@ if($_SESSION['rola'] != ("klient" || "administrator")){
 </form>
 
 <div class="container">
+    <form method="POST" action="potwierdzenieK.php">
     <div class="row">
         <div class="col">
-            <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Potwierdzenie rezerwacji
+            <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Potwierdzenie rezerwacji</h3>
+
+                <?php if (isset($_GET['error'])) { ?>
+
+                    <div class="alert alert-success" role="alert">
+                        <?=$_GET['error']?>
+                    </div>
+
+                    <?php
+                }
+                ?>
+
                 <div class="form-outline mb-4">
                     <select  class="form-control form-control-lg" name="potwierdzenieK" id="cars">
                         <optgroup label="Wybierz datę rezerwacji">
@@ -185,13 +197,16 @@ if($_SESSION['rola'] != ("klient" || "administrator")){
 
                 $date = date('Y-m-d H:i:s');
 
-                $sql = "SELECT czas, Zabieg_id,id FROM wizyta WHERE Klient_id = '$klient' AND czas >= '$date';";
+                $sql = "SELECT czas, Zabieg_id,id, potwierdzoneK FROM wizyta WHERE Klient_id = '$klient' AND czas >= '$date';";
                 $result = $conn->query($sql);
 
                 if ($result->num_rows > 0) {
                     while($row = $result->fetch_assoc()) {
 
-                        echo "<option value = '".$row["id"]."' >".$row["czas"]."</option>";
+                        if ($row["potwierdzoneK"] == false) {
+
+                            echo "<option value = '" . $row["id"] . "' >" . $row["czas"] . "</option>";
+                        }
                     }
                 }
                 $conn->close();
@@ -199,10 +214,85 @@ if($_SESSION['rola'] != ("klient" || "administrator")){
                         </optgroup>
                     </select>
                 </div>
+                <div class="pt-1 mb-4">
+                    <button class="btn btn-info btn-lg btn-block" type="submit">Potwierdź</button>
+                </div>
+    </form>
         </div>
         <div class="col">
+            <form method="POST" action="edycja_rezerwacja.php">
             <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Edycja rezerwacji</h3>
+            <div class="form-outline mb-4">
+                <select  class="form-control form-control-lg" name="dataE" id="cars">
+                    <optgroup label="Wybierz rezerwację">
+                        <?php
+                        $conn = new mysqli("localhost", "szymon", "haslo", "loki");;
+                        if ($conn->connect_error) {
+                            die("Connection failed: " . $conn->connect_error);
+                        }
+                        $klient = $_SESSION['klient_id'];
+
+                        $date = date('Y-m-d H:i:s');
+
+                        $sql = "SELECT czas, Zabieg_id,id FROM wizyta WHERE Klient_id = '$klient' AND czas >= '$date';";
+                        $result = $conn->query($sql);
+
+                        if ($result->num_rows > 0) {
+                            while($row = $result->fetch_assoc()) {
+
+                                if ($row["potwierdzoneK"] == false) {
+
+                                    echo "<option value = '" . $row["id"] . "' >" . $row["czas"] . "</option>";
+                                }
+                            }
+                        }
+                        $conn->close();
+                        ?>
+                    </optgroup>
+                </select>
+            </div>
+
+                <div class="form-outline mb-4">
+                    <select  class="form-control form-control-lg" name="zabiegE" id="cars">
+                        <optgroup label="Wybierz nowy zabieg">
+                            <?php
+                            $conn = new mysqli("localhost", "szymon", "haslo", "loki");;
+                            if ($conn->connect_error) {
+                                die("Connection failed: " . $conn->connect_error);
+                            }
+                            $klient = $_SESSION['klient_id'];
+
+
+                            $sql = "SELECT nazwa, id FROM zabieg;";
+                            $result = $conn->query($sql);
+
+                            if ($result->num_rows > 0) {
+                                while($row = $result->fetch_assoc()) {
+
+                                    if ($row["potwierdzoneK"] == false) {
+
+                                        echo "<option value = '" . $row["id"] . "' >" . $row["nazwa"] . "</option>";
+                                    }
+                                }
+                            }
+                            $conn->close();
+                            ?>
+                        </optgroup>
+                    </select>
+                </div>
+
+                <div class="form-outline mb-4">
+                    <input id="nowadataE" name="nowadataE" type="text" placeholder="Data" class="form-control">
+                    <label class="form-label">Data nowej wizyty (yyyy-mm-dd hh:mm:ss)</label>
+                </div>
+
+
+                <div class="pt-1 mb-4">
+                    <button class="btn btn-info btn-lg btn-block" type="submit">Edytuj</button>
+                </div>
+            </form>
         </div>
+
         <div class="w-100"></div>
         <div class="col">
             <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Usunięcie rezerwacji</h3>
@@ -236,19 +326,10 @@ if($_SESSION['rola'] != ("klient" || "administrator")){
             </form>
         </div>
         <div class="col">
+            <form method="POST" action="historia_rezerwacji.php"></form>
             <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Historia rezerwacji</h3>
 
-            <?php if (isset($_GET['error'])) { ?>
 
-                <div class="alert alert-success" role="alert">
-                    <?=$_GET['error']?>
-                </div>
-
-                <?php
-            }
-            ?>
-
-            <form method="POST" action="historia_rezerwacji.php"></form>
             <div class="form-outline mb-4">
                 <select  class="form-control form-control-lg" name="historia" id="cars">
                     <optgroup label="Wybierz zabieg">
