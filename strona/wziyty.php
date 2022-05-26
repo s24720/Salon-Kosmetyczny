@@ -1,3 +1,14 @@
+<?php
+session_start();
+if($_SESSION['rola'] != ("klient" || "administrator")){
+
+    header("Location: wziyty.php 401 Unauthorized");
+    exit;
+}
+?>
+
+
+
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html" lang="pl-en">
 <head>
@@ -67,7 +78,6 @@
         </button>
         <div class="dropdown-menu dropdown-menu-right">
             <?php
-            session_start();
 
             if (empty($_SESSION["username"])){
                 echo "<button class='dropdown-item'  type='button'><a class='nav-link' href='login.php'>Logowanie</a></button>";
@@ -163,6 +173,32 @@
     <div class="row">
         <div class="col">
             <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Potwierdzenie rezerwacji
+                <div class="form-outline mb-4">
+                    <select  class="form-control form-control-lg" name="potwierdzenieK" id="cars">
+                        <optgroup label="Wybierz datę rezerwacji">
+                <?php
+                $conn = new mysqli("localhost", "szymon", "haslo", "loki");;
+                if ($conn->connect_error) {
+                    die("Connection failed: " . $conn->connect_error);
+                }
+                $klient = $_SESSION['klient_id'];
+
+                $date = date('Y-m-d H:i:s');
+
+                $sql = "SELECT czas, Zabieg_id,id FROM wizyta WHERE Klient_id = '$klient' AND czas >= '$date';";
+                $result = $conn->query($sql);
+
+                if ($result->num_rows > 0) {
+                    while($row = $result->fetch_assoc()) {
+
+                        echo "<option value = '".$row["id"]."' >".$row["czas"]."</option>";
+                    }
+                }
+                $conn->close();
+                ?>
+                        </optgroup>
+                    </select>
+                </div>
         </div>
         <div class="col">
             <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Edycja rezerwacji</h3>
@@ -302,12 +338,12 @@
                     if ($rezerwacja) {
 
 
-                        echo "<td>".$j.":00".$rezerwacja."<br><span style='color: red'>rezerwacja</span>"."<br>"."</td>";
+                        echo "<td>".$j.":00<br><span style='color: red'>rezerwacja</span>"."<br>"."</td>";
 
                     }
                     else{
 
-                        echo "<td>".$j.":00".$rezerwacja."<br><span style='color: green'>wolny</span>"."<br>"."</td>";
+                        echo "<td>".$j.":00<br><span style='color: green'>wolny</span>"."<br>"."</td>";
 
                     }
                 }
