@@ -171,9 +171,9 @@ if($_SESSION['rola'] != ("klient" || "administrator")){
 
 <div class="container">
     <form method="POST" action="potwierdzenieK.php">
-    <div class="row">
-        <div class="col">
-            <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Potwierdzenie rezerwacji</h3>
+        <div class="row">
+            <div class="col">
+                <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Potwierdzenie rezerwacji</h3>
 
                 <?php if (isset($_GET['error'])) { ?>
 
@@ -188,29 +188,29 @@ if($_SESSION['rola'] != ("klient" || "administrator")){
                 <div class="form-outline mb-4">
                     <select  class="form-control form-control-lg" name="potwierdzenieK" id="cars">
                         <optgroup label="Wybierz datę rezerwacji">
-                <?php
-                $conn = new mysqli("localhost", "szymon", "haslo", "loki");;
-                if ($conn->connect_error) {
-                    die("Connection failed: " . $conn->connect_error);
-                }
-                $klient = $_SESSION['klient_id'];
+                            <?php
+                            $conn = new mysqli("localhost", "szymon", "haslo", "loki");;
+                            if ($conn->connect_error) {
+                                die("Connection failed: " . $conn->connect_error);
+                            }
+                            $klient = $_SESSION['klient_id'];
 
-                $date = date('Y-m-d H:i:s');
+                            $date = date('Y-m-d H:i:s');
 
-                $sql = "SELECT czas, Zabieg_id,id, potwierdzoneK FROM wizyta WHERE Klient_id = '$klient' AND czas >= '$date';";
-                $result = $conn->query($sql);
+                            $sql = "SELECT czas, Zabieg_id,id, potwierdzoneK FROM wizyta WHERE Klient_id = '$klient' AND czas >= '$date';";
+                            $result = $conn->query($sql);
 
-                if ($result->num_rows > 0) {
-                    while($row = $result->fetch_assoc()) {
+                            if ($result->num_rows > 0) {
+                                while($row = $result->fetch_assoc()) {
 
-                        if ($row["potwierdzoneK"] == false) {
+                                    if ($row["potwierdzoneK"] == false) {
 
-                            echo "<option value = '" . $row["id"] . "' >" . $row["czas"] . "</option>";
-                        }
-                    }
-                }
-                $conn->close();
-                ?>
+                                        echo "<option value = '" . $row["id"] . "' >" . $row["czas"] . "</option>";
+                                    }
+                                }
+                            }
+                            $conn->close();
+                            ?>
                         </optgroup>
                     </select>
                 </div>
@@ -218,7 +218,7 @@ if($_SESSION['rola'] != ("klient" || "administrator")){
                     <button class="btn btn-info btn-lg btn-block" type="submit">Potwierdź</button>
                 </div>
     </form>
-        </div>
+</div>
         <div class="col">
             <form method="POST" action="edycja_rezerwacja.php">
             <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Edycja rezerwacji</h3>
@@ -234,7 +234,7 @@ if($_SESSION['rola'] != ("klient" || "administrator")){
 
                         $date = date('Y-m-d H:i:s');
 
-                        $sql = "SELECT czas, Zabieg_id,id FROM wizyta WHERE Klient_id = '$klient' AND czas >= '$date';";
+                        $sql = "SELECT czas, Zabieg_id,id FROM wizyta WHERE Klient_id = '$klient' AND czas >= '$date' AND potwierdzoneA = false;";
                         $result = $conn->query($sql);
 
                         if ($result->num_rows > 0) {
@@ -329,6 +329,15 @@ if($_SESSION['rola'] != ("klient" || "administrator")){
         </div>
         <div class="col">
             <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Historia rezerwacji</h3>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">Pracownik</th>
+                    <th scope="col">Data zabiegu</th>
+                    <th scope="col">Nazwa zabiegu</th>
+                </tr>
+                </thead>
+            </table>
 
             <?php
             $conn = new mysqli("localhost", "szymon", "haslo", "loki");;
@@ -343,7 +352,7 @@ if($_SESSION['rola'] != ("klient" || "administrator")){
             if ($result->num_rows > 0) {
                 while($row = $result->fetch_assoc()) {
 
-                    echo '<table class="table"><tbody><tr><th>'.$row["Salon_id"].'</th><th>'.$row["Pracownik_id"].'</th><th>'.$row["czas"].'</th><th>'.$row["Zabieg_id"].'</th></tr></tbody></table>';
+                    echo '<table class="table"><tbody><tr><th>'.$row["Pracownik_id"].'</th><th>'.$row["czas"].'</th><th>'.$row["Zabieg_id"].'</th></tr></tbody></table>';
 
                 }
             }

@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html"
       lang="pl-en">
@@ -55,7 +57,6 @@
         </button>
         <div class="dropdown-menu dropdown-menu-right">
             <?php
-            session_start();
 
             if (empty($_SESSION["username"])){
                 echo "<button class='dropdown-item'  type='button'><a class='nav-link' href='login.php'>Logowanie</a></button>";
@@ -175,11 +176,127 @@
     </div>
     <div class="row">
         <div class="col">
-            <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Potwierdzenie rezerwacji</h3>
+            <div class="container">
+                <form method="POST" action="potwierdzenieA.php">
+                    <div class="row">
+                        <div class="col">
+                            <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Potwierdzenie rezerwacji</h3>
 
-        </div>
+                            <?php if (isset($_GET['error'])) { ?>
+
+                                <div class="alert alert-success" role="alert">
+                                    <?=$_GET['error']?>
+                                </div>
+
+                                <?php
+                            }
+                            ?>
+
+                            <div class="form-outline mb-4">
+                                <select  class="form-control form-control-lg" name="potwierdzenieA" id="cars">
+                                    <optgroup label="Wybierz datę rezerwacji">
+                                        <?php
+                                        $conn = new mysqli("localhost", "szymon", "haslo", "loki");;
+                                        if ($conn->connect_error) {
+                                            die("Connection failed: " . $conn->connect_error);
+                                        }
+                                        $date = date('Y-m-d H:i:s');
+
+                                        $sql = "SELECT czas, Zabieg_id,id FROM wizyta WHERE czas >= '$date' AND potwierdzoneK = true AND potwierdzoneA = false;";
+                                        $result = $conn->query($sql);
+
+                                        if ($result->num_rows > 0) {
+                                            while($row = $result->fetch_assoc()) {
+
+                                                    echo "<option value = '" . $row["id"] . "' >" . $row["czas"] . "</option>";
+
+                                            }
+                                        }
+                                        $conn->close();
+                                        ?>
+                                    </optgroup>
+                                </select>
+                            </div>
+                            <div class="pt-1 mb-4">
+                                <button class="btn btn-info btn-lg btn-block" type="submit">Potwierdź</button>
+                            </div>
+                </form>
+            </div>
         <div class="col">
-            <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Edycja rezerwacji</h3>
+            <div class="col">
+                <form method="POST" action="edycja_rezerwacja.php">
+                    <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Edycja rezerwacji</h3>
+                    <div class="form-outline mb-4">
+                        <select  class="form-control form-control-lg" name="dataE" id="cars">
+                            <optgroup label="Wybierz rezerwację">
+                                <?php
+                                $conn = new mysqli("localhost", "szymon", "haslo", "loki");;
+                                if ($conn->connect_error) {
+                                    die("Connection failed: " . $conn->connect_error);
+                                }
+                                $klient = $_SESSION['klient_id'];
+
+                                $date = date('Y-m-d H:i:s');
+
+                                $sql = "SELECT czas, Zabieg_id,id FROM wizyta WHERE Klient_id = '$klient' AND czas >= '$date';";
+                                $result = $conn->query($sql);
+
+                                if ($result->num_rows > 0) {
+                                    while($row = $result->fetch_assoc()) {
+
+                                        if ($row["potwierdzoneK"] == false) {
+
+                                            echo "<option value = '" . $row["id"] . "' >" . $row["czas"] . "</option>";
+                                        }
+                                    }
+                                }
+                                $conn->close();
+                                ?>
+                            </optgroup>
+                        </select>
+                    </div>
+
+                    <div class="form-outline mb-4">
+                        <select  class="form-control form-control-lg" name="zabiegE" id="cars">
+                            <optgroup label="Wybierz nowy zabieg">
+                                <?php
+                                $conn = new mysqli("localhost", "szymon", "haslo", "loki");;
+                                if ($conn->connect_error) {
+                                    die("Connection failed: " . $conn->connect_error);
+                                }
+                                $klient = $_SESSION['klient_id'];
+
+
+                                $sql = "SELECT nazwa, id FROM zabieg;";
+                                $result = $conn->query($sql);
+
+                                if ($result->num_rows > 0) {
+                                    while($row = $result->fetch_assoc()) {
+
+                                        if ($row["potwierdzoneK"] == false) {
+
+                                            echo "<option value = '" . $row["id"] . "' >" . $row["nazwa"] . "</option>";
+                                        }
+                                    }
+                                }
+                                $conn->close();
+                                ?>
+                            </optgroup>
+                        </select>
+                    </div>
+
+                    <div class="form-outline mb-4">
+                        <input id="nowadataE" name="nowadataE" type="text" placeholder="Data" class="form-control">
+                        <label class="form-label">Data nowej wizyty (yyyy-mm-dd hh:mm:ss)</label>
+                    </div>
+
+
+                    <div class="pt-1 mb-4">
+                        <button class="btn btn-info btn-lg btn-block" type="submit">Edytuj</button>
+                    </div>
+                </form>
+            </div>
+
 
         </div>
         <div class="row">

@@ -23,16 +23,22 @@ if (isset($_POST['username']) && isset($_POST['password'])){
             die("Connection failed: " . $conn->connect_error);
         }
 
-        $sql = "SELECT * FROM dane_logowanie WHERE email ='".$username."' and haslo='".$password."';";
+        $sql = "SELECT *, k.id AS klient_id FROM dane_logowanie d JOIN rola r ON r.id = d.id LEFT JOIN klient k ON k.Dane_logowanie_id = d.id WHERE email ='".$username."' and haslo='".$password."';";
+
         $result = $conn->query($sql);
 
         $conn->close();
 
         if ($result->num_rows > 0) {
             session_start();
+
+            $row = $result->fetch_assoc();
+            $_SESSION['klient_id'] = $row["klient_id"];
+            $_SESSION['rola'] = $row["nazwa"];
             $_SESSION["username"] = $username;
             $_SESSION["password"] = $password;
-            header("Location: main_log.php");
+
+           header("Location: main_log.php");
         }else{
             header("Location: login.php?error= Podano zle dane");
         }
