@@ -23,3 +23,6 @@
 
 
 SPECJAL CHAR PHP, żeby nie pobierało skryptu 
+
+
+       $sql = "SELECT * , klient.id as KiD , rola.nazwa as Rola FROM dane_logowanie  Inner join klient on klient.id=dane_logowanie.id   inner join rola on rola.id=Rola_id where haslo='".$password."' and email='".$username."'; 
