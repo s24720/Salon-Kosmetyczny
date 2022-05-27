@@ -20,3 +20,6 @@
                             echo '<table class="table"><tbody><tr><th>'.$row["imie"].' '.$row["nazwisko"].'</th><th>'.$row["czas"].'</th><th>'.$row["nazwa"].'</th><th>'.$row["ki"].' '.$row["kn"].'</th></tr></tbody></table>';
 
                         }
+
+
+SPECJAL CHAR PHP, żeby nie pobierało skryptu 
