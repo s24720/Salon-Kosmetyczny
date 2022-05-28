@@ -81,10 +81,10 @@
 <br>
 <div class="container">
     <?php
-    $conn = new mysqli("localhost", "szymon", "haslo", "loki");;
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
+
+    include "polaczenie.php";
+
+    $conn = OpenCon();
 
     $sql = "SELECT opina, data, nick FROM opinie ORDER BY DATE(data) DESC, data DESC;";
     $result = $conn->query($sql);
@@ -113,7 +113,7 @@
     } else {
         echo "Brak komntarzy";
     }
-    $conn->close();
+    CloseCon($conn);
     ?>
 </div>
 </body>
