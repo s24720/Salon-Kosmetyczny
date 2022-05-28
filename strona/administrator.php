@@ -1,3 +1,13 @@
+<?php
+session_start();
+if($_SESSION['rola'] != ("administrator")){
+
+    header("Location: wziyty.php 401 Unauthorized");
+    exit;
+}
+?>
+
+
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html"
       lang="pl-en">
@@ -257,25 +267,28 @@
                     <table class="table">
                         <thead>
                         <tr>
-                            <th scope="col">Klient</th>
+                            <th scope="col">Pracownik</th>
                             <th scope="col">Data zabiegu</th>
-                            <th scope="col">Nazwa zabiegu</th>
+                            <th scope="col">Nazwa zabiegu
+                            <th scope="col">Klient</th>
+
                         </tr>
                         </thead>
                     </table>
+
                     <?php
                     $conn = new mysqli("localhost", "szymon", "haslo", "loki");;
                     if ($conn->connect_error) {
                         die("Connection failed: " . $conn->connect_error);
                     }
 
-                    $sql = "SELECT Salon_id, Klient_id, czas, Zabieg_id FROM wizyta;";
+                    $sql = "Select pracownik.imie ,pracownik.nazwisko, zabieg.nazwa, wizyta.czas , klient.imie as ki, klient.nazwisko as kn from pracownik Inner join wizyta on pracownik.id=wizyta.Pracownik_id Inner join zabieg on zabieg.id=wizyta.Zabieg_id inner join klient on klient.id=wizyta.Klient_id;";
                     $result = $conn->query($sql);
 
                     if ($result->num_rows > 0) {
                         while($row = $result->fetch_assoc()) {
 
-                            echo '<table class="table"><tbody><tr><th>'.$row["Klient_id"].'</th><th>'.$row["czas"].'</th><th>'.$row["Zabieg_id"].'</th></tr></tbody></table>';
+                            echo '<table class="table"><tbody><tr><th>'.$row["imie"].' '.$row["nazwisko"].'</th><th>'.$row["czas"].'</th><th>'.$row["nazwa"].'</th><th>'.$row["ki"].' '.$row["kn"].'</th></tr></tbody></table>';
 
                         }
                     }

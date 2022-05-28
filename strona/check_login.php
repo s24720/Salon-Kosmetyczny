@@ -23,7 +23,10 @@ if (isset($_POST['username']) && isset($_POST['password'])){
             die("Connection failed: " . $conn->connect_error);
         }
 
-        $sql = "SELECT *, k.id AS klient_id FROM dane_logowanie d JOIN rola r ON r.id = d.id LEFT JOIN klient k ON k.Dane_logowanie_id = d.id WHERE email ='".$username."' and haslo='".$password."';";
+        $sql = "SELECT * , klient.id as KiD , rola.nazwa as Rola FROM dane_logowanie  Inner join klient on klient.id=dane_logowanie.id   inner join rola on rola.id=Rola_id where haslo='".$password."' and email='".$username."';";
+
+
+        echo $sql;
 
         $result = $conn->query($sql);
 
@@ -33,8 +36,8 @@ if (isset($_POST['username']) && isset($_POST['password'])){
             session_start();
 
             $row = $result->fetch_assoc();
-            $_SESSION['klient_id'] = $row["klient_id"];
-            $_SESSION['rola'] = $row["nazwa"];
+            $_SESSION['klient_id'] = $row["KiD"];
+            $_SESSION['rola'] = $row["Rola"];
             $_SESSION["username"] = $username;
             $_SESSION["password"] = $password;
 

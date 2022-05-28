@@ -118,11 +118,13 @@ if($_SESSION['rola'] != ("klient" || "administrator")){
                                     </div>
                                 </div>
                             </div>
+
                             <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
                                 <div class="form-group">
                                     <label class="control-label" for="datepicker">Data wizyty (yyyy-mm-dd hh:mm:ss)</label>
                                     <div class='input-group date' id='datetimepicker1'>
-                                        <input id="datepicker" name="data" type="text" placeholder="Data" class="form-control" required>
+                                        <input  id="datepicker" name="data" value="2022-02-20"
+                                                min="2022-02-20" max="2032-02-20" type="datetime-local"  placeholder="Data" class="form-control" required>
                                     </div>
                                 </div>
                             </div>
@@ -268,7 +270,9 @@ if($_SESSION['rola'] != ("klient" || "administrator")){
                     }
                     $klient = $_SESSION['klient_id'];
 
-                    $sql = "SELECT czas, Zabieg_id,id FROM wizyta WHERE Klient_id = '$klient';";
+                    $date = date('Y-m-d H:i:s');
+
+                    $sql = "SELECT czas, Zabieg_id,id FROM wizyta WHERE Klient_id = '$klient'AND czas >= '$date' AND potwierdzoneA = false;";
                     $result = $conn->query($sql);
 
                     if ($result->num_rows > 0) {
@@ -305,13 +309,13 @@ if($_SESSION['rola'] != ("klient" || "administrator")){
     }
     $klient = $_SESSION['klient_id'];
 
-    $sql = "SELECT Salon_id, Pracownik_id, czas, Zabieg_id FROM wizyta WHERE Klient_id = '$klient';";
+    $sql = "Select imie ,nazwisko, zabieg.nazwa, wizyta.czas from pracownik Inner join wizyta on pracownik.id=wizyta.Pracownik_id Inner join zabieg on zabieg.id=wizyta.Zabieg_id where wizyta.Klient_id='$klient';";
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
 
-            echo '<table class="table"><tbody><tr><th>'.$row["Pracownik_id"].'</th><th>'.$row["czas"].'</th><th>'.$row["Zabieg_id"].'</th></tr></tbody></table>';
+            echo '<table class="table"><tbody><tr><th>'.$row["imie"]." ".$row["nazwisko"].'</th><th>'.$row["czas"].'</th><th>'.$row["nazwa"].'</th></tr></tbody></table>';
 
         }
     }
@@ -320,76 +324,281 @@ if($_SESSION['rola'] != ("klient" || "administrator")){
 </div>
 </div>
 </div>
-<div class="container">
-    <div class="row">
-        <br><br><br><br><br>
-        <table class="table">
-            <thead>
-            <tr>
-                <th scope="col">Dzień miesiąca</th>
-                <th scope="col">Terminarz</th>
-                <th scope="col"></th>
-                <th scope="col"></th>
-            </tr>
-            </thead>
-        </table>
-        <?php
-        $sql = 'SELECT day(czas) as d ,hour(czas) as h FROM wizyta WHERE month(czas) = month(current_date());';
 
-        $conn = new mysqli("localhost", "szymon", "haslo", "loki");
 
-        $result = $conn->query($sql);
+<div id="carouselExampleIndicators" class="carousel slide" >
+    <ol class="carousel-indicators">
+        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="1" ></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+    </ol>
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <div class="container">
+                <div class="row">
+                    <br><br><br><br><br>
+                    <table class="table">
+                        <thead>
 
-        $dates = array();
+                        <tr>
+                            <th scope="col" >
+                                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-arrow-left-square-fill" viewBox="0 0 16 16">
+                                    <path d="M16 14a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12zm-4.5-6.5H5.707l2.147-2.146a.5.5 0 1 0-.708-.708l-3 3a.5.5 0 0 0 0 .708l3 3a.5.5 0 0 0 .708-.708L5.707 8.5H11.5a.5.5 0 0 0 0-1z"/>
+                                </svg>
+                            </th>
+                            <th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th>
+                            <th scope="col" style="font-size: 30px; " >
+                                <?php
+                                echo date("Y F");
+                                ?>
+                            </th>
+                            <th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th>
+                            <th scope="col">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-arrow-right-square-fill" viewBox="0 0 16 16">
+                                    <path d="M0 14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2a2 2 0 0 0-2 2v12zm4.5-6.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5a.5.5 0 0 1 0-1z"/>
+                                </svg>
+                            </th>
+                        </tr>
+                        </thead>
+                    </table>
+                    <?php
+                    $sql = 'SELECT day(czas) as d ,hour(czas) as h FROM wizyta WHERE month(czas) = month(current_date());';
 
-        if ($result->num_rows > 0) {
-            while($row = $result->fetch_assoc()) {
+                    $conn = new mysqli("localhost", "szymon", "haslo", "loki");
 
-                $dates[] = $row;
-            }
-        }
+                    $result = $conn->query($sql);
 
-        $maxDays = date('t');
+                    $dates = array();
 
-        foreach(range(1,$maxDays) as $i){
+                    if ($result->num_rows > 0) {
+                        while($row = $result->fetch_assoc()) {
 
-            echo " <table class='table'>
+                            $dates[] = $row;
+                        }
+                    }
+
+                    $maxDays = date('t');
+
+                    foreach(range(1,$maxDays) as $i){
+
+                        echo " <table class='table'>
                
                    <tbody>
                    <tr>
                    <th>".$i."</th>";
 
 
-            foreach(range(8,18) as $j){
+                        foreach(range(8,18) as $j){
 
-                $rezerwacja = false;
-                foreach ($dates as $d){
-                    if ($d["d"] == $i && $d["h"] == $j){
-                        $rezerwacja = true;
-                        break;
+                            $rezerwacja = false;
+                            foreach ($dates as $d){
+                                if ($d["d"] == $i && $d["h"] == $j){
+                                    $rezerwacja = true;
+                                    break;
+                                }
+                            }
+
+
+                            if ($rezerwacja) {
+
+
+                                echo "<td>".$j.":00<br><span style='color: red'>rezerwacja</span>"."<br>"."</td>";
+
+                            }
+                            else{
+
+                                echo "<td>".$j.":00<br><span style='color: green'>wolny</span>"."<br>"."</td>";
+
+                            }
+                        }
                     }
-                }
+                    echo "</tr></tbody></table>";
+
+                    $conn->close();
+
+                    ?>
+                </div>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <div class="container">
+                <div class="row">
+                    <br><br><br><br><br>
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col" >
+                                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-arrow-left-square-fill" viewBox="0 0 16 16">
+                                    <path d="M16 14a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12zm-4.5-6.5H5.707l2.147-2.146a.5.5 0 1 0-.708-.708l-3 3a.5.5 0 0 0 0 .708l3 3a.5.5 0 0 0 .708-.708L5.707 8.5H11.5a.5.5 0 0 0 0-1z"/>
+                                </svg>
+                            </th>
+                            <th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th>
+                            <th scope="col" style="font-size: 30px; " >
+                                <?php
+                                echo date("Y F", strtotime('+1 months'));
+                                ?>
+                            </th>
+                            <th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th>
+                            <th scope="col">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-arrow-right-square-fill" viewBox="0 0 16 16">
+                                    <path d="M0 14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2a2 2 0 0 0-2 2v12zm4.5-6.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5a.5.5 0 0 1 0-1z"/>
+                                </svg>
+                            </th>
+                        </tr>
+                        </thead>
+                    </table>
+                    <?php
+                    $sql = 'SELECT day(czas) as d ,hour(czas) as h FROM wizyta WHERE month(czas) = month(current_date())+1;';
+
+                    $conn = new mysqli("localhost", "szymon", "haslo", "loki");
+
+                    $result = $conn->query($sql);
+
+                    $dates = array();
+
+                    if ($result->num_rows > 0) {
+                        while($row = $result->fetch_assoc()) {
+
+                            $dates[] = $row;
+                        }
+                    }
+
+                    $maxDays = date('t');
+
+                    foreach(range(1,$maxDays) as $i){
+
+                        echo " <table class='table'>
+               
+                   <tbody>
+                   <tr>
+                   <th>".$i."</th>";
 
 
-                if ($rezerwacja) {
+                        foreach(range(8,18) as $j){
+
+                            $rezerwacja = false;
+                            foreach ($dates as $d){
+                                if ($d["d"] == $i && $d["h"] == $j){
+                                    $rezerwacja = true;
+                                    break;
+                                }
+                            }
 
 
-                    echo "<td>".$j.":00<br><span style='color: red'>rezerwacja</span>"."<br>"."</td>";
+                            if ($rezerwacja) {
 
-                }
-                else{
 
-                    echo "<td>".$j.":00<br><span style='color: green'>wolny</span>"."<br>"."</td>";
+                                echo "<td>".$j.":00<br><span style='color: red'>rezerwacja</span>"."<br>"."</td>";
 
-                }
-            }
-        }
-        echo "</tr></tbody></table>";
+                            }
+                            else{
 
-        $conn->close();
+                                echo "<td>".$j.":00<br><span style='color: green'>wolny</span>"."<br>"."</td>";
 
-        ?>
+                            }
+                        }
+                    }
+                    echo "</tr></tbody></table>";
+
+                    $conn->close();
+
+                    ?>
+                </div>
+            </div>        </div>
+        <div class="carousel-item">
+            <div class="container">
+                <div class="row">
+                    <br><br><br><br><br>
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col" >
+                                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-arrow-left-square-fill" viewBox="0 0 16 16">
+                                    <path d="M16 14a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12zm-4.5-6.5H5.707l2.147-2.146a.5.5 0 1 0-.708-.708l-3 3a.5.5 0 0 0 0 .708l3 3a.5.5 0 0 0 .708-.708L5.707 8.5H11.5a.5.5 0 0 0 0-1z"/>
+                                </svg>
+                            </th>
+                            <th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th>
+                            <th scope="col" style="font-size: 30px; " >
+                                <?php
+                                echo date("Y F", strtotime('+2 months'));
+                                ?>
+                            </th>
+                            <th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th>
+                            <th scope="col">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-arrow-right-square-fill" viewBox="0 0 16 16">
+                                    <path d="M0 14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2a2 2 0 0 0-2 2v12zm4.5-6.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5a.5.5 0 0 1 0-1z"/>
+                                </svg>
+                            </th>
+                        </tr>
+                        </thead>
+                    </table>
+                    <?php
+                    $sql = 'SELECT day(czas) as d ,hour(czas) as h FROM wizyta WHERE month(czas) = month(current_date())+2;';
+
+                    $conn = new mysqli("localhost", "szymon", "haslo", "loki");
+
+                    $result = $conn->query($sql);
+
+                    $dates = array();
+
+                    if ($result->num_rows > 0) {
+                        while($row = $result->fetch_assoc()) {
+
+                            $dates[] = $row;
+                        }
+                    }
+
+                    $maxDays = date('t');
+
+                    foreach(range(1,$maxDays) as $i){
+
+                        echo " <table class='table'>
+               
+                   <tbody>
+                   <tr>
+                   <th>".$i."</th>";
+
+
+                        foreach(range(8,18) as $j){
+
+                            $rezerwacja = false;
+                            foreach ($dates as $d){
+                                if ($d["d"] == $i && $d["h"] == $j){
+                                    $rezerwacja = true;
+                                    break;
+                                }
+                            }
+
+
+                            if ($rezerwacja) {
+
+
+                                echo "<td>".$j.":00<br><span style='color: red'>rezerwacja</span>"."<br>"."</td>";
+
+                            }
+                            else{
+
+                                echo "<td>".$j.":00<br><span style='color: green'>wolny</span>"."<br>"."</td>";
+
+                            }
+                        }
+                    }
+                    echo "</tr></tbody></table>";
+
+                    $conn->close();
+
+                    ?>
+                </div>
+            </div>        </div>
     </div>
+    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
 </div>
 </body>
 <br><br><br><br>

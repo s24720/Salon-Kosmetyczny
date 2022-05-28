@@ -54,7 +54,6 @@
             }
             if (!empty($_SESSION["username"])){
                 echo " <button class='dropdown-item'  type='button'><a class='nav-link' href='wziyty.php'>Wizyty</a></button>";
-                echo " <button class='dropdown-item'  type='button'><a class='nav-link' href='administrator.php'>Wizyty</a></button>";
 
                 echo "<button class='dropdown-item'  type='button'><a class='nav-link' href='logut.php'>Wyloguj się</a></button>";
             }
