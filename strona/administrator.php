@@ -88,12 +88,12 @@ if($_SESSION['rola'] != ("administrator")){
                 }
                 ?>
                 <div class="form-outline mb-4">
-                    <input type="text" name="nazwa" class="form-control form-control-lg" />
+                    <input type="text" name="nazwa" pattern="[A-Za-z0-9]+" class="form-control form-control-lg" />
                     <label class="form-label">Nazwa zabiegu</label>
                 </div>
                 <div class="form-outline mb-4">
                     <input type="text" name="cena" class="form-control form-control-lg" />
-                    <label class="form-label" >Cena zabiegu</label>
+                    <label class="form-label" >Cena zabiegu (zl.gr)</label>
                 </div>
                 <div class="form-outline mb-4">
                     <input class="form-control form-control-lg" type="time" name="czas" step="2">

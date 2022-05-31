@@ -77,15 +77,15 @@
                         }
                         ?>
                         <div class="form-outline mb-4">
-                            <input type="text" name="name" class="form-control form-control-lg" />
+                            <input type="text" name="name" pattern="[A-Za-z0-9]+" class="form-control form-control-lg" />
                             <label class="form-label">Imię</label>
                         </div>
                         <div class="form-outline mb-4">
-                            <input type="text" name="surname" class="form-control form-control-lg" />
+                            <input type="text" name="surname" pattern="[A-Za-z0-9]+" class="form-control form-control-lg" />
                             <label class="form-label" >Nazwisko</label>
                         </div>
                         <div class="form-outline mb-4">
-                            <input type="text" name="telephone" class="form-control form-control-lg" />
+                            <input type="text" name="telephone" pattern="[0-9]+" class="form-control form-control-lg" />
                             <label class="form-label" >Numer telefonu</label>
                         </div>
                         <div class="form-outline mb-4">
@@ -140,7 +140,7 @@
                 <h6 class="text-uppercase fw-bold mb-4">
                     Kontakt
                 </h6>
-                <p><i class="fas fa-home me-3"></i> Gdańsk, 14-330 PL</p>
+                <p><em class="fas fa-home me-3"></em> Gdańsk, 14-330 PL</p>
                 <p>
                     <i class="fas fa-envelope me-3"></i>
                     projekt@gmail.com

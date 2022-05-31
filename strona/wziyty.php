@@ -140,7 +140,7 @@ if($_SESSION['rola'] != ("klient" || "administrator")){
                             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                                 <div class="form-group">
                                     <label class="control-label" for="textarea">Podaj dodatkowe informacje</label>
-                                    <textarea class="form-control" id="textarea" name="informacja" rows="4" placeholder="(opcjonalne)"></textarea>
+                                    <textarea class="form-control" id="textarea" name="informacja" pattern="[A-Za-z0-9]+" rows="4" placeholder="(opcjonalne)"></textarea>
                                 </div>
                             </div>
                             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
