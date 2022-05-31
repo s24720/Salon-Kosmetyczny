@@ -76,9 +76,9 @@ if($_SESSION['rola'] != ("administrator")){
             <form style="width: 23rem;"
                   method="POST"
                   action="dodawanie_uslugi.php">
-                <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Dodaj usługę</h3>
+                <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Dodaj zabieg</h3>
                 <?php if (isset($_GET['error'])) { ?>
-                    <div class="alert alert-danger" role="alert">
+                    <div class="alert alert-success" role="alert">
                         <?=$_GET['error']?>
                     </div>
                     <?php
@@ -120,7 +120,14 @@ if($_SESSION['rola'] != ("administrator")){
             <form style="width: 23rem;"
                   method="POST"
                   action="usuwanie_uslugi.php">
-                <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Usuń usługę</h3>
+                <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Usuń zabieg</h3>
+                <?php if (isset($_GET['error2'])) { ?>
+                    <div class="alert alert-danger" role="alert">
+                        <?=$_GET['error2']?>
+                    </div>
+                    <?php
+                }
+                ?>
                 <div class="form-outline mb-4">
                     <select  class="form-control form-control-lg" name="usuwanie" id="cars">
                         <optgroup label="Wybierz zabieg">
@@ -158,9 +165,9 @@ if($_SESSION['rola'] != ("administrator")){
                     <div class="row">
                         <div class="col">
                             <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Potwierdzenie rezerwacji</h3>
-                            <?php if (isset($_GET['error'])) { ?>
+                            <?php if (isset($_GET['error3'])) { ?>
                                 <div class="alert alert-success" role="alert">
-                                    <?=$_GET['error']?>
+                                    <?=$_GET['error3']?>
                                 </div>
                                 <?php
                             }
@@ -199,6 +206,13 @@ if($_SESSION['rola'] != ("administrator")){
                 <div class="col">
                     <form method="POST" action="edycja_rezerwacjaA.php">
                         <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Edycja rezerwacji</h3>
+                        <?php if (isset($_GET['error4'])) { ?>
+                            <div class="alert alert-success" role="alert">
+                                <?=$_GET['error4']?>
+                            </div>
+                            <?php
+                        }
+                        ?>
                         <div class="form-outline mb-4">
                             <select  class="form-control form-control-lg" name="dataE" id="cars">
                                 <optgroup label="Wybierz rezerwację">
@@ -210,7 +224,7 @@ if($_SESSION['rola'] != ("administrator")){
 
                                     $date = date('Y-m-d H:i:s');
 
-                                    $sql = "SELECT czas, Zabieg_id,id FROM wizyta WHERE  czas >= '$date';";
+                                    $sql = "SELECT czas, Zabieg_id,id FROM wizyta WHERE  czas >= '$date' AND potwierdzoneK = true;";
                                     $result = $conn->query($sql);
 
                                     if ($result->num_rows > 0) {

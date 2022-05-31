@@ -32,7 +32,7 @@ if (isset($_POST['nazwa']) && isset($_POST['cena']) && isset($_POST['czas'])) {
 
         $conn = new mysqli("localhost", "szymon", "haslo", "loki");;
         if (mysqli_query($conn, $sql)) {
-            header("Location: administrator.php?error=Dodano");
+            header("Location: administrator.php?error=Dodano zabieg");
         } else {
             echo "Error: " . $sql . ":-" . mysqli_error($conn);
         }

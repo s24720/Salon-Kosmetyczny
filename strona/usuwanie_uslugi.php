@@ -7,7 +7,7 @@
 
     $conn = new mysqli("localhost", "szymon", "haslo", "loki");;
     if (mysqli_query($conn, $sql)) {
-        header("Location: administrator.php");
+        header("Location: administrator.php?error2=Skasowano");
     } else {
         echo "Error: " . $sql . ":-" . mysqli_error($conn);
     }
