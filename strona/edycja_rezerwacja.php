@@ -7,7 +7,8 @@ $sql = "UPDATE wizyta SET czas = '$nowadata', Zabieg_id = '$zabieg' WHERE  id = 
 
 $conn = new mysqli("localhost", "szymon", "haslo", "loki");;
 if (mysqli_query($conn, $sql)) {
-    header("Location: wziyty.php?error2=Rezerwacja edytowana");} else {
+    header("Location: wziyty.php?error2=Rezerwacja edytowana");
+} else {
     echo "Error: " . $sql . ":-" . mysqli_error($conn);
 }
 mysqli_close($conn);
