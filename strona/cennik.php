@@ -11,9 +11,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="PHP/styles.css">
+    <link rel="stylesheet" href="style/styles.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-    <link rel="stylesheet" href="/PHP/styl2.css" type="text/css" media="screen">
+    <link rel="stylesheet" href="/style/styl2.css" type="text/css" media="screen">
 </head>
 <body class="border border border-10 border-secondary rounded  ">
 <div id="left"></div>
@@ -24,7 +24,7 @@
     <div class="collapse navbar-collapse " id="navbarNavDropdown">
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link" href="./main_log.php">Aktlualności</a>
+                <a class="nav-link" href="index.php">Aktlualności</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="zabiegi.php">Zabiegi</a>
@@ -64,9 +64,10 @@
 <br>
 <h3 style="text-indent: 5%;" class="name-of-treatment" ><a style=" text-decoration: none; color:#e4c9c4; " href="#">Zabiegi pielęgnacyjno-złuszczające</a></h3>
 <?php
-$conn = new mysqli("localhost", "szymon", "haslo", "loki");;
+$conn = new mysqli("localhost", "szymon", "haslo", "loki");
 if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);}
+    die("Connection failed: " . $conn->connect_error);
+}
 
 
 $sql = "SELECT nazwa, cena, czas FROM zabieg WHERE Rodzaj_id = '1';";
@@ -86,7 +87,9 @@ if ($result->num_rows > 0) {
                                              </tr></tbody>
                                          </table>
                                      </div>
-                                 </section>";}}
+                                 </section>";
+    }
+}
 
 echo '<h3 style="text-indent: 5%;" class="name-of-treatment" ><a style=" text-decoration: none; color:#e4c9c4; " href="#">Zabiegi na ciało z użyciem aparatury</a></h3>';
 
@@ -106,7 +109,9 @@ if ($result->num_rows > 0) {
                                              </tr></tbody>
                                          </table>
                                      </div>
-                                 </section>";}}
+                                 </section>";
+    }
+}
 
 echo '<h3 style="text-indent: 5%;" class="name-of-treatment" ><a style=" text-decoration: none; color:#e4c9c4; " href="#">Oprawa oka</a></h3>';
 
@@ -126,7 +131,9 @@ if ($result->num_rows > 0) {
                                              </tr></tbody>
                                          </table>
                                      </div>
-                                 </section>";}}
+                                 </section>";
+    }
+}
 
 echo '<h3 style="text-indent: 5%;" class="name-of-treatment" ><a style=" text-decoration: none; color:#e4c9c4; " href="#">Masaż twarzy</a></h3>';
 
@@ -147,7 +154,9 @@ if ($result->num_rows > 0) {
                                              </tr></tbody>
                                          </table>
                                      </div>
-                                 </section>";}}
+                                 </section>";
+    }
+}
 
 echo '<h3 style="text-indent: 5%;" class="name-of-treatment" ><a style=" text-decoration: none; color:#e4c9c4; " href="#">Makijaż permanentny</a></h3>';
 
@@ -167,7 +176,9 @@ if ($result->num_rows > 0) {
                                              </tr></tbody>
                                          </table>
                                      </div>
-                                 </section>";}}
+                                 </section>";
+    }
+}
 
 echo '<h3 style="text-indent: 5%;" class="name-of-treatment" ><a style=" text-decoration: none; color:#e4c9c4; " href="#">Pielęgnacja dłoni i stóp</a></h3>';
 
@@ -246,22 +257,22 @@ if ($result->num_rows > 0) {
         </div>
         <div>
             <a href="" class="me-4 text-reset">
-                <i class="fab fa-facebook-f"></i>
+                <em class="fab fa-facebook-f"></em>
             </a>
             <a href="" class="me-4 text-reset">
-                <i class="fab fa-twitter"></i>
+                <em class="fab fa-twitter"></em>
             </a>
             <a href="" class="me-4 text-reset">
-                <i class="fab fa-google"></i>
+                <em class="fab fa-google"></em>
             </a>
             <a href="" class="me-4 text-reset">
-                <i class="fab fa-instagram"></i>
+                <em class="fab fa-instagram"></em>
             </a>
             <a href="" class="me-4 text-reset">
-                <i class="fab fa-linkedin"></i>
+                <em class="fab fa-linkedin"></em>
             </a>
             <a href="" class="me-4 text-reset">
-                <i class="fab fa-github"></i>
+                <em class="fab fa-github"></em>
             </a>
         </div>
     </section>
@@ -270,7 +281,7 @@ if ($result->num_rows > 0) {
             <div class="row mt-3">
                 <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
                     <h6 class="text-uppercase fw-bold mb-4">
-                        <i class="fas fa-gem me-3"></i>LooKreacja
+                        <em class="fas fa-gem me-3"></em>LooKreacja
                     </h6>
                     <p>
                         Najlepszy gabniet kosmetyczny
@@ -294,13 +305,13 @@ if ($result->num_rows > 0) {
                     <h6 class="text-uppercase fw-bold mb-4">
                         Kontakt
                     </h6>
-                    <p><i class="fas fa-home me-3"></i> Gdańsk, 14-330 PL</p>
+                    <p><em class="fas fa-home me-3"></em> Gdańsk, 14-330 PL</p>
                     <p>
-                        <i class="fas fa-envelope me-3"></i>
+                        <em class="fas fa-envelope me-3"></em>
                         projekt@gmail.com
                     </p>
-                    <p><i class="fas fa-phone me-3"></i> +48 987 654 321</p>
-                    <p><i class="fas fa-print me-3"></i> +48 123 456 789</p>
+                    <p><em class="fas fa-phone me-3"></em> +48 987 654 321</p>
+                    <p><em class="fas fa-print me-3"></em> +48 123 456 789</p>
                 </div>
             </div>
         </div>

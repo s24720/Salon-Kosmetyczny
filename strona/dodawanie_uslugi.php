@@ -30,7 +30,7 @@ if (isset($_POST['nazwa']) && isset($_POST['cena']) && isset($_POST['czas'])) {
         $sql = "INSERT INTO zabieg (nazwa, cena, czas, Rodzaj_id) VALUES 
              ('$nazwa','$cena','$czas','$rodzaj')";
 
-        $conn = new mysqli("localhost", "szymon", "haslo", "loki");;
+        $conn = new mysqli("localhost", "szymon", "haslo", "loki");
         if (mysqli_query($conn, $sql)) {
             header("Location: administrator.php?error=Dodano zabieg");
         } else {

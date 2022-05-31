@@ -44,7 +44,7 @@ if (isset($_POST['username']) && isset($_POST['password'])){
             if($_SESSION['rola'] == ("administrator")){
                 header("Location: administrator.php");
             }else {
-                header("Location: main_log.php");
+                header("Location: index.php");
            }
         }else{
             header("Location: login.php?error= Podano zle dane");

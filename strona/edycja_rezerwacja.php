@@ -5,7 +5,7 @@ $nowadata = $_POST['nowadataE'];
 
 $sql = "UPDATE wizyta SET czas = '$nowadata', Zabieg_id = '$zabieg' WHERE  id = '$data';";
 
-$conn = new mysqli("localhost", "szymon", "haslo", "loki");;
+$conn = new mysqli("localhost", "szymon", "haslo", "loki");
 if (mysqli_query($conn, $sql)) {
     header("Location: wziyty.php?error2=Rezerwacja edytowana");
 } else {
