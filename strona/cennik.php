@@ -62,21 +62,10 @@
     </div>
 </nav>
 <br>
-<h3 style="text-indent: 5%;" class="name-of-treatment" ><a style=" text-decoration: none; color:#e4c9c4; " href="#">Zabiegi pielęgnacyjno-złuszczające</a></h3>
 <?php
-$conn = new mysqli("localhost", "szymon", "haslo", "loki");
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
 
-
-$sql = "SELECT nazwa, cena, czas FROM zabieg WHERE Rodzaj_id = '1';";
-$result = $conn->query($sql);
-
-
-if ($result->num_rows > 0) {
-    while($row = $result->fetch_assoc()) {
-        echo "<section class='type-of-treatment'> <span class='slidetoggle-trigger''></span>
+function display($row){
+    echo "<section class='type-of-treatment'> <span class='slidetoggle-trigger''></span>
                                       <div class='table-and-explication'>
                                          <table class='list-of-tasks''>
                                              <tbody><tr>
@@ -88,166 +77,85 @@ if ($result->num_rows > 0) {
                                          </table>
                                      </div>
                                  </section>";
-    }
 }
 
-echo '<h3 style="text-indent: 5%;" class="name-of-treatment" ><a style=" text-decoration: none; color:#e4c9c4; " href="#">Zabiegi na ciało z użyciem aparatury</a></h3>';
-
-$sql = "SELECT nazwa, cena, czas FROM zabieg WHERE Rodzaj_id = '2';";
-$result = $conn->query($sql);
-
-if ($result->num_rows > 0) {
-    while($row = $result->fetch_assoc()) {
-        echo "<section class='type-of-treatment'> <span class='slidetoggle-trigger''></span>
-                                      <div class='table-and-explication'>
-                                         <table class='list-of-tasks''>
-                                             <tbody><tr>
-                                                 <td class='task-name'>".$row["nazwa"]."</td>
-                                                 <td class='duration'>".$row["czas"]."</td>
-                                                 <td class='price'>".$row["cena"]."</td>
-                                                 <td class='price-sale'>"."</td>
-                                             </tr></tbody>
-                                         </table>
-                                     </div>
-                                 </section>";
-    }
-}
-
-echo '<h3 style="text-indent: 5%;" class="name-of-treatment" ><a style=" text-decoration: none; color:#e4c9c4; " href="#">Oprawa oka</a></h3>';
-
-$sql = "SELECT nazwa, cena, czas FROM zabieg WHERE Rodzaj_id = '3';";
-$result = $conn->query($sql);
-
-if ($result->num_rows > 0) {
-    while($row = $result->fetch_assoc()) {
-        echo "<section class='type-of-treatment'> <span class='slidetoggle-trigger''></span>
-                                      <div class='table-and-explication'>
-                                         <table class='list-of-tasks''>
-                                             <tbody><tr>
-                                                 <td class='task-name'>".$row["nazwa"]."</td>
-                                                 <td class='duration'>".$row["czas"]."</td>
-                                                 <td class='price'>".$row["cena"]."</td>
-                                                 <td class='price-sale'>"."</td>
-                                             </tr></tbody>
-                                         </table>
-                                     </div>
-                                 </section>";
-    }
-}
-
-echo '<h3 style="text-indent: 5%;" class="name-of-treatment" ><a style=" text-decoration: none; color:#e4c9c4; " href="#">Masaż twarzy</a></h3>';
-
-
-$sql = "SELECT nazwa, cena, czas FROM zabieg WHERE Rodzaj_id = '4';";
-$result = $conn->query($sql);
-
-if ($result->num_rows > 0) {
-    while($row = $result->fetch_assoc()) {
-        echo "<section class='type-of-treatment'> <span class='slidetoggle-trigger''></span>
-                                      <div class='table-and-explication'>
-                                         <table class='list-of-tasks''>
-                                             <tbody><tr>
-                                                 <td class='task-name'>".$row["nazwa"]."</td>
-                                                 <td class='duration'>".$row["czas"]."</td>
-                                                 <td class='price'>".$row["cena"]."</td>
-                                                 <td class='price-sale'>"."</td>
-                                             </tr></tbody>
-                                         </table>
-                                     </div>
-                                 </section>";
-    }
-}
-
-echo '<h3 style="text-indent: 5%;" class="name-of-treatment" ><a style=" text-decoration: none; color:#e4c9c4; " href="#">Makijaż permanentny</a></h3>';
-
-$sql = "SELECT nazwa, cena, czas FROM zabieg WHERE Rodzaj_id = '5';";
-$result = $conn->query($sql);
-
-if ($result->num_rows > 0) {
-    while($row = $result->fetch_assoc()) {
-        echo "<section class='type-of-treatment'> <span class='slidetoggle-trigger''></span>
-                                      <div class='table-and-explication'>
-                                         <table class='list-of-tasks''>
-                                             <tbody><tr>
-                                                 <td class='task-name'>".$row["nazwa"]."</td>
-                                                 <td class='duration'>".$row["czas"]."</td>
-                                                 <td class='price'>".$row["cena"]."</td>
-                                                 <td class='price-sale'>"."</td>
-                                             </tr></tbody>
-                                         </table>
-                                     </div>
-                                 </section>";
-    }
-}
-
-echo '<h3 style="text-indent: 5%;" class="name-of-treatment" ><a style=" text-decoration: none; color:#e4c9c4; " href="#">Pielęgnacja dłoni i stóp</a></h3>';
-
-$sql = "SELECT nazwa, cena, czas FROM zabieg WHERE Rodzaj_id = '6';";
-$result = $conn->query($sql);
-
-if ($result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
-        echo "<section class='type-of-treatment'> <span class='slidetoggle-trigger''></span>
-                                      <div class='table-and-explication'>
-                                         <table class='list-of-tasks''>
-                                             <tbody><tr>
-                                                 <td class='task-name'>" . $row["nazwa"] . "</td>
-                                                 <td class='duration'>" . $row["czas"] . "</td>
-                                                 <td class='price'>" . $row["cena"] . "</td>
-                                                 <td class='price-sale'>" . "</td>
-                                             </tr></tbody>
-                                         </table>
-                                     </div>
-                                 </section>";
-    }
-
-    echo '<h3 style="text-indent: 5%;" class="name-of-treatment" ><a style=" text-decoration: none; color:#e4c9c4; " href="#">Zabiegi na twarz z użyciem aparatury</a></h3>';
-
-    $sql = "SELECT nazwa, cena, czas FROM zabieg WHERE Rodzaj_id = '7';";
-    $result = $conn->query($sql);
-
+function result($result){
     if ($result->num_rows > 0) {
-        while ($row = $result->fetch_assoc()) {
-            echo "<section class='type-of-treatment'> <span class='slidetoggle-trigger''></span>
-                                      <div class='table-and-explication'>
-                                         <table class='list-of-tasks''>
-                                             <tbody><tr>
-                                                 <td class='task-name'>" . $row["nazwa"] . "</td>
-                                                 <td class='duration'>" . $row["czas"] . "</td>
-                                                 <td class='price'>" . $row["cena"] . "</td>
-                                                 <td class='price-sale'>" . "</td>
-                                             </tr></tbody>
-                                         </table>
-                                     </div>
-                                 </section>";
+        while($row = $result->fetch_assoc()) {
+            echo display($row);
         }
     }
-
-    echo '<h3 style="text-indent: 5%;" class="name-of-treatment" ><a style=" text-decoration: none; color:#e4c9c4; " href="#">Mezoterapia</a></h3>';
-
-    $sql = "SELECT nazwa, cena, czas FROM zabieg WHERE Rodzaj_id = '8';";
-    $result = $conn->query($sql);
-
-    if ($result->num_rows > 0) {
-        while ($row = $result->fetch_assoc()) {
-            echo "<section class='type-of-treatment'> <span class='slidetoggle-trigger''></span>
-                                      <div class='table-and-explication'>
-                                         <table class='list-of-tasks''>
-                                             <tbody><tr>
-                                                 <td class='task-name'>" . $row["nazwa"] . "</td>
-                                                 <td class='duration'>" . $row["czas"] . "</td>
-                                                 <td class='price'>" . $row["cena"] . "</td>
-                                                 <td class='price-sale'>" . "</td>
-                                             </tr></tbody>
-                                         </table>
-                                     </div>
-                                 </section>";
-        }
-    } else {
-        echo "0 results";
-    }
-    $conn->close();
 }
+
+include ("databse.php");
+$db= new Database();
+
+$sql = "Select id, nazwa FROM rodzaj";
+$result = $db ->get($sql);
+
+while($row = $result->fetch_assoc()) {
+    $sql = "SELECT nazwa, cena, czas FROM zabieg WHERE Rodzaj_id = ".$row['id'].";";
+echo "<h3 style='text-indent: 5%;' class='name-of-treatment' ><a style=' text-decoration: none; color:#e4c9c4; ' href='#'>$row[nazwa]</a></h3>";
+    $result1 = $db->get($sql);
+    result($result1);
+}
+
+
+//$sql = "SELECT nazwa, cena, czas FROM zabieg WHERE Rodzaj_id = '1';";
+//
+//$result = $db->get($sql);
+//result($result);
+//
+//
+//echo '<h3 style="text-indent: 5%;" class="name-of-treatment" ><a style=" text-decoration: none; color:#e4c9c4; " href="#">Zabiegi na ciało z użyciem aparatury</a></h3>';
+//
+//$sql = "SELECT nazwa, cena, czas FROM zabieg WHERE Rodzaj_id = '2';";
+//$result = $db->get($sql);
+//result($result);
+//
+//
+//echo '<h3 style="text-indent: 5%;" class="name-of-treatment" ><a style=" text-decoration: none; color:#e4c9c4; " href="#">Oprawa oka</a></h3>';
+//
+//$sql = "SELECT nazwa, cena, czas FROM zabieg WHERE Rodzaj_id = '3';";
+//$result = $db->get($sql);
+//result($result);
+//
+//
+//echo '<h3 style="text-indent: 5%;" class="name-of-treatment" ><a style=" text-decoration: none; color:#e4c9c4; " href="#">Masaż twarzy</a></h3>';
+//
+//
+//$sql = "SELECT nazwa, cena, czas FROM zabieg WHERE Rodzaj_id = '4';";
+//$result = $db->get($sql);
+//result($result);
+//
+//
+//echo '<h3 style="text-indent: 5%;" class="name-of-treatment" ><a style=" text-decoration: none; color:#e4c9c4; " href="#">Makijaż permanentny</a></h3>';
+//
+//$sql = "SELECT nazwa, cena, czas FROM zabieg WHERE Rodzaj_id = '5';";
+//$result = $db->get($sql);
+//result($result);
+//
+//
+//echo '<h3 style="text-indent: 5%;" class="name-of-treatment" ><a style=" text-decoration: none; color:#e4c9c4; " href="#">Pielęgnacja dłoni i stóp</a></h3>';
+//
+//$sql = "SELECT nazwa, cena, czas FROM zabieg WHERE Rodzaj_id = '6';";
+//$result = $db->get($sql);
+//result($result);
+//
+//
+//    echo '<h3 style="text-indent: 5%;" class="name-of-treatment" ><a style=" text-decoration: none; color:#e4c9c4; " href="#">Zabiegi na twarz z użyciem aparatury</a></h3>';
+//
+//    $sql = "SELECT nazwa, cena, czas FROM zabieg WHERE Rodzaj_id = '7';";
+//$result = $db->get($sql);
+//result($result);
+//
+//
+//    echo '<h3 style="text-indent: 5%;" class="name-of-treatment" ><a style=" text-decoration: none; color:#e4c9c4; " href="#">Mezoterapia</a></h3>';
+//
+//    $sql = "SELECT nazwa, cena, czas FROM zabieg WHERE Rodzaj_id = '8';";
+//$result = $db->get($sql);
+//result($result);
+
 ?>
 </body>
 <footer class="text-center text-lg-start bg-light text-muted">

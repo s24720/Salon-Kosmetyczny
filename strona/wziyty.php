@@ -222,7 +222,7 @@ if($_SESSION['rola'] != ("klient" || "administrator")){
 
                     $date = date('Y-m-d H:i:s');
 
-                    $sql = "SELECT czas, Zabieg_id,id FROM wizyta WHERE Klient_id = '$klient' AND czas >= '$date' AND potwierdzoneA = false AND potwierdzoneK = true;";
+                    $sql = "SELECT czas, Zabieg_id,id FROM wizyta WHERE Klient_id = '$klient' AND czas >= '$date' AND potwierdzoneA = false;";
                     $result = $conn->query($sql);
 
                     if ($result->num_rows > 0) {
@@ -320,7 +320,6 @@ if($_SESSION['rola'] != ("klient" || "administrator")){
 <div class="col">
     <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Historia rezerwacji</h3>
     <table class="table">
-        <caption>historia rezerwacji</caption>
 
         <thead>
         <tr>
@@ -366,7 +365,6 @@ if($_SESSION['rola'] != ("klient" || "administrator")){
                 <div class="row">
                     <br><br><br><br><br>
                     <table class="table">
-                        <caption>kalendarz</caption>
                         <thead>
 
                         <tr>
@@ -391,7 +389,8 @@ if($_SESSION['rola'] != ("klient" || "administrator")){
                         </thead>
                     </table>
                     <?php
-                    $sql = 'SELECT day(czas) as d ,hour(czas) as h FROM wizyta WHERE month(czas) = month(current_date());';
+                    $sql = 'SELECT day(w.czas) as d ,hour(w.czas) as h,hour(ADDTIME(w.czas, z.czas)) as k FROM wizyta as w JOIN zabieg as z on z.id = w.zabieg_id WHERE month(w.czas) = month(current_date());';
+
 
                     $conn = new mysqli("localhost", "szymon", "haslo", "loki");
 
@@ -421,7 +420,7 @@ if($_SESSION['rola'] != ("klient" || "administrator")){
 
                             $rezerwacja = false;
                             foreach ($dates as $d){
-                                if ($d["d"] == $i && $d["h"] == $j){
+                                if (($d["d"] == $i || $d["k"] == $i) && $d["h"] == $j){
                                     $rezerwacja = true;
                                     break;
                                 }
@@ -454,7 +453,6 @@ if($_SESSION['rola'] != ("klient" || "administrator")){
                 <div class="row">
                     <br><br><br><br><br>
                     <table class="table">
-                        <caption>kalendarz +1</caption>
                         <thead>
                         <tr>
                             <th scope="col" >
@@ -540,7 +538,6 @@ if($_SESSION['rola'] != ("klient" || "administrator")){
                 <div class="row">
                     <br><br><br><br><br>
                     <table class="table">
-                        <caption>kalendarz +2</caption>
                         <thead>
                         <tr>
                             <th scope="col" >

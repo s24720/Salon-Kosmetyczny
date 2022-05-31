@@ -81,15 +81,14 @@
 <br>
 <div class="container">
     <?php
-    require_once('databse.php');
 
-    $conn = new Database();
+    include("databse.php");
 
-
+    $db = new Database();
 
     $sql = "SELECT opina, data, nick FROM opinie ORDER BY DATE(data) DESC, data DESC;";
 
-    $result = $conn->query($sql);
+    $result = $db->get($sql);
     if ($result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
 
@@ -114,7 +113,6 @@
     } else {
         echo "Brak komntarzy";
     }
-    $conn->close();
     ?>
 </div>
 </body>
