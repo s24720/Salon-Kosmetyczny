@@ -82,7 +82,16 @@ if($_SESSION['rola'] != ("klient" || "administrator")){
 <div class="container">
     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb30 text-center">
         <h2>Rezerwacja wizyty</h2>
+
+        <?php if (isset($_GET['error4'])) { ?>
+            <div class="alert alert-success" role="alert">
+                <?=$_GET['error4']?>
+            </div>
+            <?php
+        }
+        ?>
     </div>
+
     <form method="POST" action="rezerwacja.php">
         <div class="row">
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb30">
@@ -121,7 +130,7 @@ if($_SESSION['rola'] != ("klient" || "administrator")){
 
                             <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
                                 <div class="form-group">
-                                    <label class="control-label" for="datepicker">Data wizyty (yyyy-mm-dd hh:mm:ss)</label>
+                                    <label class="control-label" for="datepicker">Data wizyty</label>
                                     <div class='input-group date' id='datetimepicker1'>
                                         <input  id="datepicker" name="data" value="2022-02-20"
                                                 min="2022-02-20" max="2032-02-20" type="datetime-local"  placeholder="Data" class="form-control" required>
@@ -192,6 +201,15 @@ if($_SESSION['rola'] != ("klient" || "administrator")){
 <div class="col">
     <form method="POST" action="edycja_rezerwacja.php">
         <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Edycja rezerwacji</h3>
+
+        <?php if (isset($_GET['error2'])) { ?>
+            <div class="alert alert-success" role="alert">
+                <?=$_GET['error2']?>
+            </div>
+            <?php
+        }
+        ?>
+
         <div class="form-outline mb-4">
             <select  class="form-control form-control-lg" name="dataE" id="cars">
                 <optgroup label="Wybierz rezerwację">
@@ -204,7 +222,7 @@ if($_SESSION['rola'] != ("klient" || "administrator")){
 
                     $date = date('Y-m-d H:i:s');
 
-                    $sql = "SELECT czas, Zabieg_id,id FROM wizyta WHERE Klient_id = '$klient' AND czas >= '$date' AND potwierdzoneA = false;";
+                    $sql = "SELECT czas, Zabieg_id,id FROM wizyta WHERE Klient_id = '$klient' AND czas >= '$date' AND potwierdzoneA = false AND potwierdzoneK = true;";
                     $result = $conn->query($sql);
 
                     if ($result->num_rows > 0) {
@@ -248,8 +266,8 @@ if($_SESSION['rola'] != ("klient" || "administrator")){
             </select>
         </div>
         <div class="form-outline mb-4">
-            <input id="nowadataE" name="nowadataE" type="text" placeholder="Data" class="form-control">
-            <label class="form-label">Data nowej wizyty (yyyy-mm-dd hh:mm:ss)</label>
+            <input  id="datepicker" name="nowadataE" value="2022-02-20"
+                    min="2022-02-20" max="2032-02-20" type="datetime-local"  placeholder="Data" class="form-control" required>
         </div>
         <div class="pt-1 mb-4">
             <button class="btn btn-info btn-lg btn-block" type="submit">Edytuj</button>
@@ -259,10 +277,17 @@ if($_SESSION['rola'] != ("klient" || "administrator")){
 <div class="w-100"></div>
 <div class="col">
     <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Usunięcie rezerwacji</h3>
+    <?php if (isset($_GET['error3'])) { ?>
+        <div class="alert alert-danger" role="alert">
+            <?=$_GET['error3']?>
+        </div>
+        <?php
+    }
+    ?>
     <form method="POST" action="usuwanie_rezerwacji.php">
         <div class="form-outline mb-4">
             <select  class="form-control form-control-lg" name="usuwanie" id="cars">
-                <optgroup label="Wybierz zabieg">
+                <optgroup label="Wybierz rezerwację">
                     <?php
                     $conn = new mysqli("localhost", "szymon", "haslo", "loki");;
                     if ($conn->connect_error) {
@@ -278,7 +303,8 @@ if($_SESSION['rola'] != ("klient" || "administrator")){
                     if ($result->num_rows > 0) {
                         while($row = $result->fetch_assoc()) {
 
-                            echo "<option value = ".$row["id"]."' >".$row["czas"]." ".$row["Zabieg_id"]."</option>";
+                            echo "<option value = '" . $row["id"] . "' >" . $row["czas"] . "</option>";
+
                         }
                     }
                     $conn->close();

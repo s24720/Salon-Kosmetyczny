@@ -2,11 +2,11 @@
 $usun = $_POST['usuwanie'];
 
 
-$sql = "DELETE FROM wizyta WHERE id = $usun;";
+$sql = "DELETE FROM wizyta WHERE id = '$usun' ;";
 
 $conn = new mysqli("localhost", "szymon", "haslo", "loki");;
 if (mysqli_query($conn, $sql)) {
-    header("Location: wziyty.php");
+    header("Location: wziyty.php?error3=Rezerwacja skasowana");
 } else {
     echo "Error: " . $sql . ":-" . mysqli_error($conn);
 }
