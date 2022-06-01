@@ -1,16 +1,17 @@
 <?php
 $potwierdzenie = $_POST['potwierdzenieK'];
 
+include("databse.php");
+$db = new Database();
 
 $sql = "UPDATE wizyta SET potwierdzoneK = true WHERE  id = '$potwierdzenie';";
+$result = $db->get($sql);
 
-$conn = new mysqli("localhost", "szymon", "haslo", "loki");
-if (mysqli_query($conn, $sql)) {
+if ($result == true) {
     header("Location: wziyty.php?error=Rezerwacja potwierdzona");
-} else {
-    echo "Error: " . $sql . ":-" . mysqli_error($conn);
 }
-mysqli_close($conn);
+
+?>
 
 
 

@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html" lang="pl-en">
 <head>
@@ -46,7 +49,6 @@
         </button>
         <div class="dropdown-menu dropdown-menu-right">
             <?php
-            session_start();
 
             if (empty($_SESSION["username"])){
                 echo "<button class='dropdown-item'  type='button'><a class='nav-link' href='login.php'>Logowanie</a></button>";
@@ -99,62 +101,6 @@ echo "<h3 style='text-indent: 5%;' class='name-of-treatment' ><a style=' text-de
     $result1 = $db->get($sql);
     result($result1);
 }
-
-
-//$sql = "SELECT nazwa, cena, czas FROM zabieg WHERE Rodzaj_id = '1';";
-//
-//$result = $db->get($sql);
-//result($result);
-//
-//
-//echo '<h3 style="text-indent: 5%;" class="name-of-treatment" ><a style=" text-decoration: none; color:#e4c9c4; " href="#">Zabiegi na ciało z użyciem aparatury</a></h3>';
-//
-//$sql = "SELECT nazwa, cena, czas FROM zabieg WHERE Rodzaj_id = '2';";
-//$result = $db->get($sql);
-//result($result);
-//
-//
-//echo '<h3 style="text-indent: 5%;" class="name-of-treatment" ><a style=" text-decoration: none; color:#e4c9c4; " href="#">Oprawa oka</a></h3>';
-//
-//$sql = "SELECT nazwa, cena, czas FROM zabieg WHERE Rodzaj_id = '3';";
-//$result = $db->get($sql);
-//result($result);
-//
-//
-//echo '<h3 style="text-indent: 5%;" class="name-of-treatment" ><a style=" text-decoration: none; color:#e4c9c4; " href="#">Masaż twarzy</a></h3>';
-//
-//
-//$sql = "SELECT nazwa, cena, czas FROM zabieg WHERE Rodzaj_id = '4';";
-//$result = $db->get($sql);
-//result($result);
-//
-//
-//echo '<h3 style="text-indent: 5%;" class="name-of-treatment" ><a style=" text-decoration: none; color:#e4c9c4; " href="#">Makijaż permanentny</a></h3>';
-//
-//$sql = "SELECT nazwa, cena, czas FROM zabieg WHERE Rodzaj_id = '5';";
-//$result = $db->get($sql);
-//result($result);
-//
-//
-//echo '<h3 style="text-indent: 5%;" class="name-of-treatment" ><a style=" text-decoration: none; color:#e4c9c4; " href="#">Pielęgnacja dłoni i stóp</a></h3>';
-//
-//$sql = "SELECT nazwa, cena, czas FROM zabieg WHERE Rodzaj_id = '6';";
-//$result = $db->get($sql);
-//result($result);
-//
-//
-//    echo '<h3 style="text-indent: 5%;" class="name-of-treatment" ><a style=" text-decoration: none; color:#e4c9c4; " href="#">Zabiegi na twarz z użyciem aparatury</a></h3>';
-//
-//    $sql = "SELECT nazwa, cena, czas FROM zabieg WHERE Rodzaj_id = '7';";
-//$result = $db->get($sql);
-//result($result);
-//
-//
-//    echo '<h3 style="text-indent: 5%;" class="name-of-treatment" ><a style=" text-decoration: none; color:#e4c9c4; " href="#">Mezoterapia</a></h3>';
-//
-//    $sql = "SELECT nazwa, cena, czas FROM zabieg WHERE Rodzaj_id = '8';";
-//$result = $db->get($sql);
-//result($result);
 
 ?>
 </body>

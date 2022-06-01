@@ -6,18 +6,18 @@ session_start();
     $informacja = $_POST['informacja'];
     $klient = $_SESSION['klient_id'];
 
+include("databse.php");
+$db = new Database();
 
     $sql = "INSERT INTO wizyta (Klient_id, Salon_id, Pracownik_id, czas, Zabieg_id, informacje) VALUES
              ('$klient' ,1,1,'$data', '$zabieg','$informacja')";
 
-    $conn = new mysqli("localhost", "szymon", "haslo", "loki");
+$result = $db->get($sql);
 
-    if (mysqli_query($conn, $sql)) {
-        header("Location: wziyty.php?error4=Dokonano rezerwacji");
-    } else {
-        echo "Error: " . $sql . ":-" . mysqli_error($conn);
-    }
-    mysqli_close($conn);
+if ($result == true) {
+    header("Location: wziyty.php?error4=Dokonano rezerwacji");
+}
+
 ?>
 
 

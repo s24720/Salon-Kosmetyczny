@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html" lang="pl-en">
 <head>
@@ -12,6 +15,15 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="style/styles.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <script>
+        function ValidateInput(ctrl) {
+            if (event.keyCode == 8 ||event.keyCode == 46) {
+=                if (ctrl.selectionStart <= 4) return false;
+            }
+
+            return true;
+        }
+    </script>
 </head>
 <body class="border border border-10 border-secondary rounded  ">
 <div id="left"></div>
@@ -44,7 +56,6 @@
         </button>
         <div class="dropdown-menu dropdown-menu-right">
             <?php
-            session_start();
 
             if (empty($_SESSION["username"])){
                 echo "<button class='dropdown-item'  type='button'><a class='nav-link' href='login.php'>Logowanie</a></button>";
@@ -77,19 +88,19 @@
                         }
                         ?>
                         <div class="form-outline mb-4">
-                            <input type="text" name="name" pattern="[A-Za-z0-9]+" class="form-control form-control-lg" />
+                            <input type="text" name="name"  class="form-control form-control-lg" />
                             <label class="form-label">Imię</label>
                         </div>
                         <div class="form-outline mb-4">
-                            <input type="text" name="surname" pattern="[A-Za-z0-9]+" class="form-control form-control-lg" />
+                            <input type="text" name="surname"  class="form-control form-control-lg" />
                             <label class="form-label" >Nazwisko</label>
                         </div>
                         <div class="form-outline mb-4">
-                            <input type="text" name="telephone" pattern="[0-9]+" class="form-control form-control-lg" />
+                            <input type="text" name="telephone" pattern="[0-9]+" value="48" onkeydown="return ValidateInput(this)" class="form-control form-control-lg" />
                             <label class="form-label" >Numer telefonu</label>
                         </div>
                         <div class="form-outline mb-4">
-                            <input type="text" name="email" class="form-control form-control-lg" />
+                           <input type="text" name="email" class="form-control form-control-lg" />
                             <label class="form-label" >E-mail</label>
                         </div>
                         <div class="form-outline mb-4">

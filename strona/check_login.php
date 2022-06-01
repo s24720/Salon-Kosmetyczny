@@ -17,22 +17,19 @@ if (isset($_POST['username']) && isset($_POST['password'])){
         header("Location: login.php?error=Zle podano haslo");
     }else{
 
-        $conn = new mysqli("localhost", "szymon", "haslo", "loki");
-
-        if ($conn->connect_error) {
-            die("Connection failed: " . $conn->connect_error);
-        }
+        include("databse.php");
+        $db = new Database();
 
         $sql = "SELECT * , klient.id as KiD , rola.nazwa as Rola FROM dane_logowanie  Inner join klient on klient.id=dane_logowanie.id   inner join rola on rola.id=Rola_id where haslo='".$password."' and email='".$username."';";
 
 
         echo $sql;
 
-        $result = $conn->query($sql);
+        $result = $db->get($sql);
 
-        $conn->close();
 
         if ($result->num_rows > 0) {
+
             session_start();
 
             $row = $result->fetch_assoc();

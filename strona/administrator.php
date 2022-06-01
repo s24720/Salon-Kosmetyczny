@@ -135,21 +135,16 @@ if($_SESSION['rola'] != ("administrator")){
                     <select  class="form-control form-control-lg" name="usuwanie" id="cars">
                         <optgroup label="Wybierz zabieg">
                             <?php
-                            $conn = new mysqli("localhost", "szymon", "haslo", "loki");
-                            if ($conn->connect_error) {
-                                die("Connection failed: " . $conn->connect_error);
-                            }
+                            include("databse.php");
+                            $db = new Database();
+
                             $sql = "SELECT nazwa, id FROM zabieg;";
-                            $result = $conn->query($sql);
+                            $result = $db->get($sql);
 
-
-                            if ($result->num_rows > 0) {
-                                while($row = $result->fetch_assoc()) {
-
+                            while($row = $result->fetch_assoc()) {
                                     echo "<option value = '".$row["id"]."' >".$row["nazwa"]."</option>";
-                                }
+
                             }
-                            $conn->close();
                             ?>
                         </optgroup>
                     </select>
@@ -179,14 +174,11 @@ if($_SESSION['rola'] != ("administrator")){
                                 <select  class="form-control form-control-lg" name="potwierdzenieA" id="cars">
                                     <optgroup label="Wybierz datę rezerwacji">
                                         <?php
-                                        $conn = new mysqli("localhost", "szymon", "haslo", "loki");
-                                        if ($conn->connect_error) {
-                                            die("Connection failed: " . $conn->connect_error);
-                                        }
+
                                         $date = date('Y-m-d H:i:s');
 
                                         $sql = "SELECT czas, Zabieg_id,id FROM wizyta WHERE czas >= '$date' AND potwierdzoneK = true AND potwierdzoneA = false;";
-                                        $result = $conn->query($sql);
+                                        $result = $db->get($sql);
 
                                         if ($result->num_rows > 0) {
                                             while($row = $result->fetch_assoc()) {
@@ -195,7 +187,6 @@ if($_SESSION['rola'] != ("administrator")){
 
                                             }
                                         }
-                                        $conn->close();
                                         ?>
                                     </optgroup>
                                 </select>
@@ -220,15 +211,12 @@ if($_SESSION['rola'] != ("administrator")){
                             <select  class="form-control form-control-lg" name="dataE" id="cars">
                                 <optgroup label="Wybierz rezerwację">
                                     <?php
-                                    $conn = new mysqli("localhost", "szymon", "haslo", "loki");
-                                    if ($conn->connect_error) {
-                                        die("Connection failed: " . $conn->connect_error);
-                                    }
+
 
                                     $date = date('Y-m-d H:i:s');
 
                                     $sql = "SELECT czas, Zabieg_id,id FROM wizyta WHERE  czas >= '$date' AND potwierdzoneK = true;";
-                                    $result = $conn->query($sql);
+                                    $result = $db->get($sql);
 
                                     if ($result->num_rows > 0) {
                                         while($row = $result->fetch_assoc()) {
@@ -237,7 +225,6 @@ if($_SESSION['rola'] != ("administrator")){
                                             echo "<option value = '" . $row["id"] . "' >" . $row["czas"] . "</option>";
                                         }
                                     }
-                                    $conn->close();
                                     ?>
                                 </optgroup>
                             </select>
@@ -246,13 +233,10 @@ if($_SESSION['rola'] != ("administrator")){
                             <select  class="form-control form-control-lg" name="zabiegE" id="cars">
                                 <optgroup label="Wybierz nowy zabieg">
                                     <?php
-                                    $conn = new mysqli("localhost", "szymon", "haslo", "loki");
-                                    if ($conn->connect_error) {
-                                        die("Connection failed: " . $conn->connect_error);
-                                    }
+
 
                                     $sql = "SELECT nazwa, id FROM zabieg;";
-                                    $result = $conn->query($sql);
+                                    $result = $db->get($sql);
 
                                     if ($result->num_rows > 0) {
                                         while($row = $result->fetch_assoc()) {
@@ -261,7 +245,6 @@ if($_SESSION['rola'] != ("administrator")){
                                             echo "<option value = '" . $row["id"] . "' >" . $row["nazwa"] . "</option>";
                                         }
                                     }
-                                    $conn->close();
                                     ?>
                                 </optgroup>
                             </select>
@@ -280,35 +263,31 @@ if($_SESSION['rola'] != ("administrator")){
                 <div class="col">
                     <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Statystyki</h3>
                     <table class="table">
-                        <caption>statystyki</caption>
                         <thead>
                         <tr>
                             <th scope="col">Pracownik</th>
-                            <th scope="col">Data zabiegu</th>
-                            <th scope="col">Nazwa zabiegu
-                            <th scope="col">Klient</th>
+                            <th scope="col">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                Średnia cena zabiegów</th>
+                            <th scope="col">Średni czas zabiegów</th>
 
                         </tr>
                         </thead>
                     </table>
 
                     <?php
-                    $conn = new mysqli("localhost", "szymon", "haslo", "loki");
-                    if ($conn->connect_error) {
-                        die("Connection failed: " . $conn->connect_error);
-                    }
 
-                    $sql = "Select pracownik.imie ,pracownik.nazwisko, zabieg.nazwa, wizyta.czas , klient.imie as ki, klient.nazwisko as kn from pracownik Inner join wizyta on pracownik.id=wizyta.Pracownik_id Inner join zabieg on zabieg.id=wizyta.Zabieg_id inner join klient on klient.id=wizyta.Klient_id;";
-                    $result = $conn->query($sql);
+                    $sql = "SELECT k.nazwisko, k.imie, w.Klient_id, avg(z.cena) as c,avg(z.czas ) as cz from wizyta as w Join zabieg as z on z.id = w.zabieg_id INNER JOIN
+    klient k on w.Klient_id = k.id GROUP BY w.klient_id;";
+
+                    $result = $db->get($sql);
 
                     if ($result->num_rows > 0) {
                         while($row = $result->fetch_assoc()) {
 
-                            echo '<table class="table"><tbody><tr><th>'.$row["imie"].' '.$row["nazwisko"].'</th><th>'.$row["czas"].'</th><th>'.$row["nazwa"].'</th><th>'.$row["ki"].' '.$row["kn"].'</th></tr></tbody></table>';
+                            echo '<table class="table"><tbody><tr><th>'.$row["imie"].' '.$row["nazwisko"].'</th><th>'.$row["c"].'</th><th>'.$row["cz"].'</th></tr></tbody></table>';
 
                         }
                     }
-                    $conn->close();
                     ?>
                 </div>
             </div>
@@ -327,7 +306,6 @@ if($_SESSION['rola'] != ("administrator")){
                             <div class="row">
                                 <br><br><br><br><br>
                                 <table class="table">
-                                    <caption>Kalndarz</caption>
                                     <thead>
 
                                     <tr>
@@ -353,11 +331,7 @@ if($_SESSION['rola'] != ("administrator")){
                                 </table>
                                 <?php
                                 $sql = 'SELECT day(czas) as d ,hour(czas) as h FROM wizyta WHERE month(czas) = month(current_date());';
-
-                                $conn = new mysqli("localhost", "szymon", "haslo", "loki");
-
-                                $result = $conn->query($sql);
-
+                                $result = $db->get($sql);
                                 $dates = array();
 
                                 if ($result->num_rows > 0) {
@@ -366,20 +340,13 @@ if($_SESSION['rola'] != ("administrator")){
                                         $dates[] = $row;
                                     }
                                 }
-
                                 $maxDays = date('t');
-
                                 foreach(range(1,$maxDays) as $i){
-
                                     echo " <table class='table'>
-               
-                   <tbody>
-                   <tr>
-                   <th>".$i."</th>";
-
-
+                                     <tbody>
+                                    <tr>
+                                     <th>".$i."</th>";
                                     foreach(range(8,18) as $j){
-
                                         $rezerwacja = false;
                                         foreach ($dates as $d){
                                             if ($d["d"] == $i && $d["h"] == $j){
@@ -387,25 +354,16 @@ if($_SESSION['rola'] != ("administrator")){
                                                 break;
                                             }
                                         }
-
-
                                         if ($rezerwacja) {
-
-
                                             echo "<td>".$j.":00<br><span style='color: red'>rezerwacja</span>"."<br>"."</td>";
-
                                         }
                                         else{
 
                                             echo "<td>".$j.":00<br><span style='color: green'>wolny</span>"."<br>"."</td>";
-
                                         }
                                     }
                                 }
                                 echo "</tr></tbody></table>";
-
-                                $conn->close();
-
                                 ?>
                             </div>
                         </div>
@@ -415,7 +373,6 @@ if($_SESSION['rola'] != ("administrator")){
                             <div class="row">
                                 <br><br><br><br><br>
                                 <table class="table">
-                                    <caption>kalnedarz +1</caption>
                                     <thead>
                                     <tr>
                                         <th scope="col" >
@@ -440,11 +397,7 @@ if($_SESSION['rola'] != ("administrator")){
                                 </table>
                                 <?php
                                 $sql = 'SELECT day(czas) as d ,hour(czas) as h FROM wizyta WHERE month(czas) = month(current_date())+1;';
-
-                                $conn = new mysqli("localhost", "szymon", "haslo", "loki");
-
-                                $result = $conn->query($sql);
-
+                                $result = $db->get($sql);
                                 $dates = array();
 
                                 if ($result->num_rows > 0) {
@@ -453,18 +406,12 @@ if($_SESSION['rola'] != ("administrator")){
                                         $dates[] = $row;
                                     }
                                 }
-
                                 $maxDays = date('t');
-
                                 foreach(range(1,$maxDays) as $i){
-
                                     echo " <table class='table'>
-               
-                   <tbody>
-                   <tr>
-                   <th>".$i."</th>";
-
-
+                                        <tbody>
+                                         <tr>
+                                         <th>".$i."</th>";
                                     foreach(range(8,18) as $j){
 
                                         $rezerwacja = false;
@@ -474,25 +421,15 @@ if($_SESSION['rola'] != ("administrator")){
                                                 break;
                                             }
                                         }
-
-
                                         if ($rezerwacja) {
-
-
                                             echo "<td>".$j.":00<br><span style='color: red'>rezerwacja</span>"."<br>"."</td>";
-
                                         }
                                         else{
-
                                             echo "<td>".$j.":00<br><span style='color: green'>wolny</span>"."<br>"."</td>";
-
                                         }
                                     }
                                 }
                                 echo "</tr></tbody></table>";
-
-                                $conn->close();
-
                                 ?>
                             </div>
                         </div>        </div>
@@ -501,7 +438,6 @@ if($_SESSION['rola'] != ("administrator")){
                             <div class="row">
                                 <br><br><br><br><br>
                                 <table class="table">
-                                    <caption>kalendarz +2</caption>
                                     <thead>
                                     <tr>
                                         <th scope="col" >
@@ -526,10 +462,7 @@ if($_SESSION['rola'] != ("administrator")){
                                 </table>
                                 <?php
                                 $sql = 'SELECT day(czas) as d ,hour(czas) as h FROM wizyta WHERE month(czas) = month(current_date())+2;';
-
-                                $conn = new mysqli("localhost", "szymon", "haslo", "loki");
-
-                                $result = $conn->query($sql);
+                                $result = $db->get($sql);
 
                                 $dates = array();
 
@@ -539,20 +472,13 @@ if($_SESSION['rola'] != ("administrator")){
                                         $dates[] = $row;
                                     }
                                 }
-
                                 $maxDays = date('t');
-
                                 foreach(range(1,$maxDays) as $i){
-
                                     echo " <table class='table'>
-               
-                   <tbody>
-                   <tr>
-                   <th>".$i."</th>";
-
-
+                                          <tbody>
+                                            <tr>
+                                            <th>".$i."</th>";
                                     foreach(range(8,18) as $j){
-
                                         $rezerwacja = false;
                                         foreach ($dates as $d){
                                             if ($d["d"] == $i && $d["h"] == $j){
@@ -560,25 +486,15 @@ if($_SESSION['rola'] != ("administrator")){
                                                 break;
                                             }
                                         }
-
-
                                         if ($rezerwacja) {
-
-
                                             echo "<td>".$j.":00<br><span style='color: red'>rezerwacja</span>"."<br>"."</td>";
-
                                         }
                                         else{
-
                                             echo "<td>".$j.":00<br><span style='color: green'>wolny</span>"."<br>"."</td>";
-
                                         }
                                     }
                                 }
                                 echo "</tr></tbody></table>";
-
-                                $conn->close();
-
                                 ?>
                             </div>
                         </div>        </div>

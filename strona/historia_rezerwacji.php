@@ -2,19 +2,16 @@
 
 $historia = $_POST['historia'];
 
+include("databse.php");
+$db = new Database();
 
 $sql = "DELETE FROM wizyta WHERE id = $historia;";
+$result = $db->get($sql);
 
-
-$conn = new mysqli("localhost", "szymon", "haslo", "loki");
-if (mysqli_query($conn, $sql)) {
+if ($result == true) {
     header("Location: wziyty.php?error=$sql");
-
-} else {
-    echo "Error: " . $sql . ":-" . mysqli_error($conn);
 }
-mysqli_close($conn);
 
-
+?>
 
 

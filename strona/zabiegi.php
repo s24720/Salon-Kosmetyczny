@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html" lang="pl-en">
 <head>
@@ -44,7 +47,6 @@
         </button>
         <div class="dropdown-menu dropdown-menu-right">
             <?php
-            session_start();
 
             if (empty($_SESSION["username"])){
                 echo "<button class='dropdown-item'  type='button'><a class='nav-link' href='login.php'>Logowanie</a></button>";
@@ -69,13 +71,11 @@
                         Zabiegi pielęgnacyjno-złuszczające
                     </a>
                     <?php
-                    $conn = new mysqli("localhost", "szymon", "haslo", "loki");
-                    if ($conn->connect_error) {
-                        die("Connection failed: " . $conn->connect_error);
-                    }
+                    include("databse.php");
+                    $db = new Database();
 
                     $sql = "SELECT nazwa FROM zabieg WHERE Rodzaj_id = '1';";
-                    $result = $conn->query($sql);
+                    $result = $db->get($sql);
 
                     if ($result->num_rows > 0) {
                         while($row = $result->fetch_assoc()) {
@@ -84,7 +84,6 @@
                     } else {
                         echo "0 results";
                     }
-                    $conn->close();
                     ?>
                 </div>
                 <br>
@@ -95,13 +94,9 @@
                         Zabiegi na ciało z użyciem aparatury
                     </a>
                     <?php
-                    $conn = new mysqli("localhost", "szymon", "haslo", "loki");
-                    if ($conn->connect_error) {
-                        die("Connection failed: " . $conn->connect_error);
-                    }
 
                     $sql = "SELECT nazwa FROM zabieg WHERE Rodzaj_id = '2';";
-                    $result = $conn->query($sql);
+                    $result = $db->get($sql);
 
                     if ($result->num_rows > 0) {
                         while($row = $result->fetch_assoc()) {
@@ -110,7 +105,6 @@
                     } else {
                         echo "0 results";
                     }
-                    $conn->close();
                     ?>
                 </div>
                 <br>
@@ -122,13 +116,10 @@
                         Oprawa oka
                     </a>
                     <?php
-                    $conn = new mysqli("localhost", "szymon", "haslo", "loki");
-                    if ($conn->connect_error) {
-                        die("Connection failed: " . $conn->connect_error);
-                    }
+
 
                     $sql = "SELECT nazwa FROM zabieg WHERE Rodzaj_id = '3';";
-                    $result = $conn->query($sql);
+                    $result = $db->get($sql);
 
                     if ($result->num_rows > 0) {
                         while($row = $result->fetch_assoc()) {
@@ -137,7 +128,6 @@
                     } else {
                         echo "0 results";
                     }
-                    $conn->close();
                     ?>
                 </div>
                 <br>
@@ -148,13 +138,9 @@
                         Masaż twarzy
                     </a>
                     <?php
-                    $conn = new mysqli("localhost", "szymon", "haslo", "loki");
-                    if ($conn->connect_error) {
-                        die("Connection failed: " . $conn->connect_error);
-                    }
 
                     $sql = "SELECT nazwa FROM zabieg WHERE Rodzaj_id = '4';";
-                    $result = $conn->query($sql);
+                    $result = $db->get($sql);
 
                     if ($result->num_rows > 0) {
                         while($row = $result->fetch_assoc()) {
@@ -163,7 +149,6 @@
                     } else {
                         echo "0 results";
                     }
-                    $conn->close();
                     ?>
                 </div>
                 <br>
@@ -175,13 +160,10 @@
                         Makijaż permanentny
                     </a>
                     <?php
-                    $conn = new mysqli("localhost", "szymon", "haslo", "loki");
-                    if ($conn->connect_error) {
-                        die("Connection failed: " . $conn->connect_error);
-                    }
+
 
                     $sql = "SELECT nazwa FROM zabieg WHERE Rodzaj_id = '5';";
-                    $result = $conn->query($sql);
+                    $result = $db->get($sql);
 
                     if ($result->num_rows > 0) {
                         while($row = $result->fetch_assoc()) {
@@ -190,7 +172,6 @@
                     } else {
                         echo "0 results";
                     }
-                    $conn->close();
                     ?>
                 </div>
                 <br>
@@ -201,13 +182,10 @@
                         Pielęgnacja dłoni i stóp
                     </a>
                     <?php
-                    $conn = new mysqli("localhost", "szymon", "haslo", "loki");
-                    if ($conn->connect_error) {
-                        die("Connection failed: " . $conn->connect_error);
-                    }
+
 
                     $sql = "SELECT nazwa FROM zabieg WHERE Rodzaj_id = '6';";
-                    $result = $conn->query($sql);
+                    $result = $db->get($sql);
 
                     if ($result->num_rows > 0) {
                         while($row = $result->fetch_assoc()) {
@@ -216,7 +194,6 @@
                     } else {
                         echo "0 results";
                     }
-                    $conn->close();
                     ?>
                 </div>
                 <br>
@@ -228,13 +205,10 @@
                         Zabiegi na twarz z użyciem aparatury
                     </a>
                     <?php
-                    $conn = new mysqli("localhost", "szymon", "haslo", "loki");
-                    if ($conn->connect_error) {
-                        die("Connection failed: " . $conn->connect_error);
-                    }
+
 
                     $sql = "SELECT nazwa FROM zabieg WHERE Rodzaj_id = '7';";
-                    $result = $conn->query($sql);
+                    $result = $db->get($sql);
 
                     if ($result->num_rows > 0) {
                         while($row = $result->fetch_assoc()) {
@@ -243,7 +217,6 @@
                     } else {
                         echo "0 results";
                     }
-                    $conn->close();
                     ?>
                 </div>
                 <br>
@@ -254,13 +227,10 @@
                         Mezoterapia
                     </a>
                     <?php
-                    $conn = new mysqli("localhost", "szymon", "haslo", "loki");
-                    if ($conn->connect_error) {
-                        die("Connection failed: " . $conn->connect_error);
-                    }
+
 
                     $sql = "SELECT nazwa FROM zabieg WHERE Rodzaj_id = '8';";
-                    $result = $conn->query($sql);
+                    $result = $db->get($sql);
 
                     if ($result->num_rows > 0) {
                         while($row = $result->fetch_assoc()) {
@@ -269,7 +239,6 @@
                     } else {
                         echo "0 results";
                     }
-                    $conn->close();
                     ?>
                 </div>
                 <br><br>

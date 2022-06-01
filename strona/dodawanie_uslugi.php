@@ -26,17 +26,16 @@ if (isset($_POST['nazwa']) && isset($_POST['cena']) && isset($_POST['czas'])) {
         $czas = $_POST['czas'];
         $rodzaj = $_POST['rodzaj'];
 
+        include("databse.php");
+        $db = new Database();
 
-        $sql = "INSERT INTO zabieg (nazwa, cena, czas, Rodzaj_id) VALUES 
-             ('$nazwa','$cena','$czas','$rodzaj')";
+        $sql = "INSERT INTO zabieg (nazwa, cena, czas, Rodzaj_id) VALUES   ('$nazwa','$cena','$czas','$rodzaj');";
 
-        $conn = new mysqli("localhost", "szymon", "haslo", "loki");
-        if (mysqli_query($conn, $sql)) {
-            header("Location: administrator.php?error=Dodano zabieg");
-        } else {
-            echo "Error: " . $sql . ":-" . mysqli_error($conn);
+        $result = $db->get($sql);
+
+        if ($result == true) {
+                header("Location: administrator.php?error=Dodano zabieg");
         }
-        mysqli_close($conn);
     }
 }
 ?>

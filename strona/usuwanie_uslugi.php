@@ -2,16 +2,15 @@
 
     $usun = $_POST['usuwanie'];
 
+    include("databse.php");
+    $db = new Database();
 
     $sql = "DELETE FROM zabieg WHERE id = $usun;";
+    $result = $db->get($sql);
 
-    $conn = new mysqli("localhost", "szymon", "haslo", "loki");
-    if (mysqli_query($conn, $sql)) {
+    if ($result == true) {
         header("Location: administrator.php?error2=Skasowano");
-    } else {
-        echo "Error: " . $sql . ":-" . mysqli_error($conn);
     }
-    mysqli_close($conn);
 
 ?>
 
