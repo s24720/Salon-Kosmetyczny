@@ -2,7 +2,7 @@
 session_start();
 ?>
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html" lang="pl-en">
+<html lang="pl-PL">
 <head>
     <title>LooKreacja</title>
     <meta charset="UTF-8">
@@ -105,7 +105,7 @@ session_start();
                         </div>
                         <div class="form-outline mb-4">
                             <input type="password" name="password" class="form-control form-control-lg" />
-                            <label class="form-label">Hasło</label>
+                            <label class="form-label">Hasło <br>(Małe i duże litery, cyfry, znaki specjalne,<br> min. 8 znaków)</label>
                         </div>
                         <div class="pt-1 mb-4">
                             <button class="btn btn-info btn-lg btn-block" type="submit">Zarejestruj się</button>

@@ -2,7 +2,7 @@
 session_start();
 ?>
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html" lang="pl-en">
+<html lang="pl-PL">
 <head>
     <title>LooKreacja</title>
     <meta charset="UTF-8">
@@ -64,13 +64,28 @@ session_start();
     </div>
 </nav>
 <br>
+
+<section>
+    <div>
+        <table class='list-of-tasks''>
+        <tbody><tr>
+            <td class='task-name'><strong>nazwa zabiegu</strong></td>
+            <td class='duration'><strong>czas trwania</strong></td>
+            <td class='price'><strong>cena</strong></td>
+            <td class='price-sale'></td>
+        </tr></tbody>
+        </table>
+    </div>
+</section>;
+
 <?php
 
 function display($row){
     echo "<section class='type-of-treatment'> <span class='slidetoggle-trigger''></span>
                                       <div class='table-and-explication'>
                                          <table class='list-of-tasks''>
-                                             <tbody><tr>
+                                             <tbody>
+                                             <tr>
                                                  <td class='task-name'>".$row["nazwa"]."</td>
                                                  <td class='duration'>".$row["czas"]."</td>
                                                  <td class='price'>".$row["cena"]."</td>

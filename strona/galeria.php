@@ -2,7 +2,7 @@
 session_start();
 ?>
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html" lang="pl-en">
+<html lang="pl-PL">
 <head>
     <title>LooKreacja</title>
     <meta charset="UTF-8">

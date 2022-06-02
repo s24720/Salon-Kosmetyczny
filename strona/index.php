@@ -2,7 +2,7 @@
 session_start();
 ?>
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html" lang="pl-en">
+<html lang="pl-PL">
 <head>
     <title>LooKreacja</title>
     <meta charset="UTF-8">
@@ -91,7 +91,7 @@ session_start();
 </div>
 <div class="container">
     <div style="margin-top:-10px; text-align: center; padding:30px;">
-        <div  style= font-size:40px;">
+        <div  style= font-size:40px;>
             <span  class="display-3" itemprop="headline">Salon kosmetyczny LooKreacja</span>
         </div>
         <br><br>
@@ -130,7 +130,7 @@ session_start();
         </div>
     </div>
     <div style=" margin-top:-10px; text-align: center; padding:30px;">
-        <div  style= font-size:40px;">
+        <div  style= font-size:40px;>
             <br>
             <span  class="display-3" itemprop="headline">VOUCHERY - LooKreacja</span>
         </div>

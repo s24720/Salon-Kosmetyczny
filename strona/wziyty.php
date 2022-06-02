@@ -7,7 +7,7 @@ if($_SESSION['rola'] != ("klient" || "administrator")){
 }
 ?>
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html" lang="pl-en">
+<html lang="pl-PL">
 <head>
     <title>LooKreacja</title>
     <meta charset="UTF-8">
@@ -212,7 +212,7 @@ if($_SESSION['rola'] != ("klient" || "administrator")){
 
                     $date = date('Y-m-d H:i:s');
 
-                    $sql = "SELECT czas, Zabieg_id,id FROM wizyta WHERE Klient_id = '$klient' AND czas >= '$date' AND potwierdzoneA = false;";
+                    $sql = "SELECT czas, Zabieg_id,id FROM wizyta WHERE Klient_id = '$klient' AND czas >= '$date' AND potwierdzoneA = false AND potwierdzoneK = false;";
                     $result = $db->get($sql);
 
                     if ($result->num_rows > 0) {
@@ -269,7 +269,7 @@ if($_SESSION['rola'] != ("klient" || "administrator")){
         <?php
     }
     ?>
-    <form method="POST" action="usuwanie_rezerwacji.php">
+    <form action="usuwanie_rezerwacji.php" method="POST" onsubmit="return confirm('Na pewno usunąć rezerwację?');">
         <div class="form-outline mb-4">
             <select  class="form-control form-control-lg" name="usuwanie" id="cars">
                 <optgroup label="Wybierz rezerwację">
@@ -279,7 +279,7 @@ if($_SESSION['rola'] != ("klient" || "administrator")){
 
                     $date = date('Y-m-d H:i:s');
 
-                    $sql = "SELECT czas, Zabieg_id,id FROM wizyta WHERE Klient_id = '$klient'AND czas >= '$date' AND potwierdzoneA = false;";
+                    $sql = "SELECT czas, Zabieg_id,id FROM wizyta WHERE Klient_id = '$klient'AND czas >= '$date' AND potwierdzoneA = false AND potwierdzoneK = false;";
                     $result = $db->get($sql);
 
                     if ($result->num_rows > 0) {
@@ -294,7 +294,7 @@ if($_SESSION['rola'] != ("klient" || "administrator")){
             </select>
         </div>
         <div class="pt-1 mb-4">
-            <button class="btn btn-info btn-lg btn-block" type="submit">Usuń</button>
+            <button class="btn btn-info btn-lg btn-block" type="submit" name="completeYes" value="Complete Transaction">Usuń</button>
         </div>
     </form>
 </div>
@@ -326,8 +326,7 @@ if($_SESSION['rola'] != ("klient" || "administrator")){
     }
     ?>
 </div>
-</div>
-</div>
+
 
 
 <div id="carouselExampleIndicators" class="carousel slide" >
@@ -366,9 +365,8 @@ if($_SESSION['rola'] != ("klient" || "administrator")){
                         </thead>
                     </table>
                     <?php
-                    $sql = 'SELECT day(w.czas) as d ,hour(w.czas) as h,hour(ADDTIME(w.czas, z.czas)) as k FROM wizyta as w JOIN zabieg as z on z.id = w.zabieg_id WHERE month(w.czas) = month(current_date());';
+                    $sql = 'SELECT day(czas) as d ,hour(czas) as h FROM wizyta WHERE month(czas) = month(current_date());';
                     $result = $db->get($sql);
-
                     $dates = array();
 
                     if ($result->num_rows > 0) {
@@ -380,15 +378,13 @@ if($_SESSION['rola'] != ("klient" || "administrator")){
                     $maxDays = date('t');
                     foreach(range(1,$maxDays) as $i){
                         echo " <table class='table'>
-               
-                   <tbody>
-                   <tr>
-                   <th>".$i."</th>";
-
+                                     <tbody>
+                                    <tr>
+                                     <th>".$i."</th>";
                         foreach(range(8,18) as $j){
                             $rezerwacja = false;
                             foreach ($dates as $d){
-                                if (($d["d"] == $i || $d["k"] == $i) && $d["h"] == $j){
+                                if ($d["d"] == $i && $d["h"] == $j){
                                     $rezerwacja = true;
                                     break;
                                 }
@@ -397,6 +393,7 @@ if($_SESSION['rola'] != ("klient" || "administrator")){
                                 echo "<td>".$j.":00<br><span style='color: red'>rezerwacja</span>"."<br>"."</td>";
                             }
                             else{
+
                                 echo "<td>".$j.":00<br><span style='color: green'>wolny</span>"."<br>"."</td>";
                             }
                         }
@@ -446,13 +443,12 @@ if($_SESSION['rola'] != ("klient" || "administrator")){
                     }
                     $maxDays = date('t');
                     foreach(range(1,$maxDays) as $i){
-
                         echo " <table class='table'>
-               
-                   <tbody>
-                   <tr>
-                   <th>".$i."</th>";
+                                        <tbody>
+                                         <tr>
+                                         <th>".$i."</th>";
                         foreach(range(8,18) as $j){
+
                             $rezerwacja = false;
                             foreach ($dates as $d){
                                 if ($d["d"] == $i && $d["h"] == $j){
@@ -462,10 +458,8 @@ if($_SESSION['rola'] != ("klient" || "administrator")){
                             }
                             if ($rezerwacja) {
                                 echo "<td>".$j.":00<br><span style='color: red'>rezerwacja</span>"."<br>"."</td>";
-
                             }
                             else{
-
                                 echo "<td>".$j.":00<br><span style='color: green'>wolny</span>"."<br>"."</td>";
                             }
                         }
@@ -504,7 +498,9 @@ if($_SESSION['rola'] != ("klient" || "administrator")){
                     <?php
                     $sql = 'SELECT day(czas) as d ,hour(czas) as h FROM wizyta WHERE month(czas) = month(current_date())+2;';
                     $result = $db->get($sql);
+
                     $dates = array();
+
                     if ($result->num_rows > 0) {
                         while($row = $result->fetch_assoc()) {
 
@@ -514,10 +510,9 @@ if($_SESSION['rola'] != ("klient" || "administrator")){
                     $maxDays = date('t');
                     foreach(range(1,$maxDays) as $i){
                         echo " <table class='table'>
-               
-                   <tbody>
-                   <tr>
-                   <th>".$i."</th>";
+                                          <tbody>
+                                            <tr>
+                                            <th>".$i."</th>";
                         foreach(range(8,18) as $j){
                             $rezerwacja = false;
                             foreach ($dates as $d){
@@ -528,7 +523,6 @@ if($_SESSION['rola'] != ("klient" || "administrator")){
                             }
                             if ($rezerwacja) {
                                 echo "<td>".$j.":00<br><span style='color: red'>rezerwacja</span>"."<br>"."</td>";
-
                             }
                             else{
                                 echo "<td>".$j.":00<br><span style='color: green'>wolny</span>"."<br>"."</td>";

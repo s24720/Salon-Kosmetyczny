@@ -7,10 +7,8 @@ if($_SESSION['rola'] != ("administrator")){
 }
 ?>
 
-
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html"
-      lang="pl-en">
+<html lang="pl-PL">
 <head>
     <title>LooKreacja</title>
     <meta charset="UTF-8">
@@ -122,36 +120,52 @@ if($_SESSION['rola'] != ("administrator")){
         <div class="col-sm">
             <form style="width: 23rem;"
                   method="POST"
-                  action="usuwanie_uslugi.php">
-                <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Usuń zabieg</h3>
-                <?php if (isset($_GET['error2'])) { ?>
-                    <div class="alert alert-danger" role="alert">
-                        <?=$_GET['error2']?>
+                  action="edytowanie_uslugiA.php">
+                <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Edytuj zabieg</h3>
+                <?php if (isset($_GET['error10'])) { ?>
+                    <div class="alert alert-success" role="alert">
+                        <?=$_GET['error10']?>
                     </div>
                     <?php
                 }
                 ?>
                 <div class="form-outline mb-4">
-                    <select  class="form-control form-control-lg" name="usuwanie" id="cars">
-                        <optgroup label="Wybierz zabieg">
-                            <?php
-                            include("databse.php");
-                            $db = new Database();
+                        <div class="form-group">
+                            <div class="select">
+                                <select id="select" name="zabiegE" class="form-control">
+                                    <?php
+                                    include("databse.php");
+                                    $db = new Database();
 
-                            $sql = "SELECT nazwa, id FROM zabieg;";
-                            $result = $db->get($sql);
+                                    $sql = "SELECT nazwa, id FROM zabieg;";
+                                    $result = $db->get($sql);
 
-                            while($row = $result->fetch_assoc()) {
-                                    echo "<option value = '".$row["id"]."' >".$row["nazwa"]."</option>";
+                                    if ($result->num_rows > 0) {
+                                        while($row = $result->fetch_assoc()) {
 
-                            }
-                            ?>
-                        </optgroup>
-                    </select>
-                    <label class="form-label" >Nazwa zabiegu</label>
+                                            echo "<option value = '".$row["id"]."' >".$row["nazwa"]."</option>";
+                                        }
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                            <label class="control-label required" for="select">Wybierz Zabieg</label>
+                    </div>
+                </div>
+                <div class="form-outline mb-4">
+                    <input type="text" name="nazwaE" pattern="[A-Za-z0-9]+" class="form-control form-control-lg" />
+                    <label class="form-label">Nowa nazwa zabiegu</label>
+                </div>
+                <div class="form-outline mb-4">
+                    <input type="text" name="cenaE" class="form-control form-control-lg" />
+                    <label class="form-label" >Nowa cena zabiegu (zl.gr)</label>
+                </div>
+                <div class="form-outline mb-4">
+                    <input class="form-control form-control-lg" type="time" name="czasE" step="2">
+                    <label class="form-label" >Nowy czas trwania zabiegu</label>
                 </div>
                 <div class="pt-1 mb-4">
-                    <button class="btn btn-info btn-lg btn-block" type="submit">Usuń</button>
+                    <button class="btn btn-info btn-lg btn-block" type="submit">edytuj</button>
                 </div>
             </form>
         </div>
@@ -159,45 +173,85 @@ if($_SESSION['rola'] != ("administrator")){
     <div class="row">
         <div class="col">
             <div class="container">
-                <form method="POST" action="potwierdzenieA.php">
                     <div class="row">
                         <div class="col">
-                            <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Potwierdzenie rezerwacji</h3>
-                            <?php if (isset($_GET['error3'])) { ?>
-                                <div class="alert alert-success" role="alert">
-                                    <?=$_GET['error3']?>
-                                </div>
-                                <?php
-                            }
-                            ?>
-                            <div class="form-outline mb-4">
-                                <select  class="form-control form-control-lg" name="potwierdzenieA" id="cars">
-                                    <optgroup label="Wybierz datę rezerwacji">
-                                        <?php
+                            <form action="usuwanie_uslugi.php" method="POST" onsubmit="return confirm('Na pewno usunąć usługę?');">
 
-                                        $date = date('Y-m-d H:i:s');
+                                <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Usuń zabieg</h3>
+                                <?php if (isset($_GET['error2'])) { ?>
+                                    <div class="alert alert-danger" role="alert">
+                                        <?=$_GET['error2']?>
+                                    </div>
+                                    <?php
+                                }
+                                ?>
+                                <div class="form-outline mb-4">
+                                    <select  class="form-control form-control-lg" name="usuwanie" id="cars">
+                                        <optgroup label="Wybierz zabieg">
+                                            <?php
 
-                                        $sql = "SELECT czas, Zabieg_id,id FROM wizyta WHERE czas >= '$date' AND potwierdzoneK = true AND potwierdzoneA = false;";
-                                        $result = $db->get($sql);
+                                            $sql = "SELECT nazwa, id FROM zabieg;";
+                                            $result = $db->get($sql);
 
-                                        if ($result->num_rows > 0) {
                                             while($row = $result->fetch_assoc()) {
-
-                                                echo "<option value = '" . $row["id"] . "' >" . $row["czas"] . "</option>";
+                                                echo "<option value = '".$row["id"]."' >".$row["nazwa"]."</option>";
 
                                             }
-                                        }
-                                        ?>
-                                    </optgroup>
-                                </select>
-                            </div>
-                            <div class="pt-1 mb-4">
-                                <button class="btn btn-info btn-lg btn-block" type="submit">Potwierdź</button>
-                            </div>
-                </form>
+                                            ?>
+                                        </optgroup>
+                                    </select>
+                                    <label class="form-label" >Nazwa zabiegu</label>
+                                </div>
+                                <div class="pt-1 mb-4">
+
+                                    <button class="btn btn-info btn-lg btn-block" type="submit" name="completeYes" value="Complete Transaction">Usuń</button>
+                                </div>
+                            </form>
+
             </div>
             <div class="col">
                 <div class="col">
+                    <form method="POST" action="potwierdzenieA.php">
+
+                        <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Potwierdzenie rezerwacji</h3>
+                        <?php if (isset($_GET['error3'])) { ?>
+                            <div class="alert alert-success" role="alert">
+                                <?=$_GET['error3']?>
+                            </div>
+                            <?php
+                        }
+                        ?>
+                        <div class="form-outline mb-4">
+                            <select  class="form-control form-control-lg" name="potwierdzenieA" id="cars">
+                                <optgroup label="Wybierz datę rezerwacji">
+                                    <?php
+                                    $date = date('Y-m-d H:i:s');
+
+
+                                    $sql = "SELECT w.czas, w.Zabieg_id,w.id, k.imie, k.nazwisko FROM wizyta as w INNER JOIN klient k on w.Klient_id = k.id WHERE czas >= '$date' AND potwierdzoneK = true AND  potwierdzoneA = false;";
+                                    $result = $db->get($sql);
+
+                                    if ($result->num_rows > 0) {
+                                        while($row = $result->fetch_assoc()) {
+
+                                            echo "<option value = '" . $row["id"] . "' >" . $row["czas"] ." - ".$row["imie"]." ".$row["nazwisko"]."</option>";
+
+                                        }
+                                    }
+                                    ?>
+                                </optgroup>
+                            </select>
+                        </div>
+                        <div class="pt-1 mb-4">
+                            <button class="btn btn-info btn-lg btn-block" type="submit">Potwierdź</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="container">
+            <div class="row">
+                <div class="col-sm">
+
                     <form method="POST" action="edycja_rezerwacjaA.php">
                         <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Edycja rezerwacji</h3>
                         <?php if (isset($_GET['error4'])) { ?>
@@ -215,14 +269,14 @@ if($_SESSION['rola'] != ("administrator")){
 
                                     $date = date('Y-m-d H:i:s');
 
-                                    $sql = "SELECT czas, Zabieg_id,id FROM wizyta WHERE  czas >= '$date' AND potwierdzoneK = true;";
+                                    $sql = "SELECT w.czas, w.Zabieg_id,w.id, k.imie, k.nazwisko FROM wizyta as w INNER JOIN klient k on w.Klient_id = k.id WHERE czas >= '$date' AND potwierdzoneK = true AND potwierdzoneA = false;";
                                     $result = $db->get($sql);
 
                                     if ($result->num_rows > 0) {
                                         while($row = $result->fetch_assoc()) {
 
 
-                                            echo "<option value = '" . $row["id"] . "' >" . $row["czas"] . "</option>";
+                                            echo "<option value = '" . $row["id"] . "' >" . $row["czas"] ." - ".$row["imie"]." ".$row["nazwisko"]."</option>";
                                         }
                                     }
                                     ?>
@@ -257,42 +311,75 @@ if($_SESSION['rola'] != ("administrator")){
                             <button class="btn btn-info btn-lg btn-block" type="submit">Edytuj</button>
                         </div>
                     </form>
+
+
                 </div>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Statystyki</h3>
-                    <table class="table">
-                        <thead>
-                        <tr>
-                            <th scope="col">Pracownik</th>
-                            <th scope="col">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                Średnia cena zabiegów</th>
-                            <th scope="col">Średni czas zabiegów</th>
-
-                        </tr>
-                        </thead>
-                    </table>
-
-                    <?php
-
-                    $sql = "SELECT k.nazwisko, k.imie, w.Klient_id, avg(z.cena) as c,avg(z.czas ) as cz from wizyta as w Join zabieg as z on z.id = w.zabieg_id INNER JOIN
-    klient k on w.Klient_id = k.id GROUP BY w.klient_id;";
-
-                    $result = $db->get($sql);
-
-                    if ($result->num_rows > 0) {
-                        while($row = $result->fetch_assoc()) {
-
-                            echo '<table class="table"><tbody><tr><th>'.$row["imie"].' '.$row["nazwisko"].'</th><th>'.$row["c"].'</th><th>'.$row["cz"].'</th></tr></tbody></table>';
-
-                        }
+                <div class="col-sm">
+                    <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Usunięcie rezerwacji</h3>
+                    <?php if (isset($_GET['error11'])) { ?>
+                        <div class="alert alert-danger" role="alert">
+                            <?=$_GET['error11']?>
+                        </div>
+                        <?php
                     }
                     ?>
+                    <form action="usuwanie_rezerwacjaA.php" method="POST" onsubmit="return confirm('Na pewno usunąć rezerwację?');">
+                        <div class="form-outline mb-4">
+                            <select  class="form-control form-control-lg" name="usuwanie" id="cars">
+                                <optgroup label="Wybierz rezerwację">
+                                    <?php
+
+                                    $klient = $_SESSION['klient_id'];
+
+                                    $date = date('Y-m-d H:i:s');
+
+                                    $sql = "SELECT w.czas, w.Zabieg_id,w.id, k.imie, k.nazwisko FROM wizyta as w INNER JOIN klient k on w.Klient_id = k.id WHERE czas >= '$date' AND potwierdzoneK = true AND potwierdzoneA = false;";
+                                    $result = $db->get($sql);
+
+                                    if ($result->num_rows > 0) {
+                                        while($row = $result->fetch_assoc()) {
+
+                                            echo "<option value = '" . $row["id"] . "' >" . $row["czas"] ." - ".$row["imie"]." ".$row["nazwisko"]."</option>";
+
+                                        }
+                                    }
+                                    ?>
+                                </optgroup>
+                            </select>
+                        </div>
+                        <div class="pt-1 mb-4">
+                            <button class="btn btn-info btn-lg btn-block" type="submit" name="completeYes" value="Complete Transaction">Usuń</button>
+                        </div>
+                    </form>
                 </div>
             </div>
+        </div>
+        <div class="row">
+            <div class="col">
+               <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Statystyki</h3>
+                  <table class="table">
+                      <thead>
+                        <tr>
+                         <th scope="col">Pracownik</th>
+                         <th scope="col">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                           Średnia cena zabiegów</th>
+                            <th scope="col">Średni czas zabiegów</th>
+                            </tr>
+                            </thead>
+                            </table>
+                            <?php
+                            $sql = "SELECT k.nazwisko, k.imie, w.Klient_id, avg(z.cena) as c,avg(z.czas ) as cz from wizyta as w Join zabieg as z on z.id = w.zabieg_id INNER JOIN
+                                            klient k on w.Klient_id = k.id GROUP BY w.klient_id;";
+                            $result = $db->get($sql);
+                                if ($result->num_rows > 0) {
+                                    while($row = $result->fetch_assoc()) {
 
-
+                                        echo '<table class="table"><tbody><tr><th>'.$row["imie"].' '.$row["nazwisko"].'</th><th>'.$row["c"].'</th><th>'.$row["cz"].'</th></tr></tbody></table>';
+                                    }
+                                }
+                                ?>
+                            </div>
+                        </div>
 
             <div id="carouselExampleIndicators" class="carousel slide" >
                 <ol class="carousel-indicators">
