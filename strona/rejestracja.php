@@ -26,50 +26,9 @@ session_start();
     </script>
 </head>
 <body class="border border border-10 border-secondary rounded  ">
-<div id="left"></div>
-<div id="right"></div>
-<div id="top"></div>
-<div id="bottom"></div>
-<nav class="navbar navbar-expand-lg navbar-light bg-light ">
-    <div class="collapse navbar-collapse " id="navbarNavDropdown">
-        <ul class="navbar-nav">
-            <li class="nav-item">
-                <a class="nav-link" href="index.php">Aktlualności</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="zabiegi.php">Zabiegi</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="cennik.php">Cennik</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="galeria.php">Gelaria</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="./oceny.php">Oceny</a>
-            </li>
-        </ul>
-    </div>
-    <div class="btn-group">
-        <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Konto użytkownika
-        </button>
-        <div class="dropdown-menu dropdown-menu-right">
-            <?php
-
-            if (empty($_SESSION["username"])){
-                echo "<button class='dropdown-item'  type='button'><a class='nav-link' href='login.php'>Logowanie</a></button>";
-                echo "<button class='dropdown-item'  type='button'><a class='nav-link' href='rejestracja.php'>Rejestracja</a></button>";
-
-            }
-            if (!empty($_SESSION["username"])){
-                echo " <button class='dropdown-item'  type='button'><a class='nav-link' href='wziyty.php'>Wizyty</a></button>";
-                echo "<button class='dropdown-item'  type='button'><a class='nav-link' href='logut.php'>Wyloguj się</a></button>";
-            }
-            ?>
-        </div>
-    </div>
-</nav>
+<?php
+include ("nav.php");
+?>
 <br><br>
 <section class="vh-100">
     <div class="container-fluid">
@@ -120,50 +79,9 @@ session_start();
         </div>
     </div>
 </section>
-<br><br><br><br><br>
+<br><br><br><br><br><br><br>
 </body>
-<section>
-    <div class="container text-center text-md-start mt-5">
-        <div class="row mt-3">
-            <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
-                <h6 class="text-uppercase fw-bold mb-4">
-                    <em class="fas fa-gem me-3"></em>LooKreacja
-                </h6>
-                <p>
-                    Najlepszy gabniet kosmetyczny
-                </p>
-            </div>
-            <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
-                <h6 class="text-uppercase fw-bold mb-4">
-                    Linki
-                </h6>
-                <p>
-                    <a href="#!" class="text-reset">Regulamin</a>
-                </p>
-                <p>
-                    <a href="#!" class="text-reset">Ustawienia</a>
-                </p>
-                <p>
-                    <a href="#!" class="text-reset">Pomoc</a>
-                </p>
-            </div>
-            <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
-                <h6 class="text-uppercase fw-bold mb-4">
-                    Kontakt
-                </h6>
-                <p><em class="fas fa-home me-3"></em> Gdańsk, 14-330 PL</p>
-                <p>
-                    <em class="fas fa-envelope me-3"></em>
-                    projekt@gmail.com
-                </p>
-                <p><em class="fas fa-phone me-3"></em> +48 987 654 321</p>
-                <p><em class="fas fa-print me-3"></em> +48 123 456 789</p>
-            </div>
-        </div>
-    </div>
-</section>
-<div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
-    © 2021 Copyright:
-    <a class="text-reset fw-bold" href="#">Szymon Szczurowski</a>
-</div>
+<?php
+include("footer.php");
+?>
 </html>

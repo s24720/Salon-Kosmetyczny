@@ -18,51 +18,11 @@ session_start();
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 </head>
 <body class="border border border-10 border-secondary rounded  ">
-<div id="left"></div>
-<div id="right"></div>
-<div id="top"></div>
-<div id="bottom"></div>
-<nav class="navbar navbar-expand-lg navbar-light bg-light ">
-    <div class="collapse navbar-collapse " id="navbarNavDropdown">
-        <ul class="navbar-nav">
-            <li class="nav-item">
-                <a class="nav-link" href="index.php">Aktlualności</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="zabiegi.php">Zabiegi</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="cennik.php">Cennik</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="galeria.php">Gelaria</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="./oceny.php">Oceny</a>
-            </li>
-        </ul>
-    </div>
-    <div class="btn-group">
-        <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Konto użytkownika
-        </button>
-        <div class="dropdown-menu dropdown-menu-right">
-            <?php
 
-            if (empty($_SESSION["username"])){
-                echo "<button class='dropdown-item'  type='button'><a class='nav-link' href='login.php'>Logowanie</a></button>";
-                echo "<button class='dropdown-item'  type='button'><a class='nav-link' href='rejestracja.php'>Rejestracja</a></button>";
+<?php
+include ("nav.php");
+?>
 
-            }
-            if (!empty($_SESSION["username"])){
-                echo " <button class='dropdown-item'  type='button'><a class='nav-link' href='wziyty.php'>Wizyty</a></button>";
-
-                echo "<button class='dropdown-item'  type='button'><a class='nav-link' href='logut.php'>Wyloguj się</a></button>";
-            }
-            ?>
-        </div>
-    </div>
-</nav>
 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
     <ol class="carousel-indicators">
         <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -234,75 +194,7 @@ session_start();
 </div>
 <br><br>
 </body>
-<footer class="text-center text-lg-start bg-light text-muted">
-    <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
-        <div class="me-5 d-none d-lg-block">
-            <span>Zajrzyj na nasze social media:</span>
-        </div>
-        <div>
-            <a href="" class="me-4 text-reset">
-                <em class="fab fa-facebook-f"></em>
-            </a>
-            <a href="" class="me-4 text-reset">
-                <em class="fab fa-twitter"></em>
-            </a>
-            <a href="" class="me-4 text-reset">
-                <em class="fab fa-google"></em>
-            </a>
-            <a href="" class="me-4 text-reset">
-                <em class="fab fa-instagram"></em>
-            </a>
-            <a href="" class="me-4 text-reset">
-                <em class="fab fa-linkedin"></em>
-            </a>
-            <a href="" class="me-4 text-reset">
-                <em class="fab fa-github"></em>
-            </a>
-        </div>
-    </section>
-    <section>
-        <div class="container text-center text-md-start mt-5">
-            <div class="row mt-3">
-                <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
-                    <h6 class="text-uppercase fw-bold mb-4">
-                        <em class="fas fa-gem me-3"></em>LooKreacja
-                    </h6>
-                    <p>
-                        Najlepszy gabniet kosmetyczny
-                    </p>
-                </div>
-                <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
-                    <h6 class="text-uppercase fw-bold mb-4">
-                        Linki
-                    </h6>
-                    <p>
-                        <a href="#!" class="text-reset">Regulamin</a>
-                    </p>
-                    <p>
-                        <a href="#!" class="text-reset">Ustawienia</a>
-                    </p>
-                    <p>
-                        <a href="#!" class="text-reset">Pomoc</a>
-                    </p>
-                </div>
-                <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
-                    <h6 class="text-uppercase fw-bold mb-4">
-                        Kontakt
-                    </h6>
-                    <p><em class="fas fa-home me-3"></em> Gdańsk, 14-330 PL</p>
-                    <p>
-                        <em class="fas fa-envelope me-3"></em>
-                        projekt@gmail.com
-                    </p>
-                    <p><em class="fas fa-phone me-3"></em> +48 987 654 321</p>
-                    <p><em class="fas fa-print me-3"></em> +48 123 456 789</p>
-                </div>
-            </div>
-        </div>
-    </section>
-    <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
-        © 2021 Copyright:
-        <a class="text-reset fw-bold" href="#">Szymon Szczurowski</a>
-    </div>
-</footer>
+<?php
+include("head.php");
+?>
 </html>

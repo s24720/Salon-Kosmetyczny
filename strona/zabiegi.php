@@ -17,94 +17,45 @@ session_start();
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 </head>
 <body class="border border border-10 border-secondary rounded  ">
-<div id="left"></div>
-<div id="right"></div>
-<div id="top"></div>
-<div id="bottom"></div>
-<nav class="navbar navbar-expand-lg navbar-light bg-light ">
-    <div class="collapse navbar-collapse " id="navbarNavDropdown">
-        <ul class="navbar-nav">
-            <li class="nav-item">
-                <a class="nav-link" href="index.php">Aktlualności</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="zabiegi.php">Zabiegi</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="cennik.php">Cennik</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="galeria.php">Gelaria</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="./oceny.php">Oceny</a>
-            </li>
-        </ul>
-    </div>
-    <div class="btn-group">
-        <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Konto użytkownika
-        </button>
-        <div class="dropdown-menu dropdown-menu-right">
-            <?php
-
-            if (empty($_SESSION["username"])){
-                echo "<button class='dropdown-item'  type='button'><a class='nav-link' href='login.php'>Logowanie</a></button>";
-                echo "<button class='dropdown-item'  type='button'><a class='nav-link' href='rejestracja.php'>Rejestracja</a></button>";
-
-            }
-            if (!empty($_SESSION["username"])){
-                echo " <button class='dropdown-item'  type='button'><a class='nav-link' href='wziyty.php'>Wizyty</a></button>";
-                echo "<button class='dropdown-item'  type='button'><a class='nav-link' href='logut.php'>Wyloguj się</a></button>";
-            }
-            ?>
-        </div>
-    </div>
-</nav>
+<?php
+include ("nav.php");
+?>
+<br><br>
 <div style="text-align: center;">
-    <br><br>
     <div class="container">
         <div class="row">
             <div class="col">
                 <div class="list-group">
-                    <a href="#" style="background-color:  #e4c9c4;  border-color:  #e4c9c4";  class="list-group-item list-group-item-action active">
-                        Zabiegi pielęgnacyjno-złuszczające
-                    </a>
+                    <a href="#" style="background-color:  #e4c9c4;  border-color:  #e4c9c4";  class="list-group-item list-group-item-action active">Zabiegi pielęgnacyjno-złuszczające</a>
                     <?php
-                    include("databse.php");
-                    $db = new Database();
+                    function display($row){
+                        echo "<a href='#' class='list-group-item list-group-item-action'>" . $row["nazwa"] . "</a>";
+                    }
+                    function result($result){
 
+                        if ($result->num_rows > 0) {
+                            while($row = $result->fetch_assoc()) {
+                                echo display($row);
+                            }
+                        }
+                    }
+                    include("databse.php");
+
+                    $db = new Database();
                     $sql = "SELECT nazwa FROM zabieg WHERE Rodzaj_id = '1';";
                     $result = $db->get($sql);
-
-                    if ($result->num_rows > 0) {
-                        while($row = $result->fetch_assoc()) {
-                            echo "<a href='#' class='list-group-item list-group-item-action'>" . $row["nazwa"] . "</a>";
-                        }
-                    } else {
-                        echo "0 results";
-                    }
+                    result($result);
                     ?>
                 </div>
                 <br>
             </div>
             <div class="col">
                 <div class="list-group">
-                    <a href="#" style="background-color:  #e4c9c4;  border-color:  #e4c9c4";  class="list-group-item list-group-item-action active">
-                        Zabiegi na ciało z użyciem aparatury
-                    </a>
+                    <a href="#" style="background-color:  #e4c9c4;  border-color:  #e4c9c4";  class="list-group-item list-group-item-action active">Zabiegi na ciało z użyciem aparatury</a>
                     <?php
-
                     $sql = "SELECT nazwa FROM zabieg WHERE Rodzaj_id = '2';";
                     $result = $db->get($sql);
-
-                    if ($result->num_rows > 0) {
-                        while($row = $result->fetch_assoc()) {
-                            echo "<a href='#' class='list-group-item list-group-item-action'>" . $row["nazwa"] . "</a>";
-                        }
-                    } else {
-                        echo "0 results";
-                    }
+                    result($result);
                     ?>
                 </div>
                 <br>
@@ -112,43 +63,23 @@ session_start();
             <div class="w-100"></div>
             <div class="col">
                 <div class="list-group">
-                    <a href="#" style="background-color:  #e4c9c4;  border-color:  #e4c9c4";  class="list-group-item list-group-item-action active">
-                        Oprawa oka
-                    </a>
+                    <a href="#" style="background-color:  #e4c9c4;  border-color:  #e4c9c4";  class="list-group-item list-group-item-action active">Oprawa oka</a>
                     <?php
-
-
                     $sql = "SELECT nazwa FROM zabieg WHERE Rodzaj_id = '3';";
                     $result = $db->get($sql);
+                    result($result);
 
-                    if ($result->num_rows > 0) {
-                        while($row = $result->fetch_assoc()) {
-                            echo "<a href='#' class='list-group-item list-group-item-action'>" . $row["nazwa"] . "</a>";
-                        }
-                    } else {
-                        echo "0 results";
-                    }
                     ?>
                 </div>
                 <br>
             </div>
             <div class="col">
                 <div class="list-group">
-                    <a href="#" style="background-color:  #e4c9c4;  border-color:  #e4c9c4";  class="list-group-item list-group-item-action active">
-                        Masaż twarzy
-                    </a>
+                    <a href="#" style="background-color:  #e4c9c4;  border-color:  #e4c9c4";  class="list-group-item list-group-item-action active">Masaż twarzy</a>
                     <?php
-
                     $sql = "SELECT nazwa FROM zabieg WHERE Rodzaj_id = '4';";
                     $result = $db->get($sql);
-
-                    if ($result->num_rows > 0) {
-                        while($row = $result->fetch_assoc()) {
-                            echo "<a href='#' class='list-group-item list-group-item-action'>" . $row["nazwa"] . "</a>";
-                        }
-                    } else {
-                        echo "0 results";
-                    }
+                    result($result);
                     ?>
                 </div>
                 <br>
@@ -156,44 +87,22 @@ session_start();
             <div class="w-100"></div>
             <div class="col">
                 <div class="list-group">
-                    <a href="#" style="background-color:  #e4c9c4;  border-color:  #e4c9c4";  class="list-group-item list-group-item-action active">
-                        Makijaż permanentny
-                    </a>
+                    <a href="#" style="background-color:  #e4c9c4;  border-color:  #e4c9c4";  class="list-group-item list-group-item-action active">Makijaż permanentny</a>
                     <?php
-
-
                     $sql = "SELECT nazwa FROM zabieg WHERE Rodzaj_id = '5';";
                     $result = $db->get($sql);
-
-                    if ($result->num_rows > 0) {
-                        while($row = $result->fetch_assoc()) {
-                            echo "<a href='#' class='list-group-item list-group-item-action'>" . $row["nazwa"] . "</a>";
-                        }
-                    } else {
-                        echo "0 results";
-                    }
+                    result($result);
                     ?>
                 </div>
                 <br>
             </div>
             <div class="col">
                 <div class="list-group">
-                    <a href="#" style="background-color:  #e4c9c4;  border-color:  #e4c9c4";  class="list-group-item list-group-item-action active">
-                        Pielęgnacja dłoni i stóp
-                    </a>
+                    <a href="#" style="background-color:  #e4c9c4;  border-color:  #e4c9c4";  class="list-group-item list-group-item-action active">Pielęgnacja dłoni i stóp</a>
                     <?php
-
-
                     $sql = "SELECT nazwa FROM zabieg WHERE Rodzaj_id = '6';";
                     $result = $db->get($sql);
-
-                    if ($result->num_rows > 0) {
-                        while($row = $result->fetch_assoc()) {
-                            echo "<a href='#' class='list-group-item list-group-item-action'>" . $row["nazwa"] . "</a>";
-                        }
-                    } else {
-                        echo "0 results";
-                    }
+                    result($result);
                     ?>
                 </div>
                 <br>
@@ -201,44 +110,22 @@ session_start();
             <div class="w-100"></div>
             <div class="col">
                 <div class="list-group">
-                    <a href="#" style="background-color:  #e4c9c4;  border-color:  #e4c9c4";  class="list-group-item list-group-item-action active">
-                        Zabiegi na twarz z użyciem aparatury
-                    </a>
+                    <a href="#" style="background-color:  #e4c9c4;  border-color:  #e4c9c4";  class="list-group-item list-group-item-action active">Zabiegi na twarz z użyciem aparatury</a>
                     <?php
-
-
                     $sql = "SELECT nazwa FROM zabieg WHERE Rodzaj_id = '7';";
                     $result = $db->get($sql);
-
-                    if ($result->num_rows > 0) {
-                        while($row = $result->fetch_assoc()) {
-                            echo "<a href='#' class='list-group-item list-group-item-action'>" . $row["nazwa"] . "</a>";
-                        }
-                    } else {
-                        echo "0 results";
-                    }
+                    result($result);
                     ?>
                 </div>
                 <br>
             </div>
             <div class="col">
                 <div class="list-group">
-                    <a href="#" style="background-color:  #e4c9c4;  border-color:  #e4c9c4";  class="list-group-item list-group-item-action active">
-                        Mezoterapia
-                    </a>
+                    <a href="#" style="background-color:  #e4c9c4;  border-color:  #e4c9c4";  class="list-group-item list-group-item-action active">Mezoterapia</a>
                     <?php
-
-
                     $sql = "SELECT nazwa FROM zabieg WHERE Rodzaj_id = '8';";
                     $result = $db->get($sql);
-
-                    if ($result->num_rows > 0) {
-                        while($row = $result->fetch_assoc()) {
-                            echo "<a href='#' class='list-group-item list-group-item-action'>" . $row["nazwa"] . "</a>";
-                        }
-                    } else {
-                        echo "0 results";
-                    }
+                    result($result);
                     ?>
                 </div>
                 <br><br>
@@ -247,48 +134,7 @@ session_start();
     </div>
 </div>
 </body>
-<section>
-    <div class="container text-center text-md-start mt-5">
-        <div class="row mt-3">
-            <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
-                <h6 class="text-uppercase fw-bold mb-4">
-                    <em class="fas fa-gem me-3"></em>LooKreacja
-                </h6>
-                <p>
-                    Najlepszy gabniet kosmetyczny
-                </p>
-            </div>
-            <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
-                <h6 class="text-uppercase fw-bold mb-4">
-                    Linki
-                </h6>
-                <p>
-                    <a href="#!" class="text-reset">Regulamin</a>
-                </p>
-                <p>
-                    <a href="#!" class="text-reset">Ustawienia</a>
-                </p>
-                <p>
-                    <a href="#!" class="text-reset">Pomoc</a>
-                </p>
-            </div>
-            <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
-                <h6 class="text-uppercase fw-bold mb-4">
-                    Kontakt
-                </h6>
-                <p><em class="fas fa-home me-3"></em> Gdańsk, 14-330 PL</p>
-                <p>
-                    <em class="fas fa-envelope me-3"></em>
-                    projekt@gmail.com
-                </p>
-                <p><em class="fas fa-phone me-3"></em> +48 987 654 321</p>
-                <p><em class="fas fa-print me-3"></em> +48 123 456 789</p>
-            </div>
-        </div>
-    </div>
-</section>
-<div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
-    © 2021 Copyright:
-    <a class="text-reset fw-bold" href="#">Szymon Szczurowski</a>
-</div>
+<?php
+include("footer.php");
+?>
 </html>
